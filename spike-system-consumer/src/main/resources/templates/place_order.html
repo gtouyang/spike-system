@@ -1,0 +1,618 @@
+<!-- 下订单界面 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>确认订单</title>
+    <link rel="stylesheet" href="../static/stylesheets/style.css">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../static/assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="../static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../static/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="../static/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+    <!-- Sweet Alert css -->
+    <link href="../static/plugins/sweet-alert/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Spinkit css -->
+    <link href="../static/plugins/spinkit/spinkit.css" rel="stylesheet" />
+
+    <script src="../static/assets/js/modernizr.min.js"></script>
+</head>
+
+<body>
+    <!-- header -->
+    <header id="topnav">
+        <div class="topbar-main">
+            <div class="container-fluid">
+
+                <!-- Logo container-->
+                <div class="logo">
+                    <a href="index.html" class="logo">
+                        <span class="logo-small"><i class="mdi mdi-radar"></i></span>
+                        <span class="logo-large"><i class="mdi mdi-radar"></i> 秒杀系统</span>
+                    </a>
+                </div>
+                <!-- End Logo container-->
+
+                <!-- 功能栏 -->
+                <div class="menu-extras topbar-custom">
+                    <ul class="list-unstyled topbar-right-menu float-right mb-0">
+                        <!-- 系统通知 -->
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="fi-bell noti-icon"></i>
+                                <!-- 通知数 -->
+                                <span class="badge badge-danger badge-pill noti-icon-badge">4</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+                                <div class="dropdown-item noti-title">
+                                    <h6 class="m-0">系统通知</h6>
+                                </div>
+                                <!-- 通知消息 -->
+                                <div class="slimscroll" style="max-height: 230px;">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-info"><i class="mdi mdi-account-plus"></i></div>
+                                        <p class="notify-details">用户xxx请求添加您为好友。<small class="text-muted">5个小时前</small></p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-danger"><i class="mdi mdi-heart"></i></div>
+                                        <p class="notify-details">你收藏的商品已经降价，点击查看。<small class="text-muted">7个小时前</small></p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-warning"><i class="mdi mdi-comment-account-outline"></i></div>
+                                        <p class="notify-details">您购买的商品已经发货，点击查看物流详情。<small class="text-muted">1天前</small></p>
+                                    </a>
+
+                                </div>
+
+                                <!-- all notification -->
+                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                                    查看所有通知 <i class="fi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <!-- 系统通知 end -->
+
+                        <!-- 未读消息 -->
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="fi-speech-bubble noti-icon"></i>
+                                <!-- 未读消息数 -->
+                                <span class="badge badge-danger badge-pill noti-icon-badge">6</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h6 class="m-0">未读消息</h6>
+                                </div>
+
+                                <div class="slimscroll" style="max-height: 230px;">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon"><img src="../static/assets/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <p class="notify-details">admin</p>
+                                        <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon"><img src="../static/assets/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <p class="notify-details">admin</p>
+                                        <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon"><img src="../static/assets/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <p class="notify-details">admin</p>
+                                        <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon"><img src="../static/assets/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <p class="notify-details">admin</p>
+                                        <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
+                                    </a>
+
+                                </div>
+
+                                <!-- all messages -->
+                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                                    查看所有消息 <i class="fi-arrow-right"></i>
+                                </a>
+
+                            </div>
+                        </li>
+                        <!-- 未读消息 end -->
+
+                        <!-- 用户操作 -->
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="../static/assets/images/avatar.png" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                <div class="dropdown-item noti-title">
+                                    <h6 class="text-overflow m-0">Welcome !</h6>
+                                </div>
+
+                                <!-- item -->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fi-head"></i> <span>我的账户</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-cart-outline"></i> <span>购物车</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fi-file-subtract"></i> <span>我的订单</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fi-cog"></i> <span>设置</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fi-power"></i> <span>注销</span>
+                                </a>
+
+                            </div>
+                        </li>
+                        <!--  用户操作 end -->
+
+                    </ul>
+                </div>
+                <!-- 功能栏 end -->
+
+                <!-- 清除格式 -->
+                <div class="clearfix"></div>
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end topbar-main -->
+
+        <div class="navbar-custom">
+            <div class="container-fluid">
+                <div id="navigation">
+                    <form action="#">
+                        <ul class="navigation-menu p-2">
+                            <li class="has-submenu" style="width: 25%;">
+                                <input class="form-control" type="text" placeholder="搜索你想要的东西">
+                            </li>
+                            <li>
+                                <button type="submit" class="btn btn-light waves-effect waves-primary" style="zoom: 0.95;margin-bottom: 2px;"> <i class="fa fa-search m-r-5"></i> <span>搜索</span> </button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end #navigation -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end navbar-custom -->
+    </header>
+    <!-- end header -->
+
+    <!-- main -->
+    <div class="main">
+        <div class="wrapper">
+            <div class="container-fluid" style="display: flex;flex-direction: column;">
+                <div class="w-100 horizontal-center">
+                    <!-- 收货地址选择框 -->
+                    <div>
+                        <div class="place-order-frame mt-3">
+                            <div class="w-100 mb-3"><span class="font-weight-bold">选择收货地址:</span><a href="#" class="font-10" style="float: right;">添加新地址</a></div>
+                            <!-- address list -->
+                            <div class="address-list">
+                                <!-- title -->
+                                <!-- address list item -->
+                                <div class="address-item active">
+                                    <div class="address-header">
+                                        <span class="pr-2">广东<strong>汕头</strong></span>
+                                        <span>(<strong>陈仲伟</strong> 收)</span>
+                                    </div>
+                                    <div class="separator"><span></span></div>
+                                    <div class="address-body font-11">
+                                        <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                        </br>
+                                        <span class="text-muted">15919579396</span>
+                                    </div>
+                                    <div class="address-footer">
+                                        <div class="curMarker"></div>
+                                    </div>
+                                </div>
+                                <!-- address list item -->
+                                <div class="address-item">
+                                    <div class="address-header">
+                                        <span class="pr-2">广东<strong>汕头</strong></span>
+                                        <span>(<strong>陈仲伟</strong> 收)</span>
+                                    </div>
+                                    <div class="separator"><span></span></div>
+                                    <div class="address-body font-11">
+                                        <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                        </br>
+                                        <span class="text-muted">15919579396</span>
+                                    </div>
+                                    <div class="address-footer">
+                                        <div class="curMarker"></div>
+                                    </div>
+                                </div>
+                                <!-- address list item -->
+                                <div class="address-item">
+                                    <div class="address-header">
+                                        <span class="pr-2">广东<strong>汕头</strong></span>
+                                        <span>(<strong>陈仲伟</strong> 收)</span>
+                                    </div>
+                                    <div class="separator"><span></span></div>
+                                    <div class="address-body font-11">
+                                        <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                        </br>
+                                        <span class="text-muted">15919579396</span>
+                                    </div>
+                                    <div class="address-footer">
+                                        <div class="curMarker"></div>
+                                    </div>
+                                </div>
+                                <!-- address list item -->
+                                <div class="address-item">
+                                    <div class="address-header">
+                                        <span class="pr-2">广东<strong>汕头</strong></span>
+                                        <span>(<strong>陈仲伟</strong> 收)</span>
+                                    </div>
+                                    <div class="separator"><span></span></div>
+                                    <div class="address-body font-11">
+                                        <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                        </br>
+                                        <span class="text-muted">15919579396</span>
+                                    </div>
+                                    <div class="address-footer">
+                                        <div class="curMarker"></div>
+                                    </div>
+                                </div>
+                                <!-- address list item -->
+                                <div class="address-item">
+                                    <div class="address-header">
+                                        <span class="pr-2">广东<strong>汕头</strong></span>
+                                        <span>(<strong>陈仲伟</strong> 收)</span>
+                                    </div>
+                                    <div class="separator"><span></span></div>
+                                    <div class="address-body font-11">
+                                        <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                        </br>
+                                        <span class="text-muted">15919579396</span>
+                                    </div>
+                                    <div class="address-footer">
+                                        <div class="curMarker"></div>
+                                    </div>
+                                </div>
+                                <!-- address list item -->
+                                <div class="address-item">
+                                    <div class="address-header">
+                                        <span class="pr-2">广东<strong>汕头</strong></span>
+                                        <span>(<strong>陈仲伟</strong> 收)</span>
+                                    </div>
+                                    <div class="separator"><span></span></div>
+                                    <div class="address-body font-11">
+                                        <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                        </br>
+                                        <span class="text-muted">15919579396</span>
+                                    </div>
+                                    <div class="address-footer">
+                                        <div class="curMarker"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- address list end -->
+                            <div class="text-left w-100">
+                                <a href="#" class="font-10" onclick="toggleAddressList(this)" flag="false">查看所有地址</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 收货地址选择框 end -->
+                </div>
+                <div class="w-100 horizontal-center">
+                    <!-- 订单信息框 -->
+                    <div>
+                        <div class="order-info-frame mt-4">
+                            <div class="w-100 mb-3"><span class="font-weight-bold">确认订单信息:</span></div>
+                            <div class="order-header horizontal-center w-100">
+                                <!-- 订单信息 -->
+                                <div class="order-info text-center">宝贝信息</div>
+                                <div class="order-attr text-center">商品属性</div>
+                                <div class="order-price text-center">价格</div>
+                                <div class="order-amount text-center">数量</div>
+                                <div class="order-subtotal text-center">小计</div>
+                            </div>
+                            <div class="order-info-list">
+                                <div class="order-info-list-item">
+                                    <div class="seller-info-frame horizontal-center w-100 text-left mt-3" style="justify-content: flex-start;">
+                                        <!-- 店铺信息 若店铺/卖家只有一个 可以直接删除另外一个 -->
+                                        <span class="shop-info"><i class="mdi mdi-shopping pr-1"></i>店铺：<a href="#"> 沈氏集团</a></span>
+                                        <span class="seller-info pl-4"><i class="mdi mdi-account-multiple pr-1"></i>卖家：<a href="#"> 沈氏集团-凌紫幻</a></span>
+                                    </div>
+                                    <!-- 一个goods-list代表是一家店内的所有商品 -->
+                                    <div class="goods-list">
+                                        <!-- 一个goods-item为一个商品 -->
+                                        <div class="goods-item">
+                                            <!-- 商品名称 以及 封面 -->
+                                            <div class="goods-info">
+                                                <div class="goods-coverphoto"><img src="../static/assets/images/iphone_1.jpg" alt=""></div>
+                                                <div class="goods-otherinfo">
+                                                    <!-- 商品名称 -->
+                                                    <div class="goods-name font-10"><a href="#">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
+                                                </div>
+                                            </div>
+                                            <!-- 商品属性 尺寸、颜色等等 -->
+                                            <div class="goods-attr">
+                                                <div class="goods-attr-item"><span class="font-10">颜色： 白色</span></div>
+                                                <div class="goods-attr-item"><span class="font-10">内存： 256G</span></div>
+                                            </div>
+                                            <!-- 当前选购的商品的单价 -->
+                                            <div class="goods-price">
+                                                <span class="font-10">¥ 9999.00</span>
+                                            </div>
+                                            <!-- 当前选购该商品的数量 -->
+                                            <div class="goods-amount">
+                                                <span class="font-10">
+                                                                × 1
+                                                            </span>
+                                            </div>
+                                            <!-- 当前商品总价小计 -->
+                                            <div class="goods-subtotal ">
+                                                <span class="font-10">¥ 9999.00</span>
+                                            </div>
+                                            <!-- 删除商品按钮 -->
+                                            <div class="goods-delete">
+                                                <a href="#" onclick="goodsDelete(this)"><i class="fi fi-cross"></i> </a>
+                                            </div>
+                                        </div>
+                                        <div class="order-pay">
+                                            <div class="freight font-10">
+                                                运送方式：包邮
+                                            </div>
+                                            <div class="order-subtotal">
+                                                <div class="font-10">店铺合计(含运费): ¥<span class="font-18 text-danger"> 19998</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-info-list-item">
+                                    <div class="seller-info-frame horizontal-center w-100 text-left mt-3" style="justify-content: flex-start;">
+                                        <!-- 店铺信息 若店铺/卖家只有一个 可以直接删除另外一个 -->
+                                        <span class="shop-info"><i class="mdi mdi-shopping pr-1"></i>店铺：<a href="#"> 凌氏集团</a></span>
+                                        <span class="seller-info pl-4"><i class="mdi mdi-account-multiple pr-1"></i>卖家：<a href="#"> 凌氏集团-沈冠希</a></span>
+                                    </div>
+                                    <!-- 一个goods-list代表是一家店内的所有商品 -->
+                                    <div class="goods-list">
+                                        <!-- 一个goods-item为一个商品 -->
+                                        <div class="goods-item">
+                                            <!-- 商品名称 以及 封面 -->
+                                            <div class="goods-info">
+                                                <div class="goods-coverphoto"><img src="../static/assets/images/iphone_1.jpg" alt=""></div>
+                                                <div class="goods-otherinfo">
+                                                    <!-- 商品名称 -->
+                                                    <div class="goods-name font-10"><a href="#">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
+                                                </div>
+                                            </div>
+                                            <!-- 商品属性 尺寸、颜色等等 -->
+                                            <div class="goods-attr">
+                                                <div class="goods-attr-item"><span class="font-10">颜色： 白色</span></div>
+                                                <div class="goods-attr-item"><span class="font-10">内存： 256G</span></div>
+                                            </div>
+                                            <!-- 当前选购的商品的单价 -->
+                                            <div class="goods-price">
+                                                <span class="font-10">¥ 9999.00</span>
+                                            </div>
+                                            <!-- 当前选购该商品的数量 -->
+                                            <div class="goods-amount">
+                                                <span class="font-10">
+                                                                × 1
+                                                            </span>
+                                            </div>
+                                            <!-- 当前商品总价小计 -->
+                                            <div class="goods-subtotal ">
+                                                <span class="font-10">¥ 9999.00</span>
+                                            </div>
+                                            <div class="goods-delete">
+                                                <a href="#" onclick="goodsDelete(this)"><i class="fi fi-cross"></i> </a>
+                                            </div>
+                                        </div>
+                                        <div class="order-pay">
+                                            <div class="freight font-10">
+                                                运送方式：包邮
+                                            </div>
+                                            <div class="order-subtotal">
+                                                <div class="font-10">店铺合计(含运费): ¥<span class="font-18 text-danger"> 19998</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100 separator mt-2"></div>
+                            <div class="order-footer">
+                                <div class="pay-info p-2">
+                                    <div class="font-14 text-right mb-2">
+                                        实付款：<span class="text-danger pl-2" style="font-size: 25px;">¥ 99999</span>
+                                    </div>
+                                    <div class="flex-column text-right font-10" style="font-weight: normal">
+                                        <div><strong>寄送至： </strong> <span>广东省</span> <span>汕头市</span> <span>金平区</span> <span>鮀江街道</span> <span>大学路243号汕头大学</span> </div>
+                                        <div><strong>收货人： </strong> <span>陈仲伟 </span> <span>15919579396</span> </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-custom btn-large" onclick="confirmOrder()">确定下单</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 订单信息框 end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main -->
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    这里是页脚
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+
+    <!-- 阻止上传表单之后页面跳转 -->
+    <iframe name="ajaxFrame" style="display: none;"></iframe>
+
+    <!-- jQuery  -->
+    <script src="../static/assets/js/jquery.min.js"></script>
+    <script src="../static/assets/js/popper.min.js"></script>
+    <script src="../static/assets/js/bootstrap.min.js"></script>
+    <script src="../static/assets/js/waves.js"></script>
+    <script src="../static/assets/js/jquery.slimscroll.js"></script>
+
+    <!-- Sweet Alert Js  -->
+    <script src="../static/plugins/sweet-alert/sweetalert2.min.js"></script>
+    <script src="../static/assets/pages/jquery.sweet-alert.init.js"></script>
+
+    <!-- App js -->
+    <script src="../static/assets/js/jquery.core.js"></script>
+    <script src="../static/assets/js/jquery.app.js"></script>
+
+    <script>
+        $(document).ready(() => {
+            $(".place-order-frame").width(screen.width * 0.7);
+            $(".order-info-frame").width(screen.width * 0.7);
+            $(".order-info-list .goods-list .goods-info .goods-name").width($(".order-header .order-info").width() - 50 - 10);
+            //$(".order-info-list .goods-list .goods-info .goods-attr .goods-attr-item").width($(".order-header .order-attr"));
+
+            /* 所有地址显示/隐藏 */
+            toggleAddressList = function(self) {
+                $(self).attr("flag", $(self).attr("flag") == "true" ? "false" : "true");
+                if ($(self).attr("flag") == "true") {
+                    // $(".address-item:nth-child(n+5)").css("display", "flex");
+                    $($(".address-item:nth-child(n+5)")).animate({
+                        height: 'toggle'
+                    });
+                    $(self).text("收缩");
+                } else {
+                    $($(".address-item:nth-child(n+5)")).animate({
+                        height: 'toggle'
+                    });
+                    $(self).text("查看所有地址");
+                }
+            } /* 所有地址显示/隐藏 end */
+
+            /* 删除商品 */
+            goodsDelete = function(self) {
+                swal({
+                    title: '确认删除该商品吗？',
+                    text: "一旦删除将视为您放弃该商品的购买权限，无法恢复。",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonClass: 'btn btn-confirm mt-2',
+                    cancelButtonClass: 'btn btn-cancel ml-2 mt-2',
+                    confirmButtonText: '删除',
+                    cancelButtonText: "取消"
+                }).then(function() {
+                    //console.log($(self).parent().parent().siblings(".goods-item"))
+                    if ($(self).parent().parent().siblings(".goods-item").length == 0) {
+                        $(self).parent().parent().parent().parent().remove();
+                    } else {
+                        $(self).parent().parent().remove();
+                    }
+
+                    swal({
+                        title: '删除成功',
+                        text: "已经将该商品删除",
+                        type: 'success',
+                        confirmButtonClass: 'btn btn-confirm mt-2'
+                    })
+                })
+            } /* 删除商品 end */
+
+            /* 确认下单 */
+            confirmOrder = function() {
+                swal.setDefaults({
+                    confirmButtonText: '下一步',
+                    showCancelButton: true,
+                    animation: true,
+                    showLoaderOnConfirm: true,
+                    closeOnClickOutside: false,
+                    progressSteps: ['1', '2'],
+                    cancelButtonClass: 'btn btn-cancel ml-2 mt-2',
+                    confirmButtonClass: 'btn btn-confirm mt-2',
+
+                })
+
+                var steps = [{
+                    title: '选择支付方式',
+                    html: '\
+                        <div class="horizontal-center pay-methods">\
+                            <div class="pay-method-item"><img href="#" src="../static/assets/images/alipay.png" title="支付宝支付"></div>\
+                            <div class="pay-method-item"><img href="#" src="../static/assets/images/wechatpay.png" title="微信支付"></div>\
+                            <div class="pay-method-item"><img href="#" src="../static/assets/images/unionpay.png" title="银联支付"></div>\
+                        </div>\
+                        '
+                }, {
+                    html: '\
+                        <div class="vertical-center">\
+                            <h5>扫码付款</h5>\
+                            <div class="payment"><img href="#" class="QR-code" src="../static/assets/images/QR-code.png" title="二维码"></div>\
+                        </div>\
+                        '
+                }]
+                setTimeout(function() {
+                    $(".pay-method-item").click(function(e) {
+                        $(".pay-method-item").removeClass("active");
+                        $(this).toggleClass("active");
+                    })
+                }, 0)
+                swal.queue(steps).then(function(result) {
+                    swal.resetDefaults()
+                    swal({
+                        title: '支付成功!',
+                        confirmButtonClass: 'btn btn-confirm mt-2',
+                        confirmButtonText: '完成',
+                        showCancelButton: false
+                    })
+                }, function() {
+                    swal.resetDefaults()
+                })
+            } /* 确认下单 end */
+
+            /* 对元素的事件进行处理 */
+            $(".address-item").click(function(e) {
+                //console.log(e)
+                $(".address-item").removeClass("active");
+                $(this).toggleClass("active");
+                $(".address-item").children(".address-footer").children(".curMarker").css("visibility", "hidden")
+                $(this).children(".address-footer").children(".curMarker").css("visibility", "visible")
+            })
+            $(".goods-list .goods-item").hover(function(e) {
+                $(this).children(".goods-delete").toggleClass("visibility");
+            })
+
+        })
+    </script>
+</body>
+
+</html>

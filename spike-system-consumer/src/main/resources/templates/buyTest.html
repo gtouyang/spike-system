@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>butTest</title>
+</head>
+<body>
+    <form class="form-signin" action="dashboard.html" th:action="@{/buy}" th:method="post">
+        <label class="sr-only">ProductID</label>
+        <input type="text" name="productId" class="form-control" required="" autofocus="">
+        <label class="sr-only">UserID</label>
+        <input type="text" name="orderUserId" class="form-control" required="">
+        <label class="text">Amount</label>
+        <input type="text" name="amount" class="form-control" required="">
+        <button class="btn btn-lg btn-primary btn-block" type="submit" >buy</button>
+    </form>
+</body>
+</html>

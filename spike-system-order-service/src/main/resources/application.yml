@@ -1,0 +1,22 @@
+spring:
+
+  # redis config
+  redis:
+    host: 112.74.42.31
+    port: 6380
+
+  application:
+    name: spike-system-order-service
+server:
+  port: 7090
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka/
+  instance:
+    instance-id: order-service
+info:
+  app.name: ogic-spike-system-order-service
+  company.name: ogic.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

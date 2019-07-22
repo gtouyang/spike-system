@@ -1,0 +1,416 @@
+<!-- 商品查看界面 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>秒杀系统</title>
+    <link rel="stylesheet" href="../static/stylesheets/style.css">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../static/assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="../static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../static/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="../static/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+    <!-- Sweet Alert css -->
+    <link href="../static/plugins/sweet-alert/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <!-- header -->
+    <header id="topnav">
+        <div class="topbar-main">
+            <div class="container-fluid">
+
+                <!-- Logo container-->
+                <div class="logo">
+                    <a href="index.html" class="logo">
+                        <span class="logo-small"><i class="mdi mdi-radar"></i></span>
+                        <span class="logo-large"><i class="mdi mdi-radar"></i> 秒杀系统</span>
+                    </a>
+                </div>
+                <!-- End Logo container-->
+
+                <!-- 功能栏 -->
+                <div class="menu-extras topbar-custom">
+                    <ul class="list-unstyled topbar-right-menu float-right mb-0">
+                        <!-- 系统通知 -->
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="fi-bell noti-icon"></i>
+                                <!-- 通知数 -->
+                                <span class="badge badge-danger badge-pill noti-icon-badge">4</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+                                <div class="dropdown-item noti-title">
+                                    <h6 class="m-0">系统通知</h6>
+                                </div>
+                                <!-- 通知消息 -->
+                                <div class="slimscroll" style="max-height: 230px;">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-info"><i class="mdi mdi-account-plus"></i></div>
+                                        <p class="notify-details">用户xxx请求添加您为好友。<small class="text-muted">5个小时前</small></p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-danger"><i class="mdi mdi-heart"></i></div>
+                                        <p class="notify-details">你收藏的商品已经降价，点击查看。<small class="text-muted">7个小时前</small></p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-warning"><i class="mdi mdi-comment-account-outline"></i></div>
+                                        <p class="notify-details">您购买的商品已经发货，点击查看物流详情。<small class="text-muted">1天前</small></p>
+                                    </a>
+
+                                </div>
+
+                                <!-- all notification -->
+                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                                    查看所有通知 <i class="fi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <!-- 系统通知 end -->
+
+                        <!-- 未读消息 -->
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="fi-speech-bubble noti-icon"></i>
+                                <!-- 未读消息数 -->
+                                <span class="badge badge-danger badge-pill noti-icon-badge">6</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h6 class="m-0">未读消息</h6>
+                                </div>
+
+                                <div class="slimscroll" style="max-height: 230px;">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon"><img src="../static/assets/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <p class="notify-details">admin</p>
+                                        <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon"><img src="../static/assets/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <p class="notify-details">admin</p>
+                                        <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon"><img src="../static/assets/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <p class="notify-details">admin</p>
+                                        <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon"><img src="../static/assets/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <p class="notify-details">admin</p>
+                                        <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
+                                    </a>
+
+                                </div>
+
+                                <!-- all messages -->
+                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                                    查看所有消息 <i class="fi-arrow-right"></i>
+                                </a>
+
+                            </div>
+                        </li>
+                        <!-- 未读消息 end -->
+
+                        <!-- 用户操作 -->
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="../static/assets/images/avatar.png" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                <div class="dropdown-item noti-title">
+                                    <h6 class="text-overflow m-0">Welcome !</h6>
+                                </div>
+
+                                <!-- item -->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fi-head"></i> <span>我的账户</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-cart-outline"></i> <span>购物车</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fi-file-subtract"></i> <span>我的订单</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fi-cog"></i> <span>设置</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fi-power"></i> <span>注销</span>
+                                </a>
+
+                            </div>
+                        </li>
+                        <!--  用户操作 end -->
+
+                    </ul>
+                </div>
+                <!-- 功能栏 end -->
+
+                <!-- 清除格式 -->
+                <div class="clearfix"></div>
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end topbar-main -->
+
+        <div class="navbar-custom">
+            <div class="container-fluid">
+                <div id="navigation">
+                    <form action="#">
+                        <ul class="navigation-menu p-2">
+                            <li class="has-submenu" style="width: 25%;">
+                                <input class="form-control" type="text" placeholder="搜索你想要的东西">
+                            </li>
+                            <li>
+                                <button type="submit" class="btn btn-light waves-effect waves-primary" style="zoom: 0.95;margin-bottom: 2px;"> <i class="fa fa-search m-r-5"></i> <span>搜索</span> </button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end #navigation -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end navbar-custom -->
+    </header>
+    <!-- end header -->
+
+    <!-- main -->
+    <div class="main">
+        <div class="wrapper">
+            <div class="container-fluid">
+                <div class="row mt-4 goods-info">
+                    <div class="">
+                        <!-- 商品查看 -->
+                        <div class="card-box row">
+                            <!-- 商品封面 -->
+                            <div class="goods-item col-6 mb-0">
+                                <div class="picframe">
+                                    <img data-src="../static/assets/images/iphone_1.jpg" src="../static/assets/images/loading.gif" alt="picture" class="coverPhoto">
+                                </div>
+                            </div>
+                            <!-- 商品封面 end -->
+                            <!-- 商品详细信息 -->
+                            <div class="col-6" style="position: relative;">
+                                <!-- 商品名称 -->
+                                <h2>iphone xs max</h2>
+                                <!-- 商品价格 -->
+                                <span class="font-18">￥888</span>
+                                <!-- 秒杀开始时间，若没有可直接删除 -->
+                                <p class="text-right text-muted">秒杀开始： 2019-07-16 10:00</p>
+                                <!-- 联系卖家 -->
+                                <div class="text-right">
+                                    <div class="seller-info" title="联系卖家">
+                                        <img src="../static/assets/images/avatar.png" alt="user" class="rounded-circle" style="width: 20px;height: 20px;">
+                                        <span class="seller-nickname text-muted ml-1">沈氏集团 <i class="mdi mdi-message-processing"></i></span>
+                                    </div>
+                                </div>
+                                <!-- 若商品有尺寸、颜色等可选项，在这里添加代码 -->
+
+                                <!-- 用户操作 -->
+                                <div style="position: absolute;bottom: 0;">
+                                    <button class="btn btn-outline-primary waves-effect waves-light btn-sm" onclick="place_order()"><i class="mdi mdi-cash-usd"></i> 立即购买</button>
+                                    <button class="btn btn-outline-secondary waves-effect waves-light btn-sm" onclick="favorites()"><i class="mdi mdi-star-outline"></i> 加入收藏夹</button>
+                                    <button class="btn btn-outline-dark waves-effect waves-light btn-sm"><i class="mdi mdi-cart-outline"></i> 添加到购物车</button>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-5">
+                                <h4 class="font-weight-bold">商品描述：</h4>
+                                <!-- 商品文字描述 -->
+                                <span>在这里填写商品描述</span>
+                                <h4 class="font-weight-bold">更多照片：</h4>
+                                <!-- 商品图片描述 -->
+                                <div class="picList">
+                                    <div class="picItem">
+                                        <img src="../static/assets/images/loading.gif" data-src="../static/assets/images/iphone_2.jpg" alt="" class="lazyload">
+                                    </div>
+                                    <div class="picItem">
+                                        <img src="../static/assets/images/loading.gif" data-src="../static/assets/images/iphone_3.jpg" alt="" class="lazyload">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 商品详细信息 end -->
+                        </div>
+                        <!-- 商品查看 end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end main -->
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    这里是页脚
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+
+    <!-- 阻止上传表单之后页面跳转 -->
+    <iframe name="ajaxFrame" style="display: none;"></iframe>
+
+    <!-- jQuery  -->
+    <script src="../static/assets/js/jquery.min.js"></script>
+    <script src="../static/assets/js/popper.min.js"></script>
+    <script src="../static/assets/js/bootstrap.min.js"></script>
+    <script src="../static/assets/js/waves.js"></script>
+    <script src="../static/assets/js/jquery.slimscroll.js"></script>
+
+    <!-- App js -->
+    <script src="../static/assets/js/jquery.core.js"></script>
+    <script src="../static/assets/js/jquery.app.js"></script>
+
+    <!-- Sweet Alert Js  -->
+    <script src="../static/plugins/sweet-alert/sweetalert2.min.js"></script>
+    <script src="../static/assets/pages/jquery.sweet-alert.init.js"></script>
+
+
+    <!-- Parsley js -->
+    <script type="text/javascript" src="../static/plugins/parsleyjs/parsley.min.js"></script>
+
+    <!-- lazyload js -->
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+
+    <!-- modernizr js -->
+    <script src="../static/assets/js/modernizr.min.js"></script>
+</body>
+<script>
+    /* 初始化商品封面尺寸 */
+    let initPicSize = function() {
+
+        /* 模拟懒加载 */
+        let img = new Image();
+        img.src = $(".coverPhoto").attr("data-src");
+        let rate = img.width / img.height; // 图片的比例
+        if (rate > 1) { // 图片是宽图的时候，将宽度填满容器
+            $(".coverPhoto").width($(".goods-item .picframe").width());
+            $(".coverPhoto").height($(".coverPhoto").width() / rate);
+        } else { // 图片是长图的时候，将高度填满容器
+            $(".coverPhoto").height($(".goods-item .picframe").height());
+            $(".coverPhoto").width($(".coverPhoto").height() * rate);
+        }
+        $(".coverPhoto").attr("src", img.src);
+        delete img;
+    } /* initPicSize end */
+
+    /* 初始化框架大小 */
+    let initFrame = function() {
+        $(".goods-info .card-box").width(screen.width * 0.7);
+        $(".goods-item .picframe").height($(".goods-info .card-box").width() * 0.45);
+    } /* initFrame end */
+
+    $(document).ready(() => {
+        /* 加载图片大小 */
+        setTimeout(() => {
+            initPicSize();
+        }, 0);
+
+        /* 加载框架大小 */
+        initFrame();
+
+        /* 图片懒加载 */
+        lazyload();
+
+        /* 购买操作 */
+        place_order = function() {
+            setTimeout(() => {
+                $('form').parsley();
+            }, 200)
+            swal({
+                    title: '请填写信息',
+                    showCancelButton: true,
+                    confirmButtonText: '下单',
+                    cancelButtonText: '取消',
+                    showLoaderOnConfirm: true,
+                    html: '\
+                    <form class="form-group" action="#" method="post" target="ajaxFrame" id="order">\
+                        收货地址：<input type="text" class="form-control" name="address" required  style="padding-top: 5px;padding-bottom: 5px;" placeholder="填写您的收货地址" data-parsley-required-message="收货地址不能为空">\
+                        手机号码：<input type="text" class="form-control" name="phone" required  style="padding-top: 5px;padding-bottom: 5px;" placeholder="填写您的手机号码" data-parsley-required-message="手机号码不能为空">\
+                        <input type="submit" value="" style="display: none;" id="place_order">\
+                    </form>\
+                ',
+                    preConfirm: function(code) {
+                        return new Promise(function(resolve, reject) {
+                            $('#place_order').click();
+                            setTimeout(function() {
+
+                                if ($('#order').parsley().validate()) {
+                                    resolve();
+                                } else {
+                                    reject('错误');
+                                }
+                                //在这里做验证码校验
+                                /*
+                                    if (code === '错误的验证码') {
+                                        reject('错误');
+                                    } else {
+                                        resolve();
+                                    }
+                                */
+                            }, 500);
+                        });
+                    },
+                    allowOutsideClick: false
+                })
+                .then(function(email) {
+                    swal({
+                        html: '\
+                        <div class="col-10 offset-1 flex-column d-flex">\
+                            <h1 class="font-weight-bold text-center">下单成功！！</h1>\
+                            <span>已为您提醒卖家处理订单，请耐心等候</span>\
+                            <span class="text-muted mb-2 mt-2">订单号：12345789001</span>\
+                            <span class="text-muted">订单创建时间：2018-09-09 20:20</span>\
+                            <span class="mb-2 mt-2"><a href="/users/order" class="btn btn-outline-dark btn-sm">查看我的订单</a></span>\
+                        </div>',
+                        allowOutsideClick: false,
+                        showConfirmButton: false
+                    })
+                })
+        }
+
+    })
+
+    /* 窗口大小变化时触发的事件 */
+    window.onresize = () => {
+        initPicSize();
+    }
+</script>
+
+</html>

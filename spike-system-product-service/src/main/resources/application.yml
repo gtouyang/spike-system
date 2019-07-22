@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    username: root
+    password: pass
+    url: jdbc:mysql://112.74.42.31:3307/spike_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    #针对Druid的一些配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    filters: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+
+  # redis config
+  redis:
+    host: 112.74.42.31
+    port: 6380
+
+  application:
+    name: spike-system-product-service
+server:
+  port: 7080
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka/
+  instance:
+    instance-id: prodcut-service
+info:
+  app.name: ogic-spike-system-product-service
+  company.name: ogic.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
