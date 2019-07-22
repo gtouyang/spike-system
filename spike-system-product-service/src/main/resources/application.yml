@@ -44,3 +44,9 @@ info:
   company.name: ogic.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
+
+#mybatis config
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true  #启动驼峰命名法
+    use-generated-keys: true
