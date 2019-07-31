@@ -9,10 +9,9 @@
         <module name="spike-system-order-service" />
         <module name="spike-system-product-service" />
         <module name="spike-system-pay-service" />
-        <module name="spike-system" />
-        <module name="spike-system-consumer" />
-        <module name="spike-system-api" />
         <module name="spike-system-authentication-service" />
+        <module name="spike-system-api" />
+        <module name="spike-system-consumer" />
         <module name="spike-system-eureka-server" />
       </profile>
     </annotationProcessing>

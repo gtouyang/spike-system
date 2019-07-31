@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author ogic
+ */
 @Service
 public class OrderService {
 
@@ -47,7 +50,7 @@ public class OrderService {
             } else {
                 order.setPayMoney(product.getOriginPrice());
             }
-            Long orderId = (Long) redisTemplate.boundValueOps("maxOrderId").increment();
+            Long orderId = redisTemplate.boundValueOps("maxOrderId").increment();
 
             order.setId(orderId);
             redisTemplate.boundHashOps("orderMap").put(orderId, order);
@@ -91,9 +94,7 @@ public class OrderService {
 
         if (result != null) {
             Long afterAmount = result;
-            if (afterAmount >= 0) {
-                return true;
-            }
+            return afterAmount >= 0;
         }
 
         return false;

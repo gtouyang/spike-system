@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="spike_db@112.74.42.31" uuid="b6123531-e048-41c9-8124-2e486c873cb6">
+    <data-source source="LOCAL" name="spike_db@localhost" uuid="939865d5-8d58-42d9-a88a-62fe910dcad6">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://112.74.42.31:3307/spike_db</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/spike_db</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="CONVERT_TO_NULL" />

@@ -1,8 +1,8 @@
 spring:
   datasource:
-    username: root
+    username: ogic
     password: pass
-    url: jdbc:mysql://112.74.42.31:3307/spike_db
+    url: jdbc:mysql://localhost:3306/spike_db
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
@@ -26,8 +26,8 @@ spring:
 
   # redis config
   redis:
-    host: 112.74.42.31
-    port: 6380
+    host: 127.0.0.1
+    port: 6379
 
   application:
     name: spike-system-product-service
@@ -36,7 +36,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:7000/eureka/
+      defaultZone: http://eureka1:8761/eureka/, http://eureka2:8762/eureka/, http://eureka3:8763/eureka/
   instance:
     instance-id: prodcut-service
 info:

@@ -37,7 +37,7 @@ create table `order`
     `order_status`  tinyint            not null default 0 comment '订单状态 -1取消 0准备 1成功',
     `product_id`    bigint             not null comment '秒杀商品ID',
     `pay_money`     decimal(10, 2)     default null comment '支付金额',
-    `pay_time`      timestamp          default null comment '支付时间',
+    `pay_time`      timestamp          not null default current_timestamp comment '支付时间',
     `pay_user_id`   bigint             not null comment '支付用户ID',
     `create_time`   timestamp          not null default current_timestamp comment '创建时间',
     `update_time`   timestamp          not null default current_timestamp on update current_timestamp comment '最近修改时间',
