@@ -187,10 +187,10 @@
         <div class="navbar-custom">
             <div class="container-fluid">
                 <div id="navigation">
-                    <form action="#">
+                    <form action="#" th:action="@{/product}" th:method="get">
                         <ul class="navigation-menu p-2">
                             <li class="has-submenu" style="width: 25%;">
-                                <input class="form-control" type="text" placeholder="搜索你想要的东西">
+                                <input th:name="id" class="form-control" type="text" placeholder="搜索你想要的东西">
                             </li>
                             <li>
                                 <button type="submit" class="btn btn-light waves-effect waves-primary" style="zoom: 0.95;margin-bottom: 2px;"> <i class="fa fa-search m-r-5"></i> <span>搜索</span> </button>

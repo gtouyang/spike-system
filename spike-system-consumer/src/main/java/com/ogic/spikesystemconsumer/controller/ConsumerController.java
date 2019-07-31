@@ -38,6 +38,13 @@ public class ConsumerController {
         return "show_goods";
     }
 
+    @GetMapping("/product")
+    public String getProductByKey(ProductEntity product, Model model){
+        product = productExposeService.getProductById(product.getId());
+        model.addAttribute("product", product);
+        return "show_goods";
+    }
+
     @ResponseBody
     @PostMapping("/buy")
     public OrderEntity buy(OrderEntity order){
