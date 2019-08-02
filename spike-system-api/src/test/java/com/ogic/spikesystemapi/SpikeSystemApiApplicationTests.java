@@ -18,16 +18,38 @@ public class SpikeSystemApiApplicationTests {
     @Test
     public void contextLoads() {
         tokenChecker.updateAlgorithmByHMAC256("secret");
-        String token = tokenChecker.createToken("test", 60L);
-        System.out.println(token);
-        if (token != null) {
-            token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0ZXN0IiwiZXhwIjoxNTYzNjI1OTExfQ.1X47h2Nt4kDMvaejxydj9EpEhiTDPR0CwNmK3HOdp68";
-            DecodedJWT jwt = tokenChecker.vefifyToken(token, "test");
-            if (jwt != null) {
-                System.out.println(jwt.getHeader());
-                System.out.println(jwt.getPayload());
-                System.out.println(jwt.getSignature());
-            }
+//        String token = tokenChecker.createToken("test", 60L);
+//        System.out.println(token);
+//        if (token != null) {
+//            token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0ZXN0IiwiZXhwIjoxNTYzNjI1OTExfQ.1X47h2Nt4kDMvaejxydj9EpEhiTDPR0CwNmK3HOdp68";
+//            DecodedJWT jwt = tokenChecker.decodeToken(token);
+//            if (jwt != null) {
+//                System.out.println(jwt.getHeader());
+//                System.out.println(jwt.getPayload());
+//                System.out.println(jwt.getSignature());
+//            }
+//            jwt = tokenChecker.vefifyToken(token, "test");
+//            if (jwt != null) {
+//                System.out.println(jwt.getHeader());
+//                System.out.println(jwt.getPayload());
+//                System.out.println(jwt.getSignature());
+//            }
+//        }
+        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0ZXN0IiwiZXhwIjoxNTYzNjI1OTExfQ.1X47h2Nt4kDMvaejxydj9EpEhiTDPR0CwNmK3HOdp68";
+        DecodedJWT jwt = tokenChecker.decodeToken(token);
+        if (jwt != null) {
+            System.out.println(jwt.getHeader());
+            System.out.println(jwt.getPayload());
+            System.out.println(jwt.getSignature());
+            System.out.println(jwt.getContentType());
+            System.out.println(jwt.getAlgorithm());
+            System.out.println(jwt.getIssuer());
+        }
+        jwt = tokenChecker.vefifyToken(token, "test");
+        if (jwt != null) {
+            System.out.println(jwt.getHeader());
+            System.out.println(jwt.getPayload());
+            System.out.println(jwt.getSignature());
         }
     }
 
