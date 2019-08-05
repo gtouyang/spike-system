@@ -1,15 +1,14 @@
-package com.ogic.spikesystemauthenticationservice.common;
+package com.ogic.spikesystemauthenticationservice.component;
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ogic.spikesystemapi.common.TokenVerifyUtil;
+import com.ogic.spikesystemapi.entity.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Date;
@@ -24,6 +23,14 @@ public class TokenCreateUtil {
     private Algorithm algorithm;
 
     private TokenVerifyUtil tokenVerifyUtil;
+
+    @Value("token.secret")
+    private String secret;
+
+    public TokenCreateUtil(){
+        algorithm = Algorithm.HMAC512(secret);
+        tokenVerifyUtil = new TokenVerifyUtil(algorithm);
+    }
 
     public TokenCreateUtil(Algorithm algorithm){
         this.algorithm = algorithm;
@@ -46,11 +53,11 @@ public class TokenCreateUtil {
         return tokenVerifyUtil.decodeToken(token);
     }
 
-    public String createToken(UserDetails userDetails, Long lifetime) {
+    public String createToken(UserEntity userEntity, Long lifetime) {
         String token;
         try {
             token = JWT.create()
-                    .withClaim("username", userDetails.getUsername())
+                    .withClaim("username", userEntity.getUsername())
                     .withExpiresAt(new Date(System.currentTimeMillis() + lifetime))
                     .sign(algorithm);
         } catch (JWTCreationException exception) {

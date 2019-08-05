@@ -43,12 +43,12 @@ public class UserEntity {
     private String email;
 
     /**
-     * 密码上次修改时间
+     * 创建时间
      */
-    private Date lastPasswordResetDate;
+    private String createTime;
 
     /**
-     * 用户角色
+     * 上次修改时间
      */
-    private List<String> roles;
+    private Date updateTime;
 }

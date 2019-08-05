@@ -31,7 +31,7 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
   application:
-    name: auth-service
+    name: spike-system-auth-service
 
 # Logging configuration
 logging:
@@ -59,14 +59,7 @@ mybatis:
     use-generated-keys: true
 
 
-# JWT
-jwt:
-  header: Authorization
+# token
+token:
   secret: mySecret
-  expiration: 604800
-  tokenHead: "Bearer "
-  route:
-    authentication:
-      path: auth
-      refresh: refresh
-      register: "auth/register"
+  life: 86400

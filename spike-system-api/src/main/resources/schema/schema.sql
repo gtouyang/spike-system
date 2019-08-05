@@ -45,3 +45,19 @@ create table `order`
     foreign key (`product_id`) references product (`id`)
 ) charset = utf8mb4
   engine = InnoDB comment '秒杀订单表';
+
+
+drop table if exists `user_basic_info`;
+-- 创建用户表
+create table `user_basic_info`
+(
+    `id`                       bigint           not null auto_increment comment '用户id',
+    `username`                 varchar(500)     not null comment '用户名',
+    `password`                 varchar(1000)    not null comment '密码',
+    `email`                    varchar(1000)    not null comment '邮箱',
+    `create_time`              timestamp        not null default current_timestamp comment '创建时间',
+    `update_time`              timestamp        not null default current_timestamp on update current_timestamp comment '修改时间',
+    primary key (`id`),
+    unique key (`username`)
+)charset = utf8mb4
+engine = InnoDB comment '用户基础信息表';
