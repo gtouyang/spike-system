@@ -1,6 +1,6 @@
 <!-- 商品查看界面 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,18 +8,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>秒杀系统</title>
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <link rel="shortcut icon" href="../static/images/favicon.ico"  th:href="@{/images/favicon.ico}">
 
     <!-- App css -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/icons.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link href="../static/css/icons.css" th:href="@{/css/icons.css}" rel="stylesheet" type="text/css" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
 
     <!-- Sweet Alert css -->
-    <link href="../static/plugins/sweet-alert/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="../static/plugins/sweet-alert/sweetalert2.min.css" th:href="@{/plugins/sweet-alert/sweetalert2.min.css}" rel="stylesheet" type="text/css" />
 
     <!-- style css -->
-    <link rel="stylesheet" href="../static/css/show_goods.css">
+    <link rel="stylesheet" href="../static/css/show_goods.css" th:href="@{/css/show_goods.css}">
 </head>
 
 <body>
@@ -98,28 +98,28 @@
                                 <div class="slimscroll" style="max-height: 230px;">
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
 
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
 
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
 
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
@@ -138,7 +138,7 @@
                         <!-- 用户操作 -->
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="../static/images/avatar.png" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
+                                <img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <div class="dropdown-item noti-title">
@@ -218,7 +218,7 @@
                             <!-- 商品封面 -->
                             <div class="goods-item col-6 mb-0">
                                 <div class="picframe">
-                                    <img data-src="../static/images/iphone_1.jpg" src="../static/images/loading.gif" alt="picture" class="coverPhoto">
+                                    <img data-src="../static/images/iphone_1.jpg" th:data-src="@{/images/iphone_1.jpg}" src="../static/images/loading.gif" th:src="@{/images/loading.gif}" alt="picture" class="coverPhoto">
                                 </div>
                             </div>
                             <!-- 商品封面 end -->
@@ -233,7 +233,7 @@
                                 <!-- 联系卖家 -->
                                 <div class="text-right">
                                     <div class="seller-info" title="联系卖家">
-                                        <img src="../static/images/avatar.png" alt="user" class="rounded-circle" style="width: 20px;height: 20px;">
+                                        <img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" alt="user" class="rounded-circle" style="width: 20px;height: 20px;">
                                         <span class="seller-nickname text-muted ml-1">沈氏集团 <i class="mdi mdi-message-processing"></i></span>
                                     </div>
                                 </div>
@@ -254,10 +254,10 @@
                                 <!-- 商品图片描述 -->
                                 <div class="picList">
                                     <div class="picItem">
-                                        <img src="../static/images/loading.gif" data-src="../static/images/iphone_2.jpg" alt="" class="lazyload">
+                                        <img src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/iphone_2.jpg" th:data-src="@{/images/iphone_2.jpg}" alt="" class="lazyload">
                                     </div>
                                     <div class="picItem">
-                                        <img src="../static/images/loading.gif" data-src="../static/images/iphone_3.jpg" alt="" class="lazyload">
+                                        <img src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/iphone_3.jpg" th:data-src="@{/images/iphone_3.jpg}" alt="" class="lazyload">
                                     </div>
                                 </div>
                             </div>
@@ -288,29 +288,29 @@
     <iframe name="ajaxFrame" style="display: none;"></iframe>
 
     <!-- jQuery  -->
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/popper.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/waves.js"></script>
-    <script src="../static/js/jquery.slimscroll.js"></script>
+    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/js/waves.js" th:src="@{/js/waves.js}"></script>
+    <script src="../static/js/jquery.slimscroll.js" th:src="@{/js/jquery.slimscroll.js}"></script>
 
     <!-- App js -->
-    <script src="../static/js/jquery.core.js"></script>
-    <script src="../static/js/jquery.app.js"></script>
+    <script src="../static/js/jquery.core.js" th:src="@{/js/jquery.core.js}"></script>
+    <script src="../static/js/jquery.app.js" th:src="@{/js/jquery.app.js}"></script>
 
     <!-- Sweet Alert Js  -->
-    <script src="../static/plugins/sweet-alert/sweetalert2.min.js"></script>
-    <script src="../static/pages/jquery.sweet-alert.init.js"></script>
+    <script src="../static/plugins/sweet-alert/sweetalert2.min.js" th:src="@{/plugins/sweet-alert/sweetalert2.min.js}"></script>
+    <script src="../static/pages/jquery.sweet-alert.init.js" th:src="@{/pages/jquery.sweet-alert.init.js}"></script>
 
 
     <!-- Parsley js -->
-    <script type="text/javascript" src="../static/plugins/parsleyjs/parsley.min.js"></script>
+    <script type="text/javascript" src="../static/plugins/parsleyjs/parsley.min.js" th:src="@{/plugins/parsleyjs/parsley.min.js}"></script>
 
     <!-- lazyload js -->
-    <script src="../static/js/lazyload.js"></script>
+    <script src="../static/js/lazyload.js" th:src="@{/js/lazyload.js}"></script>
 
     <!-- modernizr js -->
-    <script src="../static/js/modernizr.min.js"></script>
+    <script src="../static/js/modernizr.min.js" th:src="@{/js/modernizr.min.js}"></script>
 </body>
 <script>
     /* 初始化商品封面尺寸 */
@@ -329,21 +329,24 @@
         }
         $(".coverPhoto").attr("src", img.src);
         delete img;
-    } /* initPicSize end */
+    }; /* initPicSize end */
 
     /* 初始化框架大小 */
     let initFrame = function() {
         $(".goods-info .card-box").width(screen.width * 0.7);
         $(".goods-item .picframe").height($(".goods-info .card-box").width() * 0.45);
-    } /* initFrame end */
+    }; /* initFrame end */
 
     $(document).ready(() => {
         /* 加载图片大小 */
-        setTimeout(() => {
+        setTimeout(() =;> {
             initPicSize();
-        }, 0);
+    }
+    ,
+    0;
+    )
 
-        /* 加载框架大小 */
+    /* 加载框架大小 */
         initFrame();
 
         /* 图片懒加载 */
@@ -352,8 +355,8 @@
         /* 购买操作 */
         place_order = function() {
             setTimeout(() => {
-                $('form').parsley();
-            }, 200)
+                $('form';).parsley();
+            }, 200;)
             swal({
                     title: '请填写信息',
                     showCancelButton: true,
@@ -404,12 +407,12 @@
                         showConfirmButton: false
                     })
                 })
-        }
+        };
 
     })
 
     /* 窗口大小变化时触发的事件 */
-    window.onresize = () => {
+    window.onresize = () =;> {
         initPicSize();
     }
 </script>

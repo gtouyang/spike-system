@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,15 +8,15 @@
     <title>登录 - 秒杀系统</title>
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <link rel="shortcut icon" href="../static/images/favicon.ico" th:href="@{/images/favicon.ico}">
 
     <!-- App css -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/icons.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link href="../static/css/icons.css" th:href="@{/css/icons.css}" rel="stylesheet" type="text/css" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
 
     <!-- style css -->
-    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="../static/css/login.css" th:href="@{/css/login.css}">
 
 </head>
 
@@ -104,28 +104,28 @@
                                 <div class="slimscroll" style="max-height: 230px;">
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
 
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
 
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
 
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
@@ -144,7 +144,7 @@
                         <!-- 用户操作 -->
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="../static/images/avatar.png" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
+                                <img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <div class="dropdown-item noti-title">
@@ -267,23 +267,23 @@
     <iframe name="ajaxFrame" style="display: none;"></iframe>
 
     <!-- jQuery  -->
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/popper.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/waves.js"></script>
-    <script src="../static/js/jquery.slimscroll.js"></script>
+    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/js/waves.js" th:src="@{/js/waves.js}"></script>
+    <script src="../static/js/jquery.slimscroll.js" th:src="@{/js/jquery.slimscroll.js}"></script>
 
     <!-- App js -->
-    <script src="../static/js/jquery.core.js"></script>
-    <script src="../static/js/jquery.app.js"></script>
+    <script src="../static/js/jquery.core.js" th:src="@{/js/jquery.core.js}"></script>
+    <script src="../static/js/jquery.app.js" th:src="@{/js/jquery.app.js}"></script>
     <!-- modernizr js -->
-    <script src="../static/js/modernizr.min.js"></script>
+    <script src="../static/js/modernizr.min.js" th:src="@{/js/modernizr.min.js}"></script>
     <!-- Parsley js -->
-    <script type="text/javascript" src="../static/plugins/parsleyjs/parsley.min.js"></script>
+    <script type="text/javascript" src="../static/plugins/parsleyjs/parsley.min.js" th:src="@{/plugins/parsleyjs/parsley.min.js}"></script>
 </body>
 <script>
     $(document).ready(() => {
-        $('form').parsley();
+        $('form';).parsley();
     })
     window.onbeforeunload = function() {}
 </script>
