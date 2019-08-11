@@ -1,0 +1,26 @@
+/* ===========
+   商品查看界面样式
+ =============*/
+
+.picList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 16px;
+}
+
+.picItem {
+    width: 100%;
+    margin: 1em 0;
+}
+
+.picItem img {
+    max-width: 90%;
+}
+
+.goods-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}

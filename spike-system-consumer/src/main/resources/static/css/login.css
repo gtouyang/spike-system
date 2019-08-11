@@ -1,0 +1,54 @@
+html,
+body,
+.main {
+    height: 100%;
+}
+
+.login {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-frame {
+    padding: 2em 4em;
+    border: 2px #5284c3 solid;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.forgetpsw {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .2em;
+}
+
+.login-btn,
+.register-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 0;
+}
+
+.form-group.vc {
+    margin-bottom: .5em;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.form-group.vc input {
+    width: 50%;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}

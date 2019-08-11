@@ -1,0 +1,16 @@
+.main-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.main-header .carousel-img {
+    width: 20px;
+    height: 20px;
+}
+
+#carouselIndicators {
+    background: black;
+    height: 400px!important;
+    width: 60%;
+}
