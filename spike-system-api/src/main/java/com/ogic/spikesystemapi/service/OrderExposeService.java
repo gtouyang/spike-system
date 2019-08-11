@@ -3,6 +3,7 @@ package com.ogic.spikesystemapi.service;
 import com.ogic.spikesystemapi.entity.OrderEntity;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author ogic
@@ -15,6 +16,6 @@ public interface OrderExposeService {
      * @param order 订单对象
      * @return  订单对象
      */
-    @PostMapping("/buy")
-    OrderEntity buy(OrderEntity order);
+    @PostMapping("/order")
+    OrderEntity order(@RequestParam("order") OrderEntity order);
 }

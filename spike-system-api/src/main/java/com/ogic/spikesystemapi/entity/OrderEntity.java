@@ -57,7 +57,7 @@ public class OrderEntity implements Serializable {
     /**
      * 订单ID
      */
-    private Long id;
+    private String id;
 
     /**
      * 下单时间
@@ -67,9 +67,9 @@ public class OrderEntity implements Serializable {
     private Date orderTime;
 
     /**
-     * 下单用户ID
+     * 下单用户名
      */
-    private Long orderUserId;
+    private String orderUsername;
 
     /**
      * 订单状态
@@ -99,7 +99,7 @@ public class OrderEntity implements Serializable {
     private Date payTime;
 
     /**
-     * 支付用户ID
+     * 支付用户名
      */
-    private Long payUserId;
+    private String payUsername;
 }

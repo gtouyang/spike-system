@@ -14,9 +14,9 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @PostMapping("/buy")
-    public OrderEntity buy(OrderEntity order){
-        return orderService.buy(order.getProductId(), order.getOrderUserId(), order.getAmount());
+    @PostMapping("/order")
+    public OrderEntity order(@RequestParam OrderEntity order){
+        return orderService.order(order.getProductId(), order.getOrderUserId(), order.getAmount());
     }
 
 }

@@ -23,19 +23,25 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 
   application:
-    name: spike-system-product-service
+    name: spike-system-pay-service
 server:
-  port: 7080
+  port: 8100
 eureka:
   client:
     service-url:
       defaultZone: http://eureka1:8761/eureka/, http://eureka2:8762/eureka/, http://eureka3:8763/eureka/
   instance:
-    instance-id: product-service
+    instance-id: pay-service
 info:
-  app.name: ogic-spike-system-product-service
+  app.name: ogic-spike-system-pay-service
   company.name: ogic.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$

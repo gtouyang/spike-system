@@ -2,6 +2,9 @@ package com.ogic.spikesystemorderservice.service;
 
 import com.ogic.spikesystemapi.entity.OrderEntity;
 import com.ogic.spikesystemapi.entity.ProductEntity;
+import com.ogic.spikesystemapi.exception.ProductAmountLessThanZeroException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.core.RedisOperations;
@@ -9,8 +12,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author ogic
@@ -19,7 +24,11 @@ import java.util.List;
 public class OrderService {
 
     @Autowired
-    RedisTemplate redisTemplate;
+    RedisTemplate<String, Object> redisTemplate;
+
+    public final String DEFAULT_ORDER_HEAD = "ORDER";
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 创建订单并存放在redis上
@@ -36,11 +45,10 @@ public class OrderService {
                 .setAmount(amount)
                 .setOrderStatus(OrderEntity.OrderStatusEnum.READY)
                 .setOrderTime(current);
-
-        //如果redis中不存在该商品或获取最大订单号异常则不执行
         try {
             ProductEntity product = (ProductEntity) redisTemplate.boundHashOps("productMap").get(productId);
 
+            assert product != null;
             if (product.getSpikeStartTime()==null||product.getSpikeEndTime()==null){
                 order.setPayMoney(product.getOriginPrice());
             }
@@ -50,11 +58,25 @@ public class OrderService {
             } else {
                 order.setPayMoney(product.getOriginPrice());
             }
-            Long orderId = redisTemplate.boundValueOps("maxOrderId").increment();
+            StringBuilder builder = new StringBuilder();
+            builder.append(DEFAULT_ORDER_HEAD)
+                    .append(System.currentTimeMillis())
+                    .append(new SecureRandom().longs());
 
+            String orderId = builder.toString();
             order.setId(orderId);
-            redisTemplate.boundHashOps("orderMap").put(orderId, order);
+
+            //不幸订单号重复
+            while (! redisTemplate.boundValueOps(orderId).setIfAbsent(order)){
+                builder = new StringBuilder();
+                builder.append(DEFAULT_ORDER_HEAD)
+                        .append(System.currentTimeMillis())
+                        .append(new SecureRandom().longs());
+                orderId = builder.toString();
+                order.setId(orderId);
+            }
         } catch (NullPointerException exception) {
+            logger.error("can not find product[" + productId + "]");
             return null;
         }
         return order;
@@ -67,15 +89,14 @@ public class OrderService {
      * @param reduceAmount 减少的数量
      * @return 减少成功与否
      */
-    public boolean reduceProductAmount(Long productId, Integer reduceAmount) {
+    public boolean reduceProductAmount(Long productId, Integer reduceAmount) throws ProductAmountLessThanZeroException {
 
-
-        Long result = (Long) redisTemplate.execute(new SessionCallback() {
+        Optional result = Optional.ofNullable(redisTemplate.execute(new SessionCallback() {
             @Override
             public Object execute(RedisOperations redisOperations) throws DataAccessException {
                 redisOperations.watch("amountOfProduct" + productId.toString());
 
-                Integer leaveAmount = (Integer) redisOperations.boundValueOps("amountOfProduct" + productId.toString()).get();
+                Long leaveAmount = (Long) redisOperations.boundValueOps("amountOfProduct" + productId.toString()).get();
                 while (leaveAmount >= reduceAmount) {
                     redisOperations.multi();
                     redisOperations.boundValueOps("amountOfProduct" + productId.toString()).decrement(reduceAmount);
@@ -85,16 +106,18 @@ public class OrderService {
                     }
                     redisOperations.watch("amountOfProduct" + productId.toString());
 
-                    leaveAmount = (Integer) redisOperations.boundValueOps("amountOfProduct" + productId.toString()).get();
+                    leaveAmount = (Long) redisOperations.boundValueOps("amountOfProduct" + productId.toString()).get();
 
                 }
                 return null;
             }
-        });
+        }));
 
-        if (result != null) {
-            Long afterAmount = result;
-            return afterAmount >= 0;
+        if (result.isPresent()) {
+            Long leaveAmount = (Long) result.get();
+            if (leaveAmount < 0){
+                throw new ProductAmountLessThanZeroException(productId.toString());
+            }
         }
 
         return false;
@@ -107,13 +130,17 @@ public class OrderService {
      * @param amount    数量
      * @return  订单
      */
-    public OrderEntity buy(Long productId, Long userId, Integer amount) {
-        if (reduceProductAmount(productId, amount)) {
-            OrderEntity order = createOrder(productId, userId, amount);
-            if (order==null){
-                redisTemplate.boundValueOps("amountOfProduct" + productId.toString()).increment(amount);
+    public OrderEntity order(Long productId, Long userId, Integer amount){
+        try {
+            if (reduceProductAmount(productId, amount)) {
+                OrderEntity order = createOrder(productId, userId, amount);
+                if (order == null) {
+                    redisTemplate.boundValueOps("amountOfProduct" + productId.toString()).increment(amount);
+                }
+                return order;
             }
-            return order;
+        }catch (ProductAmountLessThanZeroException exception){
+            logger.error(exception.getMessage());
         }
         return null;
     }
