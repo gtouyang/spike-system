@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>秒杀系统</title>
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../static/images/favicon.ico"  th:href="@{/images/favicon.ico}">
+    <link rel="shortcut icon" href="../static/images/favicon.ico" th:href="@{/images/favicon.ico}">
 
     <!-- App css -->
     <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
@@ -284,6 +284,25 @@
     </footer>
     <!-- end footer -->
 
+    <!-- 侧边操作栏 -->
+    <div class="sidebar font-14">
+        <div class="sidebar-item text-center">
+            <span><a href="#">我的足迹</a></span>
+            <span class="underline"></span>
+        </div>
+        <div class="sidebar-item text-center">
+            <span><a href="#">反馈</a></span>
+            <span class="underline"></span>
+        </div>
+        <div class="sidebar-item text-center">
+            <span><a href="#">举报</a></span>
+        </div>
+        <div class="sidebar-item text-center pointer">
+            <a href="#"><i class="mdi mdi-chevron-up" style="zoom: 1.5;"></i></a>
+        </div>
+    </div>
+    <!-- 侧边操作栏 end -->
+
     <!-- 阻止上传表单之后页面跳转 -->
     <iframe name="ajaxFrame" style="display: none;"></iframe>
 
@@ -339,14 +358,13 @@
 
     $(document).ready(() => {
         /* 加载图片大小 */
-        setTimeout(() =;> {
-            initPicSize();
-    }
-    ,
-    0;
-    )
+        setTimeout(() = ; > {
+                initPicSize();
+            },
+            0;
+        )
 
-    /* 加载框架大小 */
+        /* 加载框架大小 */
         initFrame();
 
         /* 图片懒加载 */
@@ -412,7 +430,7 @@
     })
 
     /* 窗口大小变化时触发的事件 */
-    window.onresize = () =;> {
+    window.onresize = () = ; > {
         initPicSize();
     }
 </script>

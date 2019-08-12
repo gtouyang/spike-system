@@ -958,6 +958,11 @@ a:focus {
     font-size: 18px !important;
 }
 
+.font-25 {
+    font-size: 25px !important;
+    font-weight: bold!important;
+}
+
 .bx-shadow {
     box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
 }
@@ -6638,4 +6643,53 @@ body {
 
 a {
     color: #00B7FF;
+}
+
+.sidebar {
+    position: fixed;
+    right: 20px;
+    top: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: .4em .5em;
+}
+
+.sidebar .sidebar-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 3em;
+    background: #ffffff;
+    padding: 0 .4em .5em .4em;
+}
+
+.sidebar .sidebar-item:last-child {
+    background: rgb(82, 132, 195);
+    border-radius: 0 0 .5em .5em;
+    border: 1px solid #ffffff;
+}
+
+.sidebar .sidebar-item:first-child {
+    border-radius: .5em .5em 0 0;
+    border: 1px solid #ffffff;
+    padding-top: .5em;
+}
+
+.sidebar .sidebar-item .underline {
+    border-bottom: 1px solid black;
+    margin-top: .4em;
+    width: 100%;
+}
+
+.sidebar .sidebar-item a {
+    color: black;
+}
+
+.sidebar .sidebar-item a:hover {
+    color: #5284c3;
+}
+
+.sidebar .sidebar-item:last-child a:hover {
+    color: inherit!important;
 }

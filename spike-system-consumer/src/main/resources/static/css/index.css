@@ -4,13 +4,99 @@
     justify-content: center;
 }
 
-.main-header .carousel-img {
-    width: 20px;
-    height: 20px;
-}
+.ads-img img {}
 
 #carouselIndicators {
-    background: black;
     height: 400px!important;
-    width: 60%;
+    width: 80%;
+}
+
+.carousel-item {
+    height: 400px;
+}
+
+.ads-img {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ads-img img {
+    display: block;
+}
+
+.duration span {
+    background: rgba(82, 132, 195, 0.8);
+    padding: .3em;
+    margin: .1em;
+}
+
+.main-body {
+    width: 100%;
+}
+
+.main-body-title {
+    width: 100%;
+}
+
+.main-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-body-content {
+    width: 80%;
+}
+
+.on-sale-item {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2em;
+    justify-content: center;
+}
+
+.on-sale-item-left {
+    width: 35%;
+    padding-right: 20px;
+}
+
+.on-sale-item-left img {
+    width: 400px;
+    height: 300px;
+}
+
+.on-sale-item-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.on-sale-item-right .duration {
+    margin-bottom: 11px;
+    margin-left: 5em;
+}
+
+.on-sale-item-right .duration span {
+    border-radius: .2em!important;
+    padding: .1em;
+}
+
+.on-sale-item-right .title {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.on-sale-item-right .price {
+    padding-top: .3em;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.progress {
+    background: white;
 }
