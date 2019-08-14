@@ -62,4 +62,4 @@ mybatis:
 # token
 token:
   secret: mySecret
-  life: 86400
+

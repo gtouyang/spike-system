@@ -6,6 +6,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Optional;
+
 /**
  * @author ogic
  */
@@ -18,5 +20,5 @@ public interface ProductExposeService {
      * @return      商品对象
      */
     @GetMapping("/product/{id}")
-    ProductEntity getProductById(@PathVariable("id") long id);
+    Optional<ProductEntity> getProductById(@PathVariable("id") long id);
 }

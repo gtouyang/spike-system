@@ -31,18 +31,18 @@ public class TokenVerifyUtil {
         algorithm = Algorithm.HMAC512(secret);
     }
 
-    public DecodedJWT verifyToken(String token, UserDetails userDetails) {
-        DecodedJWT jwt;
+    public DecodedJWT verifyToken(DecodedJWT decodedJWT) {
+        DecodedJWT verifyJWT;
         try {
             JWTVerifier verifier = JWT.require(algorithm)
-                    .withClaim("username", userDetails.getUsername())
+                    .withClaim("username", decodedJWT.getClaim("username").asString())
                     .build(); //Reusable verifier instance
-            jwt = verifier.verify(token);
+            verifyJWT = verifier.verify(decodedJWT.getToken());
         } catch (JWTVerificationException exception) {
-            jwt = null;
+            verifyJWT = null;
             logger.info("token is disabled");
         }
-        return jwt;
+        return verifyJWT;
     }
     public DecodedJWT decodeToken(String token) {
         DecodedJWT jwt;

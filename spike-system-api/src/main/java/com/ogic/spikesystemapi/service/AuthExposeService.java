@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+
 /**
  * @author ogic
  */
@@ -20,7 +22,7 @@ public interface AuthExposeService {
      * @return  token
      */
     @PostMapping("/login")
-    String login(@RequestParam("username") final String username, @RequestParam("password") final String password);
+    Optional<String> login(@RequestParam("username") final String username, @RequestParam("password") final String password);
 
     /**
      * 注册服务
@@ -28,5 +30,5 @@ public interface AuthExposeService {
      * @return  注册结果
      */
     @PutMapping("/register")
-    String register(@RequestParam("user") final UserEntity userEntity);
+    Optional<String> register(@RequestParam("user") final UserEntity userEntity);
 }

@@ -20,3 +20,6 @@ info:
   company.name: ogic.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
+
+token:
+  secret: mySecret

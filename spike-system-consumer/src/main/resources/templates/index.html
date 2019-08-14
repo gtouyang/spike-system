@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
     <title>秒杀系统</title>
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <link rel="shortcut icon" href="../static/images/favicon.ico" th:href="@{/images/favicon.ico}">
 
     <!-- App css -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -104,28 +104,28 @@
                                 <div class="slimscroll" style="max-height: 230px;">
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
 
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
 
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
 
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon"><img src="../static/images/avatar.png" class="img-fluid rounded-circle" alt="" /> </div>
+                                        <div class="notify-icon"><img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" class="img-fluid rounded-circle" alt="" /> </div>
                                         <p class="notify-details">admin</p>
                                         <p class="text-muted font-13 mb-0 user-msg">您购物车中的商品即将失效，请尽快付款，点击查看。</p>
                                     </a>
@@ -172,7 +172,7 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="javascript:void(0);" class="dropdown-item notify-item" th:href="@{/logout}">
                                     <i class="fi-power"></i> <span>注销</span>
                                 </a>
 
@@ -410,28 +410,28 @@
     <iframe name="ajaxFrame" style="display: none;"></iframe>
 
     <!-- jQuery  -->
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/popper.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/waves.js"></script>
-    <script src="../static/js/jquery.slimscroll.js"></script>
+    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+    <script src="../static/js/waves.js" th:src="@{/js/waves.js}"></script>
+    <script src="../static/js/jquery.slimscroll.js" th:src="@{/js/jquery.slimscroll.js}"></script>
 
     <!-- App js -->
-    <script src="../static/js/jquery.core.js"></script>
-    <script src="../static/js/jquery.app.js"></script>
+    <script src="../static/js/jquery.core.js" th:src="@{/js/jquery.core.js}"></script>
+    <script src="../static/js/jquery.app.js" th:src="@{/js/jquery.app.js}"></script>
 
     <!-- modernizr js -->
-    <script src="../static/js/modernizr.min.js"></script>
+    <script src="../static/js/modernizr.min.js" th:src="@{/js/modernizr.min.js}"></script>
 
     <!-- lazyload js -->
-    <script src="../static/js/lazyload.js"></script>
+    <script src="../static/js/lazyload.js" th:src="@{/js/modernizr.min.js}"></script>
 
 
     <script>
         /* 初始化商品封面尺寸 */
         let initPicSize = function() {
 
-        } /* initPicSize end */
+        }; /* initPicSize end */
 
         $(document).ready(() => {
 

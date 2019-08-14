@@ -21,8 +21,6 @@ public class SpikeSystemOrderServiceApplicationTests {
 
     @Test
     public void contextLoads() {
-        OrderEntity order = orderService.buy(20L, 1L, 200);
-        System.out.println(order);
     }
 
 }

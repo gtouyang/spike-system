@@ -34,14 +34,14 @@ public class OrderService {
      * 创建订单并存放在redis上
      *
      * @param productId 商品ID
-     * @param userId    用户ID
+     * @param username  用户名
      * @return 生成的订单
      */
-    public OrderEntity createOrder(Long productId, Long userId, Integer amount) {
+    public OrderEntity createOrder(Long productId, String username, Integer amount) {
         Date current = new Date();
         OrderEntity order = new OrderEntity()
                 .setProductId(productId)
-                .setOrderUserId(userId)
+                .setOrderUsername(username)
                 .setAmount(amount)
                 .setOrderStatus(OrderEntity.OrderStatusEnum.READY)
                 .setOrderTime(current);
@@ -89,7 +89,7 @@ public class OrderService {
      * @param reduceAmount 减少的数量
      * @return 减少成功与否
      */
-    public boolean reduceProductAmount(Long productId, Integer reduceAmount) throws ProductAmountLessThanZeroException {
+    private boolean reduceProductAmount(Long productId, Integer reduceAmount) throws ProductAmountLessThanZeroException {
 
         Optional result = Optional.ofNullable(redisTemplate.execute(new SessionCallback() {
             @Override
@@ -126,14 +126,14 @@ public class OrderService {
     /**
      * 下单流程
      * @param productId 商品ID
-     * @param userId    用户ID
+     * @param username  用户名
      * @param amount    数量
      * @return  订单
      */
-    public OrderEntity order(Long productId, Long userId, Integer amount){
+    public OrderEntity order(Long productId, String username, Integer amount){
         try {
             if (reduceProductAmount(productId, amount)) {
-                OrderEntity order = createOrder(productId, userId, amount);
+                OrderEntity order = createOrder(productId, username, amount);
                 if (order == null) {
                     redisTemplate.boundValueOps("amountOfProduct" + productId.toString()).increment(amount);
                 }

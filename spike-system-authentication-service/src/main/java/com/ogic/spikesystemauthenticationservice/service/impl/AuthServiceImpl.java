@@ -28,8 +28,7 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     TokenCreateUtil tokenCreateUtil;
 
-    @Value("token.life")
-    Long tokenLife;
+    Long tokenLife = 86400L;
 
     @Override
     public String register(UserEntity userEntity) {
@@ -49,7 +48,9 @@ public class AuthServiceImpl implements AuthService {
         Optional userOptional = userMapper.findUserBasicInfoByUsername(username);
         if (userOptional.isPresent()) {
             UserEntity userEntity = (UserEntity) userOptional.get();
-            return tokenCreateUtil.createToken(userEntity, tokenLife);
+            if (userEntity.getPassword().equals(password)) {
+                return tokenCreateUtil.createToken(userEntity, tokenLife);
+            }
         }
         return null;
     }

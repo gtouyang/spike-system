@@ -144,7 +144,7 @@
                         <!-- 用户操作 -->
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
+                                <img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name" th:text="${session.username}">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <div class="dropdown-item noti-title">
@@ -218,12 +218,12 @@
         <div class="container-fluid login">
             <div class="login-frame">
                 <div class="login-body">
-                    <form action="#" method="post" enctype="multipart/form-data">
+                    <form action="#" method="post" enctype="multipart/form-data" th:action="@{/login}" th:method="post">
                         <div class="form-group">
-                            <input type="alphanum" data-parsley-type="alphanum" name="username" parsley-trigger="change" required placeholder="请输入用户名" data-parsley-required-message="用户名不能为空" class="form-control" minlength="6" maxlength="18">
+                            <input type="alphanum" data-parsley-type="alphanum" name="username" parsley-trigger="change" required placeholder="请输入用户名" data-parsley-required-message="用户名不能为空" class="form-control" minlength="4" maxlength="18">
                         </div>
                         <div class="form-group">
-                            <input type="alphanum" data-parsley-type="alphanum" name="password" parsley-trigger="change" required placeholder="请输入密码" data-parsley-required-message="用户密码不能为空" class="form-control" minlength="6" maxlength="30">
+                            <input type="alphanum" data-parsley-type="alphanum"  name="password" parsley-trigger="change" required placeholder="请输入密码" data-parsley-required-message="用户密码不能为空" class="form-control" minlength="4" maxlength="30">
                         </div>
                         <div class="form-group vc">
                             <input type="alphanum" data-parsley-type="alphanum" name="verificationCode" parsley-trigger="change" required placeholder="请输入图中的验证码" data-parsley-required-message="验证码不能为空" class="form-control">

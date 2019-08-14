@@ -45,8 +45,8 @@ public class TokenCreateUtil {
         algorithm = Algorithm.HMAC512(secret);
     }
 
-    public DecodedJWT verifyToken(String token, UserDetails userDetails) {
-        return tokenVerifyUtil.verifyToken(token, userDetails);
+    public DecodedJWT verifyToken(DecodedJWT decodedJWT) {
+        return tokenVerifyUtil.verifyToken(decodedJWT);
     }
 
     public DecodedJWT decodeToken(String token) {

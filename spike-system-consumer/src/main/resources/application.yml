@@ -1,5 +1,9 @@
 server:
   port: 8080
+  ssl:
+    key-store: classpath:gtouyang.pfx
+    key-store-password: nS2Nd2g2
+    key-store-type: PKCS12
 eureka:
   client:
     service-url:
@@ -12,3 +16,8 @@ spring:
   mvc:
     favicon:
       enabled: false
+  application:
+    name: spike-system-consumer
+token:
+  secret: mySecret
+
