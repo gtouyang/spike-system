@@ -15,7 +15,7 @@ public interface AuthService {
      * @param userEntity    用户对象
      * @return  注册消息
      */
-    String register(UserEntity userEntity);
+    Optional<String> register(UserEntity userEntity);
 
     /**
      * 登录
@@ -23,12 +23,12 @@ public interface AuthService {
      * @param password  密码
      * @return  token
      */
-    String login(String username, String password);
+    Optional<String> login(String username, String password);
 
     /**
      * 通过Token获得用户名
      * @param token 身份令牌
      * @return  用户名
      */
-    Optional findByToken(String token);
+    Optional<String> findByToken(String token);
 }

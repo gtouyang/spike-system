@@ -43,15 +43,15 @@ create table `order`
     `update_time`       timestamp                   not null default current_timestamp on update current_timestamp comment '最近修改时间',
     primary key (`id`),
     foreign key (`product_id`) references product (`id`),
-    foreign key (`order_username`) references user_basic_info(`username`),
-    foreign key (`pay_username`) references user_basic_info(`username`)
+    foreign key (`order_username`) references user(`username`),
+    foreign key (`pay_username`) references user(`username`)
 ) charset = utf8mb4
   engine = InnoDB comment '秒杀订单表';
 
 
-drop table if exists `user_basic_info`;
+drop table if exists `user`;
 -- 创建用户表
-create table `user_basic_info`
+create table `user`
 (
     `id`                       bigint           not null auto_increment comment '用户id',
     `username`                 varchar(100)     not null comment '用户名',
@@ -72,8 +72,8 @@ create table `wallet`
     `username`                  varchar(100)    not null comment '用户名',
     `payPassword`               varchar(100)    not null comment '支付密码',
     `money`                     decimal(10, 2)  not null default 0  comment '钱包余额',
-    `version`                   int             not null comment '版本',
+    `version`                   int             not null default 0  comment '版本',
     primary key (`id`),
-    foreign key (`username`) references user_basic_info(`username`)
+    foreign key (`username`) references user(`username`)
 )charset = utf8mb4
 engine = InnoDB comment '用户钱包表';

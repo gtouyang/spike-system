@@ -1,9 +1,7 @@
-package com.ogic.spikesystempayservice.mapper;
+package com.ogic.spikesystemsqlservice.mapper;
 
 import com.ogic.spikesystemapi.entity.WalletEntity;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -39,5 +37,16 @@ public interface WalletMapper {
      * @return 更新成功与否
      */
     @Update("update table wallet set money = #{money}, version = version+1 where id = #{id} and version = #{version}")
-    Integer updateMoney(Long id, Double money, Integer version);
+    Integer updateWalletMoney(Long id, Double money, Integer version);
+
+    /**
+     * 插入新钱包
+     * @param wallet    钱包实例
+     * @return
+     */
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    @Insert("insert into wallet(username, money)" +
+            "values(#{username}," +
+            "#{money})")
+    Integer insertWallet(WalletEntity wallet);
 }

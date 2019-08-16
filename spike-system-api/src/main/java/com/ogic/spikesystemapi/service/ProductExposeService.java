@@ -1,6 +1,5 @@
 package com.ogic.spikesystemapi.service;
 
-import com.ogic.spikesystemapi.entity.OrderEntity;
 import com.ogic.spikesystemapi.entity.ProductEntity;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

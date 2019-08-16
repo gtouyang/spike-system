@@ -3,7 +3,11 @@ package com.ogic.spikesystempayservice.service;
 import com.ogic.spikesystemapi.entity.WalletEntity;
 
 import java.util.List;
+import java.util.Optional;
 
+/**
+ * @author ogic
+ */
 public interface PayService {
 
     /**
@@ -11,7 +15,7 @@ public interface PayService {
      * @param username  用户名
      * @return  钱包列表
      */
-    List<WalletEntity> getUserAllWallets(String username);
+    Optional<List<WalletEntity>> getUserAllWallets(String username);
 
     /**
      * 获得可以支付的钱包列表
@@ -19,7 +23,7 @@ public interface PayService {
      * @param orderId   订单ID
      * @return  钱包列表
      */
-    List<WalletEntity> getUserAllWallets(String username, String orderId);
+    Optional<List<WalletEntity>> getUserAllWallets(String username, String orderId);
 
     /**
      * 使用钱包给订单支付
@@ -28,5 +32,5 @@ public interface PayService {
      * @param pasPassword   支付密码
      * @return  支付成功与否
      */
-    Boolean payOrderByWallet(Long walletID, String pasPassword, String orderId);
+    Optional<Boolean> payOrderByWallet(Long walletID, String pasPassword, String orderId);
 }

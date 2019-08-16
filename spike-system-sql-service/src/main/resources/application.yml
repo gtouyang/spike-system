@@ -1,0 +1,49 @@
+server:
+  port: 9090
+
+sharding:
+  jdbc:
+    datasource:
+      names: master, slave
+    master:
+      username: ogic
+      password: pass
+      url: jdbc:mysql://localhost:3306/spike_db
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      maxPoolSize: 20
+    slave:
+      username: ogic
+      password: pass
+      url: jdbc:mysql://localhost:3307/spike_db
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      maxPoolSize: 20
+    config:
+      masterslave:
+        load-balance-algorithm-type: round_robin
+        name: dataSource
+        master-data-source-name: master
+        slave-data-source-names: slave
+
+#mybatis config
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true  #启动驼峰命名法
+    use-generated-keys: true
+
+spring:
+  application:
+    name: spike-system-sql-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:8761/eureka/, http://eureka2:8762/eureka/, http://eureka3:8763/eureka/
+  instance:
+    instance-id: sql-service
+info:
+  app.name: ogic-spike-system-sql-service
+  company.name: ogic.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

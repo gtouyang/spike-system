@@ -2,14 +2,12 @@ package com.ogic.spikesystemauthenticationservice.service.impl;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ogic.spikesystemapi.entity.UserEntity;
+import com.ogic.spikesystemapi.service.UserSqlExposeService;
 import com.ogic.spikesystemauthenticationservice.component.TokenCreateUtil;
-import com.ogic.spikesystemauthenticationservice.mapper.UserMapper;
 import com.ogic.spikesystemauthenticationservice.service.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,7 +21,7 @@ public class AuthServiceImpl implements AuthService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    UserMapper userMapper;
+    UserSqlExposeService userSqlExposeService;
 
     @Autowired
     TokenCreateUtil tokenCreateUtil;
@@ -31,28 +29,25 @@ public class AuthServiceImpl implements AuthService {
     Long tokenLife = 86400L;
 
     @Override
-    public String register(UserEntity userEntity) {
-        try {
-            int res = userMapper.insertUserBasicInfo(userEntity);
-            if (res > 0){
-                return "success";
-            }
-        }catch (DataAccessException exception){
-            return "fail: username exists";
+    public Optional<String> register(UserEntity userEntity) {
+
+        Optional<Integer> res = userSqlExposeService.insertUser(userEntity);
+        if (res.isPresent() && res.get() > 0){
+            return Optional.of("create user success");
         }
-        return "fail";
+        return Optional.of("fail");
     }
 
     @Override
-    public String login(String username, String password) {
-        Optional userOptional = userMapper.findUserBasicInfoByUsername(username);
+    public Optional<String> login(String username, String password) {
+        Optional<UserEntity> userOptional = userSqlExposeService.getUser(username);
         if (userOptional.isPresent()) {
-            UserEntity userEntity = (UserEntity) userOptional.get();
+            UserEntity userEntity = userOptional.get();
             if (userEntity.getPassword().equals(password)) {
-                return tokenCreateUtil.createToken(userEntity, tokenLife);
+                return Optional.ofNullable(tokenCreateUtil.createToken(userEntity, tokenLife));
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
@@ -64,7 +59,7 @@ public class AuthServiceImpl implements AuthService {
             return Optional
                     .ofNullable(username)
                     .map(String::valueOf)
-                    .flatMap(userMapper::findUserBasicInfoByUsername);
+                    .flatMap(userSqlExposeService::getUser);
         }
         return  Optional.empty();
     }

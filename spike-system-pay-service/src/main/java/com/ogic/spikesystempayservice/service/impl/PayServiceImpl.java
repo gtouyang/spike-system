@@ -2,7 +2,7 @@ package com.ogic.spikesystempayservice.service.impl;
 
 import com.ogic.spikesystemapi.entity.OrderEntity;
 import com.ogic.spikesystemapi.entity.WalletEntity;
-import com.ogic.spikesystempayservice.mapper.WalletMapper;
+import com.ogic.spikesystemapi.service.WalletSqlExposeService;
 import com.ogic.spikesystempayservice.service.PayService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 
@@ -26,7 +27,7 @@ public class PayServiceImpl implements PayService {
     RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
-    WalletMapper walletMapper;
+    WalletSqlExposeService walletSqlExposeService;
 
     @Autowired
     RabbitTemplate rabbitTemplate;
@@ -39,24 +40,37 @@ public class PayServiceImpl implements PayService {
      */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Boolean reduceMoney(Long walletId,String payPassword, OrderEntity order){
-        WalletEntity wallet = walletMapper.getWalletById(walletId);
-        if (wallet.getMoney() < order.getPayMoney() || !wallet.getPayPassword().equals(payPassword)){
-            return false;
+        Optional<WalletEntity> wallet = walletSqlExposeService.getWalletById(walletId);
+        if (wallet.isPresent()) {
+            if (wallet.get().getMoney() < order.getPayMoney() || !wallet.get().getPayPassword().equals(payPassword)) {
+                return false;
+            }
+            Optional result = walletSqlExposeService.updateWalletMoney(walletId,
+                    wallet.get().getMoney() - order.getPayMoney(),
+                    wallet.get().getVersion());
+            if (result.isPresent()){
+                return result.get().equals(1);
+            }
         }
-        return walletMapper.updateMoney(walletId,
-                wallet.getMoney() - order.getPayMoney(),
-                wallet.getVersion()) == 1;
+        return false;
     }
 
     @Async
-    public void rollbackMoney(Long walletId, OrderEntity order){
-        WalletEntity wallet;
-        do{
-            wallet = walletMapper.getWalletById(walletId);
-
-        }while (walletMapper.updateMoney(walletId,
-                wallet.getMoney()+order.getPayMoney(),
-                wallet.getVersion()) != 1);
+    public Boolean rollbackMoney(Long walletId, OrderEntity order){
+        while (true) {
+            Optional<WalletEntity> wallet = walletSqlExposeService.getWalletById(walletId);
+            Optional result;
+            if (wallet.isPresent()) {
+                result = walletSqlExposeService.updateWalletMoney(walletId,
+                        wallet.get().getMoney() + order.getPayMoney(),
+                        wallet.get().getVersion());
+                if (result.isPresent() && result.get().equals(1)){
+                    return true;
+                }
+            }else {
+                return false;
+            }
+        }
     }
 
     private String lockOrder(String orderId){
@@ -72,41 +86,41 @@ public class PayServiceImpl implements PayService {
 
 
     @Override
-    public List<WalletEntity> getUserAllWallets(String username) {
-        List<WalletEntity> walletEntityList = walletMapper.getWalletByUsername(username);
-        if (walletEntityList == null || walletEntityList.size() < 1){
-            return null;
+    public Optional<List<WalletEntity>> getUserAllWallets(String username) {
+        Optional<List<WalletEntity>> walletEntityList = walletSqlExposeService.getWalletByUsername(username);
+        if (!walletEntityList.isPresent() || walletEntityList.get().size() < 1){
+            return Optional.empty();
         }
-        walletEntityList.sort(Comparator.comparing(WalletEntity::getMoney));
+        walletEntityList.get().sort(Comparator.comparing(WalletEntity::getMoney));
         return walletEntityList;
     }
 
     @Override
-    public List<WalletEntity> getUserAllWallets(String username, String orderId) {
+    public Optional<List<WalletEntity>> getUserAllWallets(String username, String orderId) {
         OrderEntity order = (OrderEntity) redisTemplate.boundValueOps(orderId).get();
         if (order == null) {
-            return null;
+            return Optional.empty();
         }
 
-        List<WalletEntity> walletEntityList = walletMapper.getWalletByUsername(username);
-        if (walletEntityList == null || walletEntityList.size() < 1){
-            return null;
+        Optional<List<WalletEntity>> walletEntityList = walletSqlExposeService.getWalletByUsername(username);
+        if (!walletEntityList.isPresent() || walletEntityList.get().size() < 1){
+            return Optional.empty();
         }
 
-        for (WalletEntity wallet : walletEntityList){
+        for (WalletEntity wallet : walletEntityList.get()){
             if (wallet.getMoney() < order.getPayMoney()){
-                walletEntityList.remove(wallet);
+                walletEntityList.get().remove(wallet);
             }
         }
-        walletEntityList.sort(Comparator.comparing(WalletEntity::getMoney));
+        walletEntityList.get().sort(Comparator.comparing(WalletEntity::getMoney));
         return walletEntityList;
     }
 
     @Override
-    public Boolean payOrderByWallet(Long walletID, String pasPassword, String orderId) {
+    public Optional<Boolean> payOrderByWallet(Long walletID, String pasPassword, String orderId) {
         String lockCode = lockOrder(orderId);
         if (lockCode == null){
-            return false;
+            return Optional.of(Boolean.FALSE);
         }
         OrderEntity order = (OrderEntity) redisTemplate.boundValueOps(orderId).get();
         if (reduceMoney(walletID, pasPassword, order)){
@@ -115,11 +129,13 @@ public class PayServiceImpl implements PayService {
                 rabbitTemplate.convertAndSend("order", "finishedOrder", order);
                 redisTemplate.delete("lock"+orderId);
                 redisTemplate.delete(orderId);
-                return true;
+                return Optional.of(Boolean.TRUE);
             }else {
-               rollbackMoney(walletID, order);
+               if (!rollbackMoney(walletID, order)){
+                   rabbitTemplate.convertAndSend("error", "roolbackMoneyError", order);
+               }
             }
         }
-        return false;
+        return Optional.of(Boolean.FALSE);
     }
 }

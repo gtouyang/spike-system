@@ -1,7 +1,7 @@
 package com.ogic.spikesystemproductservice;
 
 import com.ogic.spikesystemapi.entity.ProductEntity;
-import com.ogic.spikesystemproductservice.service.ProductService;
+import com.ogic.spikesystemproductservice.service.impl.ProductServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.Date;
 public class SpikeSystemProductServiceApplicationTests {
 
     @Autowired
-    ProductService productService;
+    ProductServiceImpl productService;
 
     @Test
     public void contextLoads() {
