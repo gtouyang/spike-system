@@ -31,7 +31,7 @@ public interface ProductMapper {
      * @param rows
      * @return
      */
-    @Select("select * from product order by id desc limit #{offset} #{rows}")
+    @Select("select * from product order by id desc limit #{offset}, #{rows}")
     List<ProductEntity> getProducts(Long offset, Integer rows);
 
     /**

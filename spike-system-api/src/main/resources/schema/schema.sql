@@ -3,6 +3,35 @@
  */
 
 
+drop table if exists `user`;
+-- 创建用户表
+create table `user`
+(
+    `id`                       bigint           not null auto_increment comment '用户id',
+    `username`                 varchar(100)     not null comment '用户名',
+    `password`                 varchar(100)    not null comment '密码',
+    `email`                    varchar(100)    not null comment '邮箱',
+    `create_time`              timestamp        not null default current_timestamp comment '创建时间',
+    `update_time`              timestamp        not null default current_timestamp on update current_timestamp comment '修改时间',
+    primary key (`id`),
+    unique key (`username`)
+)charset = utf8mb4
+ engine = InnoDB comment '用户基础信息表';
+
+drop table if exists `wallet`;
+-- 创建用户钱包表
+create table `wallet`
+(
+    `id`                        bigint          not null auto_increment comment '钱包ID',
+    `username`                  varchar(100)    not null comment '用户名',
+    `payPassword`               varchar(100)    not null comment '支付密码',
+    `money`                     decimal(10, 2)  not null default 0  comment '钱包余额',
+    `version`                   int             not null default 0  comment '版本',
+    primary key (`id`),
+    foreign key (`username`) references user(`username`)
+)charset = utf8mb4
+ engine = InnoDB comment '用户钱包表';
+
 drop table if exists `product`;
 -- 创建秒杀商品表
 create table `product`
@@ -47,33 +76,3 @@ create table `order`
     foreign key (`pay_username`) references user(`username`)
 ) charset = utf8mb4
   engine = InnoDB comment '秒杀订单表';
-
-
-drop table if exists `user`;
--- 创建用户表
-create table `user`
-(
-    `id`                       bigint           not null auto_increment comment '用户id',
-    `username`                 varchar(100)     not null comment '用户名',
-    `password`                 varchar(100)    not null comment '密码',
-    `email`                    varchar(100)    not null comment '邮箱',
-    `create_time`              timestamp        not null default current_timestamp comment '创建时间',
-    `update_time`              timestamp        not null default current_timestamp on update current_timestamp comment '修改时间',
-    primary key (`id`),
-    unique key (`username`)
-)charset = utf8mb4
-engine = InnoDB comment '用户基础信息表';
-
-drop table if exists `wallet`;
--- 创建用户钱包表
-create table `wallet`
-(
-    `id`                        bigint          not null auto_increment comment '钱包ID',
-    `username`                  varchar(100)    not null comment '用户名',
-    `payPassword`               varchar(100)    not null comment '支付密码',
-    `money`                     decimal(10, 2)  not null default 0  comment '钱包余额',
-    `version`                   int             not null default 0  comment '版本',
-    primary key (`id`),
-    foreign key (`username`) references user(`username`)
-)charset = utf8mb4
-engine = InnoDB comment '用户钱包表';

@@ -13,9 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class AuthServiceConfig {
 
     @Bean
-    public TokenCreateUtil getTokenCreateUtil(
-            @Value("token.secret")
-            String secret){
+    public TokenCreateUtil getTokenCreateUtil(@Value("token.secret") String secret){
         return new TokenCreateUtil(secret);
     }
 }

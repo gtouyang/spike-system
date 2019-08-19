@@ -357,27 +357,27 @@
                                                 <div class="goods-coverphoto"><img src="../static/images/iphone_1.jpg" th:src="@{/images/iphone_1.jpg}" alt=""></div>
                                                 <div class="goods-otherinfo">
                                                     <!-- 商品名称 -->
-                                                    <div class="goods-name font-10"><a href="#">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
+                                                    <div class="goods-name font-10"><a href="#" th:text="${product.getName()}">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
                                                 </div>
                                             </div>
                                             <!-- 商品属性 尺寸、颜色等等 -->
                                             <div class="goods-attr">
-                                                <div class="goods-attr-item"><span class="font-10">颜色： 白色</span></div>
-                                                <div class="goods-attr-item"><span class="font-10">内存： 256G</span></div>
+                                                <div class="goods-attr-item"><span class="font-10" th:text="${product.getInfo()}">颜色： 白色</span></div>
+                                                <div class="goods-attr-item"><span class="font-10" th:remove="all">内存： 256G</span></div>
                                             </div>
                                             <!-- 当前选购的商品的单价 -->
                                             <div class="goods-price">
-                                                <span class="font-10">¥ 9999.00</span>
+                                                <span class="font-10" th:text="${order.getPayMoney()/order.getAmount()}">¥ 9999.00</span>
                                             </div>
                                             <!-- 当前选购该商品的数量 -->
                                             <div class="goods-amount">
-                                                <span class="font-10">
+                                                <span class="font-10" th:text="'x ' + ${order.getAmount()}">
                                                                 × 1
                                                             </span>
                                             </div>
                                             <!-- 当前商品总价小计 -->
                                             <div class="goods-subtotal ">
-                                                <span class="font-10">¥ 9999.00</span>
+                                                <span class="font-10" th:text="${order.getPayMoney()}">¥ 9999.00</span>
                                             </div>
                                             <!-- 删除商品按钮 -->
                                             <div class="goods-delete">
@@ -401,7 +401,7 @@
                                         <span class="seller-info pl-4"><i class="mdi mdi-account-multiple pr-1"></i>卖家：<a href="#"> 凌氏集团-沈冠希</a></span>
                                     </div>
                                     <!-- 一个goods-list代表是一家店内的所有商品 -->
-                                    <div class="goods-list">
+                                    <div class="goods-list" th:remove="all">
                                         <!-- 一个goods-item为一个商品 -->
                                         <div class="goods-item">
                                             <!-- 商品名称 以及 封面 -->

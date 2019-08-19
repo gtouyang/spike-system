@@ -1,30 +1,30 @@
 server:
   port: 9090
-
-sharding:
-  jdbc:
-    datasource:
-      names: master, slave
-    master:
-      username: ogic
-      password: pass
-      url: jdbc:mysql://localhost:3306/spike_db
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
-      maxPoolSize: 20
-    slave:
-      username: ogic
-      password: pass
-      url: jdbc:mysql://localhost:3307/spike_db
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
-      maxPoolSize: 20
-    config:
-      masterslave:
-        load-balance-algorithm-type: round_robin
-        name: dataSource
-        master-data-source-name: master
-        slave-data-source-names: slave
+#
+#sharding:
+#  jdbc:
+#    datasource:
+#      names: master, slave
+#    master:
+#      username: root
+#      password: pass
+#      url: jdbc:mysql://112.74.42.31:3307/spike_db
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      type: com.alibaba.druid.pool.DruidDataSource
+#      maxPoolSize: 20
+#    slave:
+#      username: root
+#      password: pass
+#      url: jdbc:mysql://112.74.42.31:3308/spike_db
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      type: com.alibaba.druid.pool.DruidDataSource
+#      maxPoolSize: 20
+#    config:
+#      masterslave:
+#        load-balance-algorithm-type: round_robin
+#        name: dataSource
+#        master-data-source-name: master
+#        slave-data-source-names: slave
 
 #mybatis config
 mybatis:
@@ -47,3 +47,37 @@ info:
   company.name: ogic.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
+
+#druid:
+#  initialSize: 5
+#  minIdle: 5
+#  maxActive: 20
+#  maxWait: 60000
+#  timeBetweenEvictionRunsMillis: 60000
+#  minEvictableIdleTimeMillis: 300000
+#  validationQuery: SELECT 1 FROM DUAL
+#  testWhileIdle: true
+#  testOnBorrow: false
+#  testOnReturn: false
+#  poolPreparedStatements: true
+#  filters: stat,wall
+#  maxPoolPreparedStatementPerConnectionSize: 20
+#  useGlobalDataSourceStat: true
+#  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+datasource:
+  master:
+    username: root
+    password: pass
+    url: jdbc:mysql://112.74.42.31:3307/spike_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    maxPoolSize: 20
+  slave:
+    username: root
+    password: pass
+    url: jdbc:mysql://112.74.42.31:3308/spike_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    maxPoolSize: 20
+

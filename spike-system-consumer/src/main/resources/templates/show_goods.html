@@ -225,11 +225,11 @@
                             <!-- 商品详细信息 -->
                             <div class="col-6" style="position: relative;">
                                 <!-- 商品名称 -->
-                                <h2>iphone xs max</h2>
+                                <h2 th:text="${display.getName()}">iphone xs max</h2>
                                 <!-- 商品价格 -->
-                                <span class="font-18">￥888</span>
+                                <span class="font-18" th:text="${display.getPrice()}">￥888</span>
                                 <!-- 秒杀开始时间，若没有可直接删除 -->
-                                <p class="text-right text-muted">秒杀开始： 2019-07-16 10:00</p>
+                                <p class="text-right text-muted" th:text="${display.getTimeInfo()}">秒杀开始： 2019-07-16 10:00</p>
                                 <!-- 联系卖家 -->
                                 <div class="text-right">
                                     <div class="seller-info" title="联系卖家">
@@ -241,15 +241,19 @@
 
                                 <!-- 用户操作 -->
                                 <div style="position: absolute;bottom: 0;">
-                                    <button class="btn btn-outline-primary waves-effect waves-light btn-sm" onclick="place_order()"><i class="mdi mdi-cash-usd"></i> 立即购买</button>
-                                    <button class="btn btn-outline-secondary waves-effect waves-light btn-sm" onclick="favorites()"><i class="mdi mdi-star-outline"></i> 加入收藏夹</button>
-                                    <button class="btn btn-outline-dark waves-effect waves-light btn-sm"><i class="mdi mdi-cart-outline"></i> 添加到购物车</button>
+                                    <form type="hidden" th:type="" th:action="@{/order}" th:method="post">
+                                        <input type="hidden" th:value="${product}" th:name="product">
+                                        <input type="hidden" th:value="${1}" th:name="amount">
+                                        <button th:type="submit" class="btn btn-outline-primary waves-effect waves-light btn-sm" onclick="place_order()"><i class="mdi mdi-cash-usd"></i> 立即购买</button>
+                                        <button class="btn btn-outline-secondary waves-effect waves-light btn-sm" onclick="favorites()"><i class="mdi mdi-star-outline"></i> 加入收藏夹</button>
+                                        <button class="btn btn-outline-dark waves-effect waves-light btn-sm"><i class="mdi mdi-cart-outline"></i> 添加到购物车</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-12 mt-5">
                                 <h4 class="font-weight-bold">商品描述：</h4>
                                 <!-- 商品文字描述 -->
-                                <span>在这里填写商品描述</span>
+                                <span th:text="${display.getInfo()}">在这里填写商品描述</span>
                                 <h4 class="font-weight-bold">更多照片：</h4>
                                 <!-- 商品图片描述 -->
                                 <div class="picList">
@@ -358,7 +362,7 @@
 
     $(document).ready(() => {
         /* 加载图片大小 */
-        setTimeout(() = ; > {
+        setTimeout(() =;> {
                 initPicSize();
             },
             0;
@@ -430,7 +434,7 @@
     })
 
     /* 窗口大小变化时触发的事件 */
-    window.onresize = () = ; > {
+    window.onresize = () =;> {
         initPicSize();
     }
 </script>
