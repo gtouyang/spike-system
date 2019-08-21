@@ -26,8 +26,9 @@ public class UserSqlController {
         return Optional.ofNullable(userMapper.getUseByUsername(username));
     }
 
-    @PutMapping("/sql/insert/user")
+    @PostMapping("/sql/insert/user")
     public Optional<Integer> insertUser(@RequestParam UserEntity user){
         return Optional.ofNullable(userMapper.insertUser(user));
     }
+
 }

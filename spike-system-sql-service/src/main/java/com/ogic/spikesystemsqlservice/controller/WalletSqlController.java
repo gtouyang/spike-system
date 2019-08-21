@@ -35,13 +35,13 @@ public class WalletSqlController {
     }
 
     @Master
-    @PostMapping(value = "/sql/update/wallet/money")
+    @PutMapping(value = "/sql/update/wallet/money")
     public Optional<Integer> updateWalletMoney(@RequestParam Long id, @RequestParam Double money, @RequestParam Integer version){
         return Optional.ofNullable(walletMapper.updateWalletMoney(id, money, version));
     }
 
     @Master
-    @PutMapping(value = "/sql/insert/wallet")
+    @PostMapping(value = "/sql/insert/wallet")
     public Optional<Integer> insertWallet(@RequestParam WalletEntity wallet){
         return Optional.ofNullable(walletMapper.insertWallet(wallet));
     }

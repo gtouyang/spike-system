@@ -30,6 +30,6 @@ public interface AuthExposeService {
      * @param userEntity    用户实例
      * @return  注册结果
      */
-    @PutMapping("/register")
+    @PostMapping("/register")
     Optional<String> register(@RequestBody final UserEntity userEntity);
 }

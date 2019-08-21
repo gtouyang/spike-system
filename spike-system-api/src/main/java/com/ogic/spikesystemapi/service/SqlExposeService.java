@@ -1,6 +1,7 @@
 package com.ogic.spikesystemapi.service;
 
 import com.ogic.spikesystemapi.entity.ProductEntity;
+import com.ogic.spikesystemapi.entity.ShopEntity;
 import com.ogic.spikesystemapi.entity.UserEntity;
 import com.ogic.spikesystemapi.entity.WalletEntity;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -34,8 +35,9 @@ public interface SqlExposeService {
     /**
      * 插入新商品
      * @param product
+     * @return
      */
-    @PutMapping(value = "/sql/insert/product")
+    @PostMapping(value = "/sql/insert/product")
     Optional<Integer> insertProduct(@RequestParam ProductEntity product);
 
     /**
@@ -51,7 +53,7 @@ public interface SqlExposeService {
      * @param user  用户实例
      * @return 插入结果
      */
-    @PutMapping("/sql/insert/user")
+    @PostMapping("/sql/insert/user")
     Optional<Integer> insertUser(@RequestParam UserEntity user);
 
     /**
@@ -77,13 +79,50 @@ public interface SqlExposeService {
      * @param version
      * @return
      */
-    @PostMapping(value = "/sql/update/wallet/money")
+    @PutMapping(value = "/sql/update/wallet/money")
     Optional<Integer> updateWalletMoney(@RequestParam Long id, @RequestParam Double money, @RequestParam Integer version);
 
     /**
      * 插入新钱包
      * @param wallet
+     * @return
      */
-    @PutMapping(value = "/sql/insert/wallet")
+    @PostMapping(value = "/sql/insert/wallet")
     Optional<Integer> insertWallet(@RequestParam WalletEntity wallet);
+
+    /**
+     * 根据商铺ID获取商铺
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/sql/select/shop")
+    Optional<ShopEntity> getShopById(@RequestParam Long id);
+
+    /**
+     * 根据商铺卖家用户名获取商铺列表
+     *
+     * @param owner
+     * @return
+     */
+    @GetMapping(value = "/sql/select/shop")
+    Optional<List<ShopEntity>> getShopByOwner(@RequestParam String owner);
+
+    /**
+     * 插入新商铺
+     *
+     * @param shop
+     * @return
+     */
+    @PostMapping(value = "/sql/insert/shop")
+    Optional<Integer> insertShop(@RequestParam ShopEntity shop);
+
+    /**
+     * 更新商铺余额
+     *
+     * @param shop
+     * @return
+     */
+    @PutMapping(value = "/sql/update/shop")
+    Optional<Integer> updateShopMoney(@RequestParam ShopEntity shop);
 }

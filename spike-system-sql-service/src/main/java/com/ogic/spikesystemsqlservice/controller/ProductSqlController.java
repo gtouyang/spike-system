@@ -27,7 +27,7 @@ public class ProductSqlController {
         return Optional.ofNullable(productMapper.getProducts(offest,rows));
     }
 
-    @PutMapping(value = "/sql/insert/product")
+    @PostMapping(value = "/sql/insert/product")
     public Optional<Integer> insertProduct(@RequestParam ProductEntity product){
         return Optional.ofNullable(productMapper.insertProduct(product));
     }

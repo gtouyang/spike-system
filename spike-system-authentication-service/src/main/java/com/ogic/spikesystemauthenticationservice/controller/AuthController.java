@@ -24,7 +24,7 @@ public class AuthController {
         return authService.login(username,password);
     }
 
-    @PutMapping("/register")
+    @PostMapping("/register")
     public Optional<String> register(@RequestBody final UserEntity userEntity){
         return authService.register(userEntity);
     }
