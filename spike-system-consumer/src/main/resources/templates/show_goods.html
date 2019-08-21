@@ -362,10 +362,10 @@
 
     $(document).ready(() => {
         /* 加载图片大小 */
-        setTimeout(() =;> {
+        setTimeout(() => {
                 initPicSize();
             },
-            0;
+            0
         )
 
         /* 加载框架大小 */
@@ -377,8 +377,8 @@
         /* 购买操作 */
         place_order = function() {
             setTimeout(() => {
-                $('form';).parsley();
-            }, 200;)
+                $('form').parsley();
+            }, 200)
             swal({
                     title: '请填写信息',
                     showCancelButton: true,
@@ -434,7 +434,7 @@
     })
 
     /* 窗口大小变化时触发的事件 */
-    window.onresize = () =;> {
+    window.onresize = () => {
         initPicSize();
     }
 </script>
