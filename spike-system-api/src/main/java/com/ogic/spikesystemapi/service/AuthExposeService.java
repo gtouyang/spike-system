@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
@@ -22,7 +23,7 @@ public interface AuthExposeService {
      * @return  token
      */
     @PostMapping("/login")
-    Optional<String> login(@RequestParam("username") final String username, @RequestParam("password") final String password);
+    Optional<String> login(@RequestParam("username") final String username, @RequestBody final String password);
 
     /**
      * 注册服务
@@ -30,5 +31,5 @@ public interface AuthExposeService {
      * @return  注册结果
      */
     @PutMapping("/register")
-    Optional<String> register(@RequestParam("user") final UserEntity userEntity);
+    Optional<String> register(@RequestBody final UserEntity userEntity);
 }

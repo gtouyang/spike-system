@@ -1,39 +1,34 @@
 package com.ogic.spikesystemauthenticationservice;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.google.inject.internal.cglib.core.$ObjectSwitchCallback;
 import com.ogic.spikesystemapi.entity.UserEntity;
-import com.ogic.spikesystemauthenticationservice.mapper.UserMapper;
+import com.ogic.spikesystemauthenticationservice.component.TokenCreateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Date;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpikeSystemAuthenticationServiceApplicationTests {
 
     @Autowired
-    UserMapper userMapper;
+    TokenCreateUtil tokenCreateUtil;
 
     @Test
     public void contextLoads() {
-        System.out.println(userMapper.findUserBasicInfoByUsername("ha"));
-        UserEntity userEntity = new UserEntity()
-                .setUsername("haafafaassa")
-                .setPassword("haha")
-                .setEmail("ha@ah");
-        try {
-            System.out.println(userMapper.insertUserBasicInfo(userEntity));
-        }catch (DataAccessException exception){
-            exception.printStackTrace();
-            String cause = exception.getCause().toString();
-            if (cause.contains("Duplicate")) {
-                System.out.println("username exists");
-            }
-        }
+        UserEntity userEntity = new UserEntity().setUsername("test");
+        Long current = System.currentTimeMillis();
+        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJzcGlrZSIsImV4cCI6MTU2NjQzODMxNiwidXNlcm5hbWUiOiJvZ2ljIn0.w1ZnNaN-ecaozAYV44Ar4cFiGF0Co-BNBgduDJU0-7gNf-KD8lWTRmF3zUW7h9XFUc-EYGEADBVWRErXwwQZtQ";
+        DecodedJWT jwt = tokenCreateUtil.decodeToken(token);
+        jwt =tokenCreateUtil.verifyToken(jwt);
+        System.out.println(jwt);
+        Date date = new Date();
     }
 
 }

@@ -35,6 +35,7 @@ public class TokenVerifyUtil {
         DecodedJWT verifyJWT;
         try {
             JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer(decodedJWT.getIssuer())
                     .withClaim("username", decodedJWT.getClaim("username").asString())
                     .build(); //Reusable verifier instance
             verifyJWT = verifier.verify(decodedJWT.getToken());

@@ -394,14 +394,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="order-info-list-item">
+                                <div class="order-info-list-item"  th:remove="all">
                                     <div class="seller-info-frame horizontal-center w-100 text-left mt-3" style="justify-content: flex-start;">
                                         <!-- 店铺信息 若店铺/卖家只有一个 可以直接删除另外一个 -->
                                         <span class="shop-info"><i class="mdi mdi-shopping pr-1"></i>店铺：<a href="#"> 凌氏集团</a></span>
                                         <span class="seller-info pl-4"><i class="mdi mdi-account-multiple pr-1"></i>卖家：<a href="#"> 凌氏集团-沈冠希</a></span>
                                     </div>
                                     <!-- 一个goods-list代表是一家店内的所有商品 -->
-                                    <div class="goods-list" th:remove="all">
+                                    <div class="goods-list">
                                         <!-- 一个goods-item为一个商品 -->
                                         <div class="goods-item">
                                             <!-- 商品名称 以及 封面 -->

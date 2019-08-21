@@ -1,6 +1,8 @@
 package com.ogic.spikesystemsqlservice.mapper;
 
 import com.ogic.spikesystemapi.entity.UserEntity;
+import com.ogic.spikesystemsqlservice.annotation.Master;
+import com.ogic.spikesystemsqlservice.annotation.Slave;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -19,6 +21,7 @@ public interface UserMapper {
      * @param username  用户名
      * @return  用户对象
      */
+    @Slave
     @Select("select * from user where username like #{username}")
     UserEntity getUseByUsername(String username);
 
@@ -27,6 +30,7 @@ public interface UserMapper {
      * @param userEntity    用户对象
      * @return  结果
      */
+    @Master
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into user(username, password, email)" +
             "values(" +

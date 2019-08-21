@@ -57,6 +57,7 @@ public class TokenCreateUtil {
         String token;
         try {
             token = JWT.create()
+                    .withIssuer("spike")
                     .withClaim("username", userEntity.getUsername())
                     .withExpiresAt(new Date(System.currentTimeMillis() + lifetime))
                     .sign(algorithm);

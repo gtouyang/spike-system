@@ -1,6 +1,8 @@
 package com.ogic.spikesystemsqlservice.mapper;
 
 import com.ogic.spikesystemapi.entity.ProductEntity;
+import com.ogic.spikesystemsqlservice.annotation.Master;
+import com.ogic.spikesystemsqlservice.annotation.Slave;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -22,6 +24,7 @@ public interface ProductMapper {
      * @param id
      * @return
      */
+    @Slave
     @Select("select * from product where id = #{id}")
     ProductEntity getProductById(Long id);
 
@@ -31,6 +34,7 @@ public interface ProductMapper {
      * @param rows
      * @return
      */
+    @Slave
     @Select("select * from product order by id desc limit #{offset}, #{rows}")
     List<ProductEntity> getProducts(Long offset, Integer rows);
 
@@ -39,6 +43,7 @@ public interface ProductMapper {
      * @param product
      * @return
      */
+    @Master
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into product(name, amount, origin_price, spike_price, spike_start_time, spike_end_time, image_url, info)" +
             "values(#{name}, " +

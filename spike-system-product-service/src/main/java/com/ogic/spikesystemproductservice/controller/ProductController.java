@@ -1,6 +1,7 @@
 package com.ogic.spikesystemproductservice.controller;
 
 import com.ogic.spikesystemapi.entity.ProductEntity;
+import com.ogic.spikesystemproductservice.service.ProductService;
 import com.ogic.spikesystemproductservice.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ import java.util.Optional;
 public class ProductController {
 
     @Autowired
-    ProductServiceImpl productService;
+    ProductService productService;
 
     @GetMapping("/product/{id}")
     public Optional<ProductEntity> getProductById(@PathVariable("id") long id) {

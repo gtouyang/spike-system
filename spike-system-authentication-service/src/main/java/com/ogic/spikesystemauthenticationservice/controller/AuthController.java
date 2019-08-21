@@ -5,10 +5,10 @@ import com.ogic.spikesystemauthenticationservice.service.AuthService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.swing.text.html.Option;
+import java.util.Optional;
 
 /**
  * @author ogic
@@ -20,16 +20,12 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public String login(@RequestParam("username") final String username, @RequestParam("password") final String password) {
-        String token= authService.login(username,password);
-        if(StringUtils.isEmpty(token)){
-            return "fail create token";
-        }
-        return token;
+    public Optional<String> login(@RequestParam("username") final String username, @RequestBody final String password) {
+        return authService.login(username,password);
     }
 
     @PutMapping("/register")
-    public String register(@RequestParam("user") final UserEntity userEntity){
+    public Optional<String> register(@RequestBody final UserEntity userEntity){
         return authService.register(userEntity);
     }
 }

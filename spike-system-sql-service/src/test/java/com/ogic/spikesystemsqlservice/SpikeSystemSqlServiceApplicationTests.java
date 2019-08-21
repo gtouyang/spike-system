@@ -1,7 +1,8 @@
 package com.ogic.spikesystemsqlservice;
 
-import com.ogic.spikesystemapi.entity.ProductEntity;
+import com.ogic.spikesystemsqlservice.annotation.Slave;
 import com.ogic.spikesystemsqlservice.mapper.ProductMapper;
+import com.ogic.spikesystemsqlservice.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,10 +17,13 @@ public class SpikeSystemSqlServiceApplicationTests {
     @Resource
     ProductMapper productMapper;
 
+    @Resource
+    UserMapper userMapper;
+
+    @Slave
     @Test
     public void contextLoads() {
-        ProductEntity product = new ProductEntity().setName("iphone").setOriginPrice(10000.00).setAmount(500);
-        productMapper.insertProduct(product);
+        System.out.println(userMapper.getUseByUsername("ogic"));
     }
 
 }

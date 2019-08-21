@@ -76,6 +76,11 @@ public class ProductEntity implements Serializable {
     private Date updateTime;
 
     /**
+     * 商铺
+     */
+    public Long shopId;
+
+    /**
      * 商品图片链接
      */
     private String imageUrl;

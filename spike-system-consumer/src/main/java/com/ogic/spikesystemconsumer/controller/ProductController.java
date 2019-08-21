@@ -29,9 +29,9 @@ public class ProductController {
             display.setInfo(entity.getInfo());
             display.setPrice(entity.getOriginPrice().toString());
             display.setTimeInfo("目前还没有活动");
-            if (current.before(entity.getSpikeStartTime())){
+            if (entity.getSpikeStartTime()!=null && current.before(entity.getSpikeStartTime())){
                 display.setTimeInfo("秒杀开始： " + entity.getSpikeStartTime());
-            }else if (current.before(entity.getSpikeEndTime())){
+            }else if (entity.getSpikeEndTime()!=null && current.before(entity.getSpikeEndTime())){
                 display.setTimeInfo("秒杀结束： " + entity.getSpikeEndTime());
                 display.setPrice(entity.getSpikePrice().toString());
             }

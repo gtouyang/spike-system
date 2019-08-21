@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * @author ogic
  */
-@Controller
+@RestController
 public class WalletSqlController {
 
     @Resource
@@ -29,19 +29,19 @@ public class WalletSqlController {
     }
 
     @Slave
-    @GetMapping(value = "sql/select/wallets/{username}")
+    @GetMapping(value = "/sql/select/wallets/{username}")
     public Optional<List<WalletEntity>> getWalletByUsername(@PathVariable String username){
         return Optional.ofNullable(walletMapper.getWalletByUsername(username));
     }
 
     @Master
-    @PostMapping(value = "sql/update/wallet/money")
+    @PostMapping(value = "/sql/update/wallet/money")
     public Optional<Integer> updateWalletMoney(@RequestParam Long id, @RequestParam Double money, @RequestParam Integer version){
         return Optional.ofNullable(walletMapper.updateWalletMoney(id, money, version));
     }
 
     @Master
-    @PutMapping(value = "sql/insert/wallet")
+    @PutMapping(value = "/sql/insert/wallet")
     public Optional<Integer> insertWallet(@RequestParam WalletEntity wallet){
         return Optional.ofNullable(walletMapper.insertWallet(wallet));
     }

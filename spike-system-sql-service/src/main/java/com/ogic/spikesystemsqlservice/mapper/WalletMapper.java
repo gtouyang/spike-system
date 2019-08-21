@@ -1,6 +1,8 @@
 package com.ogic.spikesystemsqlservice.mapper;
 
 import com.ogic.spikesystemapi.entity.WalletEntity;
+import com.ogic.spikesystemsqlservice.annotation.Master;
+import com.ogic.spikesystemsqlservice.annotation.Slave;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -16,6 +18,7 @@ public interface WalletMapper {
      * @param username  用户名
      * @return  钱包实例
      */
+    @Slave
     @Select("select * from wallet where username = #{username}")
     List<WalletEntity> getWalletByUsername(String username);
 
@@ -25,6 +28,7 @@ public interface WalletMapper {
      * @param id    钱包ID
      * @return  钱包实例
      */
+    @Slave
     @Select("select * from wallet where id = #{id} limit 1")
     WalletEntity getWalletById(Long id);
 
@@ -36,6 +40,7 @@ public interface WalletMapper {
      * @param version 版本
      * @return 更新成功与否
      */
+    @Master
     @Update("update table wallet set money = #{money}, version = version+1 where id = #{id} and version = #{version}")
     Integer updateWalletMoney(Long id, Double money, Integer version);
 
@@ -44,6 +49,7 @@ public interface WalletMapper {
      * @param wallet    钱包实例
      * @return
      */
+    @Master
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into wallet(username, money)" +
             "values(#{username}," +

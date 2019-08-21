@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author ogic
+ */
 @Controller
 public class ConsumerController {
     private final String USERNAME_KEY = "username";

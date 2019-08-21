@@ -45,40 +45,39 @@ public class OrderService {
                 .setAmount(amount)
                 .setOrderStatus(OrderEntity.OrderStatusEnum.READY)
                 .setOrderTime(current);
-        try {
-            ProductEntity product = (ProductEntity) redisTemplate.boundHashOps("productMap").get(productId);
+        ProductEntity product = (ProductEntity) redisTemplate.boundHashOps("productMap").get(productId);
 
-            assert product != null;
-            if (product.getSpikeStartTime()==null||product.getSpikeEndTime()==null){
-                order.setPayMoney(product.getOriginPrice());
-            }
+        if (product == null || product.getOriginPrice() == null){
+            return null;
+        }
 
-            if (current.after(product.getSpikeStartTime()) && current.before(product.getSpikeEndTime())) {
-                order.setPayMoney(product.getSpikePrice());
-            } else {
-                order.setPayMoney(product.getOriginPrice());
-            }
-            StringBuilder builder = new StringBuilder();
+        if (product.getSpikeStartTime() == null || product.getSpikeEndTime() == null) {
+            order.setPayMoney(product.getOriginPrice());
+        }
+        else if (current.after(product.getSpikeStartTime()) && current.before(product.getSpikeEndTime())) {
+            order.setPayMoney(product.getSpikePrice());
+        }
+        else {
+            order.setPayMoney(product.getOriginPrice());
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append(DEFAULT_ORDER_HEAD)
+                .append(System.currentTimeMillis())
+                .append(randomNumbers(10));
+
+        String orderId = builder.toString();
+        order.setId(orderId);
+
+        //不幸订单号重复
+        while (!redisTemplate.boundValueOps(orderId).setIfAbsent(order)) {
+            builder = new StringBuilder();
             builder.append(DEFAULT_ORDER_HEAD)
                     .append(System.currentTimeMillis())
                     .append(new SecureRandom().longs());
-
-            String orderId = builder.toString();
+            orderId = builder.toString();
             order.setId(orderId);
-
-            //不幸订单号重复
-            while (! redisTemplate.boundValueOps(orderId).setIfAbsent(order)){
-                builder = new StringBuilder();
-                builder.append(DEFAULT_ORDER_HEAD)
-                        .append(System.currentTimeMillis())
-                        .append(new SecureRandom().longs());
-                orderId = builder.toString();
-                order.setId(orderId);
-            }
-        } catch (NullPointerException exception) {
-            logger.error("can not find product[" + productId + "]");
-            return null;
         }
+
         return order;
     }
 
@@ -96,17 +95,17 @@ public class OrderService {
             public Object execute(RedisOperations redisOperations) throws DataAccessException {
                 redisOperations.watch("amountOfProduct" + productId.toString());
 
-                Long leaveAmount = (Long) redisOperations.boundValueOps("amountOfProduct" + productId.toString()).get();
+                Integer leaveAmount = (Integer) redisOperations.boundValueOps("amountOfProduct" + productId.toString()).get();
                 while (leaveAmount >= reduceAmount) {
                     redisOperations.multi();
                     redisOperations.boundValueOps("amountOfProduct" + productId.toString()).decrement(reduceAmount);
-                    List<Long> resList = redisOperations.exec();
+                    List<Integer> resList = redisOperations.exec();
                     if (resList != null) {
                         return resList.get(0);
                     }
                     redisOperations.watch("amountOfProduct" + productId.toString());
 
-                    leaveAmount = (Long) redisOperations.boundValueOps("amountOfProduct" + productId.toString()).get();
+                    leaveAmount = (Integer) redisOperations.boundValueOps("amountOfProduct" + productId.toString()).get();
 
                 }
                 return null;
@@ -114,9 +113,11 @@ public class OrderService {
         }));
 
         if (result.isPresent()) {
-            Long leaveAmount = (Long) result.get();
+            Integer leaveAmount = Integer.parseInt(result.get().toString());
             if (leaveAmount < 0){
                 throw new ProductAmountLessThanZeroException(productId.toString());
+            }else {
+                return true;
             }
         }
 
@@ -143,5 +144,14 @@ public class OrderService {
             logger.error(exception.getMessage());
         }
         return null;
+    }
+
+    private String randomNumbers(int amount){
+        StringBuilder builder = new StringBuilder();
+        SecureRandom random = new SecureRandom();
+        for (int i = 0; i < amount; i++){
+            builder.append(random.nextInt(9));
+        }
+        return builder.toString();
     }
 }

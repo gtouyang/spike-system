@@ -1,7 +1,7 @@
 package com.ogic.spikesystemproductservice.service.impl;
 
 import com.ogic.spikesystemapi.entity.ProductEntity;
-import com.ogic.spikesystemapi.service.ProductSqlExposeService;
+import com.ogic.spikesystemapi.service.SqlExposeService;
 import com.ogic.spikesystemproductservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    ProductSqlExposeService productSqlExposeService;
+    SqlExposeService sqlExposeService;
 
     /**
      * 自动注入redis模板，使用该模板操作redis
@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
         //这一条命令可有可无
         productEntity.setId(null).setCreateTime(null);
 
-        productSqlExposeService.insertProduct(productEntity);
+        sqlExposeService.insertProduct(productEntity);
     }
 
     /**
@@ -51,16 +51,16 @@ public class ProductServiceImpl implements ProductService {
 
         ProductEntity cache = (ProductEntity)  redisTemplate.boundHashOps("productMap").get(id);
         if (cache == null) {
-            Optional<ProductEntity> product = productSqlExposeService.getProductById(id);
-            if (product.isPresent()) {
-                redisTemplate.boundHashOps("productMap").put(id, product);
+            Optional<ProductEntity> productOptional = sqlExposeService.getProductById(id);
+            if (productOptional.isPresent()) {
+                redisTemplate.boundHashOps("productMap").put(id, productOptional.get());
                 redisTemplate.boundZSetOps("productZSet").add(id, 1);
 
                 if (redisTemplate.boundValueOps("amountOfProduct" + id).get() == null) {
-                    redisTemplate.boundValueOps("amountOfProduct" + id).set(product.get().getAmount());
+                    redisTemplate.boundValueOps("amountOfProduct" + id).set(productOptional.get().getAmount());
                 }
             }
-            return product;
+            return productOptional;
         } else {
             redisTemplate.boundZSetOps("productZSet").incrementScore(id, 1);
             return Optional.of(cache);
@@ -77,7 +77,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Optional<List<ProductEntity>> getProducts(Long offset, Integer rows) {
-        Optional<List<ProductEntity>> products = productSqlExposeService.getProducts(offset, rows);
+        Optional<List<ProductEntity>> products = sqlExposeService.getProducts(offset, rows);
         products.ifPresent(this::updateRedis);
         return products;
     }
