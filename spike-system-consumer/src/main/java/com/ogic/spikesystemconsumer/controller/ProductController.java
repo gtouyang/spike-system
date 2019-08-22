@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Date;
 import java.util.Optional;
 
+/**
+ * @author ogic
+ */
 @Controller
 public class ProductController {
 
@@ -21,6 +24,7 @@ public class ProductController {
     @GetMapping("/product/{id}")
     public String getProductById(@PathVariable("id") long id, Model model) {
         Optional<ProductEntity> product = productExposeService.getProductById(id);
+
         if (product.isPresent()) {
             ProductEntity entity = product.get();
             ProductDisplayEntity display = new ProductDisplayEntity();

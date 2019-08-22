@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/spike-system-order-service/spike-system-order-service.iml" filepath="$PROJECT_DIR$/spike-system-order-service/spike-system-order-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spike-system-pay-service/spike-system-pay-service.iml" filepath="$PROJECT_DIR$/spike-system-pay-service/spike-system-pay-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spike-system-product-service/spike-system-product-service.iml" filepath="$PROJECT_DIR$/spike-system-product-service/spike-system-product-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spike-system-shop-service/spike-system-shop-service.iml" filepath="$PROJECT_DIR$/spike-system-shop-service/spike-system-shop-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spike-system-sql-service/spike-system-sql-service.iml" filepath="$PROJECT_DIR$/spike-system-sql-service/spike-system-sql-service.iml" />
     </modules>
   </component>

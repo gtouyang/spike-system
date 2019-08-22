@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: spike-system-shop-service
+server:
+  port: 8300
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:8761/eureka/, http://eureka2:8762/eureka/, http://eureka3:8763/eureka/
+  instance:
+    instance-id: shop-service
+info:
+  app.name: ogic-spike-system-shop-service
+  company.name: ogic.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

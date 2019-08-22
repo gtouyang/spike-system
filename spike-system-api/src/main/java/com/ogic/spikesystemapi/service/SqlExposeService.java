@@ -92,7 +92,6 @@ public interface SqlExposeService {
 
     /**
      * 根据商铺ID获取商铺
-     *
      * @param id
      * @return
      */
@@ -101,7 +100,6 @@ public interface SqlExposeService {
 
     /**
      * 根据商铺卖家用户名获取商铺列表
-     *
      * @param owner
      * @return
      */
@@ -110,7 +108,6 @@ public interface SqlExposeService {
 
     /**
      * 插入新商铺
-     *
      * @param shop
      * @return
      */
@@ -119,7 +116,6 @@ public interface SqlExposeService {
 
     /**
      * 更新商铺余额
-     *
      * @param shop
      * @return
      */

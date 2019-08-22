@@ -1,7 +1,7 @@
 package com.ogic.spikesystemsqlservice.controller;
 
 import com.ogic.spikesystemapi.entity.ShopEntity;
-import com.ogic.spikesystemsqlservice.mapper.ShopMappper;
+import com.ogic.spikesystemsqlservice.mapper.ShopMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -14,25 +14,25 @@ import java.util.Optional;
 @RestController
 public class ShopSqlController {
     @Resource
-    ShopMappper shopMappper;
+    ShopMapper shopMapper;
 
     @GetMapping(value = "/sql/select/shop")
     public Optional<ShopEntity> getShopById(@RequestParam Long id) {
-        return Optional.ofNullable(shopMappper.getShopById(id));
+        return Optional.ofNullable(shopMapper.getShopById(id));
     }
 
     @GetMapping(value = "/sql/select/shop")
     public Optional<List<ShopEntity>> getShopByOwner(@RequestParam String owner) {
-        return Optional.ofNullable(shopMappper.getShopsByOwner(owner));
+        return Optional.ofNullable(shopMapper.getShopsByOwner(owner));
     }
 
     @PostMapping(value = "/sql/insert/shop")
     public Optional<Integer> insertShop(@RequestParam ShopEntity shop) {
-        return Optional.ofNullable(shopMappper.insertShop(shop));
+        return Optional.ofNullable(shopMapper.insertShop(shop));
     }
 
     @PutMapping(value = "/sql/update/shop")
     public Optional<Integer> updateShopMoney(@RequestParam ShopEntity shop) {
-        return Optional.ofNullable(shopMappper.updateShopMoney(shop));
+        return Optional.ofNullable(shopMapper.updateShopMoney(shop));
     }
 }

@@ -32,5 +32,5 @@ public class ShopEntity {
     /**
      * 店铺余额
      */
-    public Integer money;
+    public Double money;
 }

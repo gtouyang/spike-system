@@ -11,7 +11,7 @@ import java.util.List;
  * @author ogic
  */
 @Mapper
-public interface ShopMappper {
+public interface ShopMapper {
 
     /**
      * 根据商铺ID获得商铺

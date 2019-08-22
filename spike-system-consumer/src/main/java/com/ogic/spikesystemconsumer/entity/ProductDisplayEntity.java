@@ -15,6 +15,8 @@ import lombok.experimental.Accessors;
 public class ProductDisplayEntity {
     private String name;
     private String price;
+    private String shop;
+    private String seller;
     private String timeInfo;
     private String info;
 }

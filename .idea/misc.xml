@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/spike-system-pay-service/pom.xml" />
         <option value="$PROJECT_DIR$/spike-system-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/spike-system-sql-service/pom.xml" />
+        <option value="$PROJECT_DIR$/spike-system-shop-service/pom.xml" />
       </list>
     </option>
   </component>
