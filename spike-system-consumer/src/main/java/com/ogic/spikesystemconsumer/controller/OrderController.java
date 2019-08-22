@@ -2,8 +2,10 @@ package com.ogic.spikesystemconsumer.controller;
 
 import com.ogic.spikesystemapi.entity.OrderEntity;
 import com.ogic.spikesystemapi.entity.ProductEntity;
+import com.ogic.spikesystemapi.entity.ShopEntity;
 import com.ogic.spikesystemapi.service.OrderExposeService;
 import com.ogic.spikesystemapi.service.ProductExposeService;
+import com.ogic.spikesystemapi.service.ShopExposeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,9 @@ public class OrderController {
     @Autowired
     ProductExposeService productExposeService;
 
+    @Autowired
+    ShopExposeService shopExposeService;
+
     private final String TOKEN_KEY = "token";
 
     @PostMapping("/order")
@@ -40,10 +45,13 @@ public class OrderController {
             }
         }
         if (productOptional.isPresent() && tokenOptional.isPresent()) {
-            Optional<OrderEntity> order = orderExposeService.order(productOptional.get().getId(), amount, tokenOptional.get());
-            if (order.isPresent()){
+            Optional<OrderEntity> orderOptional = orderExposeService.order(productOptional.get().getId(), amount, tokenOptional.get());
+            Optional<ShopEntity> shopOptional = productOptional.map(ProductEntity::getShopId)
+                    .flatMap(id -> shopExposeService.getShopById(id));
+            if (orderOptional.isPresent()) {
+                shopOptional.ifPresent(shopEntity -> model.addAttribute("shop", shopEntity));
                 model.addAttribute("product", productOptional.get());
-                model.addAttribute("order", order.get());
+                model.addAttribute("order", orderOptional.get());
                 return "place_order";
             }
         }

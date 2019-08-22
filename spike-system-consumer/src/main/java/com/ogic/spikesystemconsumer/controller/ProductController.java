@@ -1,7 +1,9 @@
 package com.ogic.spikesystemconsumer.controller;
 
 import com.ogic.spikesystemapi.entity.ProductEntity;
+import com.ogic.spikesystemapi.entity.ShopEntity;
 import com.ogic.spikesystemapi.service.ProductExposeService;
+import com.ogic.spikesystemapi.service.ShopExposeService;
 import com.ogic.spikesystemconsumer.entity.ProductDisplayEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,25 +23,33 @@ public class ProductController {
     @Autowired
     ProductExposeService productExposeService;
 
+    @Autowired
+    ShopExposeService shopExposeService;
+
     @GetMapping("/product/{id}")
     public String getProductById(@PathVariable("id") long id, Model model) {
-        Optional<ProductEntity> product = productExposeService.getProductById(id);
+        Optional<ProductEntity> productOptional = productExposeService.getProductById(id);
 
-        if (product.isPresent()) {
-            ProductEntity entity = product.get();
+        if (productOptional.isPresent()) {
+
+            ProductEntity product = productOptional.get();
+
+            Optional<ShopEntity> shopOptional = shopExposeService.getShopById(product.getShopId());
+
             ProductDisplayEntity display = new ProductDisplayEntity();
             Date current = new Date();
-            display.setName(entity.getName());
-            display.setInfo(entity.getInfo());
-            display.setPrice(entity.getOriginPrice().toString());
+            display.setName(product.getName());
+            display.setInfo(product.getInfo());
+            display.setPrice(product.getOriginPrice().toString());
             display.setTimeInfo("目前还没有活动");
-            if (entity.getSpikeStartTime()!=null && current.before(entity.getSpikeStartTime())){
-                display.setTimeInfo("秒杀开始： " + entity.getSpikeStartTime());
-            }else if (entity.getSpikeEndTime()!=null && current.before(entity.getSpikeEndTime())){
-                display.setTimeInfo("秒杀结束： " + entity.getSpikeEndTime());
-                display.setPrice(entity.getSpikePrice().toString());
+            if (product.getSpikeStartTime() != null && current.before(product.getSpikeStartTime())) {
+                display.setTimeInfo("秒杀开始： " + product.getSpikeStartTime());
+            } else if (product.getSpikeEndTime() != null && current.before(product.getSpikeEndTime())) {
+                display.setTimeInfo("秒杀结束： " + product.getSpikeEndTime());
+                display.setPrice(product.getSpikePrice().toString());
             }
-            model.addAttribute("product", product.get());
+            shopOptional.ifPresent(shopEntity -> model.addAttribute("shop", shopEntity));
+            model.addAttribute("product", product);
             model.addAttribute("display", display);
         }
         return "show_goods";

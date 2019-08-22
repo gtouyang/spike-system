@@ -234,7 +234,8 @@
                                 <div class="text-right">
                                     <div class="seller-info" title="联系卖家">
                                         <img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" alt="user" class="rounded-circle" style="width: 20px;height: 20px;">
-                                        <span class="seller-nickname text-muted ml-1">沈氏集团 <i class="mdi mdi-message-processing"></i></span>
+                                        <span class="seller-nickname text-muted ml-1" th:text="${shop.getShopName()}">沈氏集团 <i
+                                                class="mdi mdi-message-processing"></i></span>
                                     </div>
                                 </div>
                                 <!-- 若商品有尺寸、颜色等可选项，在这里添加代码 -->

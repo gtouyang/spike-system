@@ -5,10 +5,13 @@ import com.ogic.spikesystemapi.entity.WalletEntity;
 import com.ogic.spikesystemapi.service.SqlExposeService;
 import com.ogic.spikesystempayservice.service.PayService;
 import org.apache.commons.lang.RandomStringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author ogic
  */
+@Service
 public class PayServiceImpl implements PayService {
 
     @Autowired
@@ -31,6 +35,13 @@ public class PayServiceImpl implements PayService {
 
     @Autowired
     RabbitTemplate rabbitTemplate;
+
+
+    private final String LOCK_HEADER = "lock";
+
+    private final long LOCK_MINUTES = 5;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 更新钱包余额
@@ -56,7 +67,7 @@ public class PayServiceImpl implements PayService {
     }
 
     @Async
-    public Boolean rollbackMoney(Long walletId, OrderEntity order){
+    public void rollbackMoney(Long walletId, OrderEntity order) {
         while (true) {
             Optional<WalletEntity> wallet = sqlExposeService.getWalletById(walletId);
             Optional result;
@@ -65,21 +76,27 @@ public class PayServiceImpl implements PayService {
                         wallet.get().getMoney() + order.getPayMoney(),
                         wallet.get().getVersion());
                 if (result.isPresent() && result.get().equals(1)){
-                    return true;
+                    break;
                 }
             }else {
-                return false;
+                rabbitTemplate.convertAndSend("error", "rollback money", order);
             }
         }
     }
 
     private String lockOrder(String orderId){
-        if (redisTemplate.boundValueOps("lock"+orderId).get() != null){
+
+        if (redisTemplate.boundValueOps(LOCK_HEADER + orderId).get() != null) {
             return null;
         }
         String lockCode = RandomStringUtils.randomAlphabetic(10);
-        if (redisTemplate.boundValueOps("lock" + orderId).setIfAbsent(lockCode, 5, TimeUnit.MINUTES)){
-            return lockCode;
+
+        try {
+            if (redisTemplate.boundValueOps(LOCK_HEADER + orderId).setIfAbsent(lockCode, LOCK_MINUTES, TimeUnit.MINUTES)) {
+                return lockCode;
+            }
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
         return null;
     }
@@ -117,23 +134,22 @@ public class PayServiceImpl implements PayService {
     }
 
     @Override
-    public Optional<Boolean> payOrderByWallet(Long walletID, String pasPassword, String orderId) {
+    public Optional<Boolean> payOrderByWallet(Long walletId, String payPassword, String orderId) {
         String lockCode = lockOrder(orderId);
         if (lockCode == null){
             return Optional.of(Boolean.FALSE);
         }
         OrderEntity order = (OrderEntity) redisTemplate.boundValueOps(orderId).get();
-        if (reduceMoney(walletID, pasPassword, order)){
-            if (redisTemplate.boundValueOps("lock" + orderId).get() == lockCode){
+        if (reduceMoney(walletId, payPassword, order)) {
+            if (redisTemplate.boundValueOps(LOCK_HEADER + orderId).get() == lockCode) {
+                assert order != null;
                 order.setOrderStatus(OrderEntity.OrderStatusEnum.FINISHED);
                 rabbitTemplate.convertAndSend("order", "finishedOrder", order);
-                redisTemplate.delete("lock"+orderId);
+                redisTemplate.delete(LOCK_HEADER + orderId);
                 redisTemplate.delete(orderId);
                 return Optional.of(Boolean.TRUE);
             }else {
-               if (!rollbackMoney(walletID, order)){
-                   rabbitTemplate.convertAndSend("error", "roolbackMoneyError", order);
-               }
+                rollbackMoney(walletId, order);
             }
         }
         return Optional.of(Boolean.FALSE);

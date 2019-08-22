@@ -4,7 +4,7 @@ import com.ogic.spikesystemapi.entity.ShopEntity;
 import com.ogic.spikesystemapi.service.SqlExposeService;
 import com.ogic.spikesystemshopservice.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +12,7 @@ import java.util.Optional;
 /**
  * @author ogic
  */
+@Service
 public class ShopServiceImpl implements ShopService {
 
     @Autowired

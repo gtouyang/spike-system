@@ -28,9 +28,9 @@ public interface PayService {
     /**
      * 使用钱包给订单支付
      * @param orderId   订单ID
-     * @param walletID  钱包
-     * @param pasPassword   支付密码
+     * @param walletId  钱包
+     * @param payPassword   支付密码
      * @return  支付成功与否
      */
-    Optional<Boolean> payOrderByWallet(Long walletID, String pasPassword, String orderId);
+    Optional<Boolean> payOrderByWallet(Long walletId, String payPassword, String orderId);
 }

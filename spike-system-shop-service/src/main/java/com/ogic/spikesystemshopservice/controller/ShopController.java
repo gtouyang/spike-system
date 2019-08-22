@@ -11,6 +11,7 @@ import java.util.Optional;
 /**
  * @author ogic
  */
+@RestController
 public class ShopController {
     @Autowired
     ShopService shopService;
