@@ -228,7 +228,7 @@
                         <div class="form-group vc">
                             <input type="alphanum" data-parsley-type="alphanum" name="verificationCode" parsley-trigger="change" required placeholder="请输入图中的验证码" data-parsley-required-message="验证码不能为空" class="form-control">
                             <div title="点击更换验证码" class="verificationCode" style="margin-top: .2em; height: 40px; width: 100px;border: 1px black solid;display: flex;flex-direction: row;justify-content: center;align-items: center;">
-                                验证码区域
+                                <img alt="点击更换" id="captcha_img" onclick="refresh()" th:src="@{/kaptcha}" title="点击更换"/>
                             </div>
                         </div>
                         <div class="form-group forgetpsw">
@@ -286,6 +286,10 @@
         $('form'
     ).parsley();
     })
+
+    function refresh() {
+        document.getElementById('captcha_img').src = "/kaptcha?" + Math.random();
+    }
     window.onbeforeunload = function() {}
 </script>
 

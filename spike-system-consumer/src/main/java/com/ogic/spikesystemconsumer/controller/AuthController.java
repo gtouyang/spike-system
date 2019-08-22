@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
@@ -35,7 +36,22 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public RedirectView getToken(@RequestParam final String username, @RequestParam String password, HttpServletResponse response){
+    public RedirectView login(@RequestParam final String username, @RequestParam final String password, @RequestParam String verificationCode, HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        String correctVerificationCode = null;
+        for (Cookie cookie : cookies) {
+            if ("verificationCode".equals(cookie.getName())) {
+                correctVerificationCode = cookie.getValue();
+                break;
+            }
+        }
+        if (correctVerificationCode != null && correctVerificationCode.equals(verificationCode)) {
+            return login(username, password, response);
+        }
+        return new RedirectView("/login");
+    }
+
+    public RedirectView login(final String username, final String password, HttpServletResponse response) {
         Optional<String> token = authExposeService.login(username, password);
 
         if (token.isPresent()) {
@@ -58,7 +74,7 @@ public class AuthController {
                                                         .setUsername(username)
                                                         .setPassword(password));
         if (result.isPresent()){
-            return getToken(username, password, response);
+            return login(username, password, response);
         }
         return new RedirectView("/login");
     }

@@ -28,6 +28,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     RedisTemplate redisTemplate;
 
+    private final String PRODUCT_AMOUNT_HEADER = "amountOfProduct";
+
+
     /**
      * 自定义的形式添加一个商品,要注意product内的name,amount,originPrice属性不应为空,并且商品的ID和创建时间由MySQL决定,定义没用
      *
@@ -56,8 +59,8 @@ public class ProductServiceImpl implements ProductService {
                 redisTemplate.boundHashOps("productMap").put(id, productOptional.get());
                 redisTemplate.boundZSetOps("productZSet").add(id, 1);
 
-                if (redisTemplate.boundValueOps("amountOfProduct" + id).get() == null) {
-                    redisTemplate.boundValueOps("amountOfProduct" + id).set(productOptional.get().getAmount());
+                if (redisTemplate.boundValueOps(PRODUCT_AMOUNT_HEADER + id).get() == null) {
+                    redisTemplate.boundValueOps(PRODUCT_AMOUNT_HEADER + id).set(productOptional.get().getAmount());
                 }
             }
             return productOptional;

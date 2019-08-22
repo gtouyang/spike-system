@@ -10,9 +10,25 @@ import java.util.Optional;
  */
 public interface ProductService {
 
+    /**
+     * 增加商品
+     *
+     * @param productEntity
+     */
     void addProduct(ProductEntity productEntity);
 
+    /**
+     * 根据商品ID获取商品
+     * @param id
+     * @return
+     */
     Optional<ProductEntity> getProductById(Long id);
 
+    /**
+     * 根据位移和数量获取商品列表
+     * @param offset
+     * @param rows
+     * @return
+     */
     Optional<List<ProductEntity>> getProducts(Long offset, Integer rows);
 }

@@ -3,8 +3,6 @@ package com.ogic.spikesystemproductservice.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -14,14 +12,11 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * 配置Redis
- *
  * @author ogic
  * @date 2019-07-16
  */
 @Configuration
 public class RedisConfig {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 配置redisTemplate并默认将对象序列化成json格式,然后将bean添加到IOC容器

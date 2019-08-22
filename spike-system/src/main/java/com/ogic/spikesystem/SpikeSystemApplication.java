@@ -3,6 +3,9 @@ package com.ogic.spikesystem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author ogic
+ */
 @SpringBootApplication
 public class SpikeSystemApplication {
 
