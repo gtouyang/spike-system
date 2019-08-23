@@ -154,4 +154,9 @@ public class PayServiceImpl implements PayService {
         }
         return Optional.of(Boolean.FALSE);
     }
+
+    @Override
+    public Optional<Integer> addWallet(WalletEntity wallet) {
+        return sqlExposeService.insertWallet(wallet);
+    }
 }

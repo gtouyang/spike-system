@@ -42,4 +42,13 @@ public interface PayExposeService {
      */
     @PutMapping("/pay")
     Optional<Boolean> payOrderByWallet(@RequestParam Long wallerId, @RequestBody String payPassword, @RequestParam String orderId);
+
+    /**
+     * 添加钱包
+     *
+     * @param wallet
+     * @return
+     */
+    @PostMapping("/wallet")
+    Optional<Integer> addWallet(@RequestParam WalletEntity wallet);
 }

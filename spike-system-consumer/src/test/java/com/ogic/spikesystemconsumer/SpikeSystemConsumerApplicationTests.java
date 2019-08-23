@@ -40,6 +40,7 @@ public class SpikeSystemConsumerApplicationTests {
     @Test
     public void addDefaultWallet(PayExposeService payExposeService) {
         WalletEntity wallet = new WalletEntity().setUsername("ogic").setPayPassword("pay").setMoney(100000.0);
+        payExposeService.addWallet(wallet);
     }
 
     @Test

@@ -52,4 +52,9 @@ public class PayController {
     public Optional<Boolean> payOrderByWallet(@RequestParam Long walletId, @RequestBody String payPassword, @RequestParam String orderId) {
         return payService.payOrderByWallet(walletId, payPassword, orderId);
     }
+
+    @PostMapping("/wallet")
+    public Optional<Integer> addWallet(@RequestParam WalletEntity wallet) {
+        return payService.addWallet(wallet);
+    }
 }
