@@ -37,11 +37,11 @@ public class ProductServiceImpl implements ProductService {
      * @param productEntity 商品对象
      */
     @Override
-    public void addProduct(ProductEntity productEntity) {
+    public Optional<Integer> addProduct(ProductEntity productEntity) {
         //这一条命令可有可无
         productEntity.setId(null).setCreateTime(null);
 
-        sqlExposeService.insertProduct(productEntity);
+        return sqlExposeService.insertProduct(productEntity);
     }
 
     /**

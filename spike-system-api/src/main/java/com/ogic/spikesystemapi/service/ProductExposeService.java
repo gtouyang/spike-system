@@ -4,6 +4,8 @@ import com.ogic.spikesystemapi.entity.ProductEntity;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -20,4 +22,13 @@ public interface ProductExposeService {
      */
     @GetMapping("/product/{id}")
     Optional<ProductEntity> getProductById(@PathVariable("id") long id);
+
+    /**
+     * 添加商品
+     *
+     * @param product
+     * @return
+     */
+    @PostMapping("/product")
+    Optional<Integer> addProduct(@RequestParam ProductEntity product);
 }

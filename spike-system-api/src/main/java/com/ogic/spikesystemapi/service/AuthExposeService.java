@@ -1,10 +1,8 @@
 package com.ogic.spikesystemapi.service;
 
 import com.ogic.spikesystemapi.entity.UserEntity;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 

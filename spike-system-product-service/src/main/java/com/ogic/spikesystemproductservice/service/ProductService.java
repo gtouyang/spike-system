@@ -12,10 +12,10 @@ public interface ProductService {
 
     /**
      * 增加商品
-     *
      * @param productEntity
+     * @return
      */
-    void addProduct(ProductEntity productEntity);
+    Optional<Integer> addProduct(ProductEntity productEntity);
 
     /**
      * 根据商品ID获取商品
