@@ -1,54 +1,74 @@
-html,
-body,
-.main {
+body, html{
     height: 100%;
-}
-
-.login {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.login-frame {
-    padding: 2em 4em;
-    border: 2px #5284c3 solid;
-    border-radius: 1em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.forgetpsw {
     width: 100%;
+    padding: 0;
+
+}
+.main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* align-items: center; */
+    width: 100%;
+    height: 100%;
+    /* position:relative; */
+}
+.login{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+}
+.login-logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-logo img{
+    width: 80px;
+    /* margin-bottom: 2em; */
+}
+
+.login-frame{
+    background: white;
+    border-radius: 5px;
+    padding: 2em 1.5em .8em;
+    border: 1px solid rgb(216, 222, 226);
+    width: 320px;
+}
+
+.password-group{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: .2em;
 }
 
-.login-btn,
-.register-btn {
+.verification-code{
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    margin-bottom: 0;
-}
-
-.form-group.vc {
-    margin-bottom: .5em;
-    display: flex;
-    flex-direction: row-reverse;
     justify-content: space-between;
 }
 
-.form-group.vc input {
-    width: 50%;
+.verificationCode{
+    height: 40px; 
+    width: 100px;
+    border: 1px black solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1em;
 }
 
-.form-group:last-child {
-    margin-bottom: 0;
+.create-account{
+    width: 320px;
+    margin-top: 1em;
+    border: 1px solid rgb(216, 222, 226);
+    padding: 1em;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
