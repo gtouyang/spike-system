@@ -6637,8 +6637,12 @@ File: Responsive
     justify-content: center;
 }
 
-body {
+body,
+html{
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    scroll-behavior: smooth;
+    overflow-y:auto;
+    overflow-x:auto;
 }
 
 a {

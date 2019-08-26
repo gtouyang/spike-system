@@ -238,10 +238,18 @@
                                                 class="mdi mdi-message-processing"></i></span>
                                     </div>
                                 </div>
+                                
                                 <!-- 若商品有尺寸、颜色等可选项，在这里添加代码 -->
 
                                 <!-- 用户操作 -->
                                 <div style="position: absolute;bottom: 0;">
+                                    <p class="duration">现距离开始：<span>00</span>:<span>08</span>:<span>30</span></p>
+                                    <div style="display: flex;flex-direction: row;align-items: center;align-content: center;" class="mb-4">
+                                        <p class="p-0 m-0">剩余：</p>
+                                        <div class="progress mb-0 w-75">
+                                            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                                        </div>
+                                    </div>
                                     <form th:action="@{/order}" th:method="post">
                                         <input type="hidden" th:value="${product.getId()}" th:name="productId">
                                         <input type="hidden" th:value="1" th:name="amount">
@@ -258,11 +266,45 @@
                                 <h4 class="font-weight-bold">更多照片：</h4>
                                 <!-- 商品图片描述 -->
                                 <div class="picList">
-                                    <div class="picItem">
-                                        <img src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/iphone_2.jpg" th:data-src="@{/images/iphone_2.jpg}" alt="" class="lazyload">
-                                    </div>
-                                    <div class="picItem">
-                                        <img src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/iphone_3.jpg" th:data-src="@{/images/iphone_3.jpg}" alt="" class="lazyload">
+                                    <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+                                            <li data-target="#carouselIndicators" data-slide-to="1"></li>
+                                            <li data-target="#carouselIndicators" data-slide-to="2"></li>
+                                            <li data-target="#carouselIndicators" data-slide-to="3"></li>
+                                        </ol>
+                                        <!-- 下面是轮播图部分，在data-src里直接插入图片就可以 -->
+                                        <!-- 图片高度是固定的，比例可以在show_goods.css 里面找到 .ads-img 进行跳转 -->
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <div class="ads-img">
+                                                    <img class="d-block w-100 carousel-img lazyload" src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/goods_1.jpg" th:data-src="@{/images/goods_1.jpg}" alt="ads">
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <div class="ads-img">
+                                                    <img class="d-block w-100 carousel-img lazyload" src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/goods_2.jpg" th:data-src="@{/images/goods_2.jpg}" alt="ads">
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <div class="ads-img">
+                                                    <img class="d-block w-100 carousel-img lazyload" src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/goods_3.jpg" th:data-src="@{/images/goods_3.jpg}" alt="ads">
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <div class="ads-img">
+                                                    <img class="d-block w-100 carousel-img lazyload" src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/iphone_3.jpg" th:data-src="@{/images/iphone_3.jpg}" alt="ads">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -335,6 +377,7 @@
 
     <!-- modernizr js -->
     <script src="../static/js/modernizr.min.js" th:src="@{/js/modernizr.min.js}"></script>
+
 </body>
 <script>
     /* 初始化商品封面尺寸 */
@@ -432,6 +475,8 @@
                 })
         };
 
+        $('body').width(screen.availWidth);
+        $('body').css("visibility", "visible");
     })
 
     /* 窗口大小变化时触发的事件 */

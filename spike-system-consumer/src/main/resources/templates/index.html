@@ -428,13 +428,10 @@
 
 
     <script>
-        /* 初始化商品封面尺寸 */
-        let initPicSize = function() {
-
-        }; /* initPicSize end */
 
         $(document).ready(() => {
-
+            $('body').width(screen.availWidth);
+            $('body').css("visibility", "visible");
             /* 图片懒加载 */
             lazyload();
         })

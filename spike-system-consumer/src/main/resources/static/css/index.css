@@ -1,3 +1,7 @@
+html,
+body{
+    visibility: hidden;
+}
 .main-header {
     display: flex;
     flex-direction: row;
