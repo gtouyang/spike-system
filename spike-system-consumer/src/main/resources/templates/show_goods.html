@@ -475,13 +475,13 @@
                 })
         };
 
-        $('body').width(screen.availWidth);
-        $('body').css("visibility", "visible");
+        $('html').width(screen.availWidth);
+        $('html').css("visibility", "visible");
     })
 
     /* 窗口大小变化时触发的事件 */
     window.onresize = () => {
-        initPicSize();
+        // initPicSize();
     }
 </script>
 

@@ -1,0 +1,64 @@
+html{
+    visibility: hidden;
+}
+
+.wallet .wallet-item{
+    position: relative;
+    height: 130px!important;
+    overflow: hidden;
+}
+
+.wallet .wallet-item.active .curMarker{
+    visibility: visible;
+}
+
+.wallet .wallet-item.active .widget-flat{
+    border: 3px solid transparent;
+}
+
+.wallet .wallet-item .widget-flat{
+    border: 3px solid transparent;
+}
+
+.wallet .wallet-item .widget-flat:hover{
+    border: 3px solid rgba(146, 134, 146, 0.384);
+    border-radius: 5px;
+}
+
+.wallet .wallet-item .widget-flat{
+    border-color: transparent;
+}
+
+.wallet-item-footer {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
+
+.wallet-item-footer .curMarker {
+    width: 0;
+    height: 0;
+    border-bottom: 50px solid rgba(146, 134, 146, 0.644);
+    border-left: 50px solid transparent;
+    position: absolute;
+    visibility: hidden;
+    right: 30px;
+    bottom: 30px;
+}
+
+.wallet-item-footer .curMarker::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 10px;
+    right: 8px;
+    bottom: -38px;
+    position: absolute;
+    border: 4px solid #eee;
+    border-radius: 1px;
+    border-top: none;
+    border-right: none;
+    background: transparent;
+    transform: rotate(-45deg);
+}

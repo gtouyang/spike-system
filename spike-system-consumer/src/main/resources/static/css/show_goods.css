@@ -67,7 +67,6 @@
     margin-bottom: 1em;
 }
 
-html,
-body{
+html{
     visibility: hidden;
 }

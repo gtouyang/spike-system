@@ -18,6 +18,8 @@
     <!-- icon css -->
     <link href="../static/css/iconfont.css" rel="stylesheet" type="text/css" th:href="@{/css/iconfont.css}" />
 
+    <!-- style css -->
+    <link rel="stylesheet" href="../static/css/account.css" th:href="@{/css/account.css}">
     <style>
     </style>
 </head>
@@ -211,28 +213,39 @@
     <div class="main">
         <div class="wrapper">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6 col-lg-6 col-xl-3 mt-5">
-                            <div class="card-box widget-flat border-custom bg-custom text-white text-right">
+                    <h4 class="font-600 mb-3">我的钱包</h4>
+                    <a href="#" class="btn btn-custom waves-effect waves-light btn-sm font-10"><i class="mdi mdi-plus-circle"></i>增加钱包</a>
+                    <div class="row mt-3 wallet">
+                        <div class="col-2 pointer wallet-item">
+                            <div class="card-box widget-flat bg-success text-white text-right">
                                 <i class="iconfont icon-wechat-pay-line" ></i>
-                                <h3 class="m-b-10">余额：¥<span data-plugin="counterup">25563</span></h3>
+                                <h4 class="m-b-10">余额：¥<span data-plugin="counterup">25563</span></h4>
                                 <p class="text-uppercase m-b-5 font-13 font-600">微信钱包</p>
                             </div>
+                            <div class="wallet-item-footer">
+                                <div class="curMarker"></div>
+                            </div>
                         </div>
-                        <div class="col-sm-6 col-lg-6 col-xl-3 mt-5">
-                            <div class="card-box widget-flat border-custom bg-custom text-white text-right">
+                        <div class="col-2 pointer wallet-item">
+                            <div class="card-box widget-flat bg-info text-white text-right">
                                 <i class="iconfont icon-alipay" ></i>
-                                <h3 class="m-b-10">余额：¥<span data-plugin="counterup">2563</span></h3>
+                                <h4 class="m-b-10">余额：¥<span data-plugin="counterup">2563</span></h4>
                                 <p class="text-uppercase m-b-5 font-13 font-600">支付宝钱包</p>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-6 col-xl-3 mt-5">
-                            <div class="card-box widget-flat border-custom bg-custom text-white text-right">
-                                <i class="iconfont icon-zhifu-yinlian " ></i>
-                                <h3 class="m-b-10">余额：¥<span data-plugin="counterup">2563</span></h3>
-                                <p class="text-uppercase m-b-5 font-13 font-600">xx银行：6222 **** **** **** 222</p>
+                            <div class="wallet-item-footer">
+                                <div class="curMarker"></div>
                             </div>
                         </div>
+                        <div class="col-2 pointer wallet-item">
+                            <div class="card-box widget-flat bg-warning text-white text-right">
+                                <i class="iconfont icon-zhifu-yinlian " ></i>
+                                <h4 class="m-b-10">余额：¥<span data-plugin="counterup">2563</span></h4>
+                                <p class="text-uppercase m-b-5 font-13 font-600">xx银行：6222 **** **** **** 222</p>
+                            </div>
+                            <div class="wallet-item-footer">
+                                <div class="curMarker"></div>
+                            </div>
+                        </div>    
                     </div>
                 </div>
 
@@ -272,7 +285,20 @@
     <script src="../static/js/jquery.core.js" th:src="@{/js/jquery.core.js}"></script>
     <script src="../static/js/jquery.app.js" th:src="@{/js/jquery.app.js}"></script>
     
-
+    <script>
+        $(document).ready(() => {
+            $('html').width(screen.availWidth);
+            $('html').css("visibility", "visible");
+            
+            /* 对元素的事件进行处理 */
+            $(".wallet-item").click(function(e) {
+                //console.log(e)
+               
+                $(".wallet-item").removeClass("active");
+                $(this).toggleClass("active");
+            });
+        })
+    </script>
 </body>
 
 </html>
