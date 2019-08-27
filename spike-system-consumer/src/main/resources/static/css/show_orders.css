@@ -1,0 +1,237 @@
+/* ===========
+   订单界面样式
+ =============*/
+
+ .order-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-item .goods-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.place-order-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    width: 100%;
+}
+
+.order-info-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    width: 100%;
+}
+
+.order-info-frame .separator {
+    border-bottom: 2px solid #5284c3;
+}
+
+.order-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+
+.order-header{
+    display: flex;
+    flex-direction: row;
+}
+
+.order-header .order-info,
+.order-header .order-attr,
+.order-header .order-price,
+.order-header .order-amount,
+.order-header .order-subtotal,
+.order-header .order-status {
+    border-bottom: 2px solid #5284c3;
+    margin-right: 2px;
+}
+
+.order-header .order-info{
+    width: 25%;
+}
+
+.goods-info {
+    width: 35.71%;
+}
+
+.order-header .order-attr {
+    width: 15%;
+}
+
+.goods-attr{
+    width: 21.42%;
+}
+
+.order-header .order-price{
+    width: 15%;
+}
+
+.goods-price {
+    width: 21.42%;
+}
+
+.order-header .order-amount {
+    width: 15%;
+}
+
+.goods-amount{
+    width: 21.42%;
+}
+
+.order-header .order-subtotal,
+.order-item-price {
+    width: 20%;
+}
+
+.order-header .order-status,
+.order-item-status{
+    width: 10%;
+}
+
+.order-item-price{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-item-status{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-item-status a{
+    color: black;
+}
+
+.order-item-status a:hover{
+    color: #5284c3;
+}
+
+.order-info-list .goods-list .goods-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    overflow: hidden;
+    
+}
+
+.order-info-list .goods-list .goods-attr {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-info-list .goods-list .goods-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-info-list .goods-list .goods-amount {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-info-list .goods-list .goods-subtotal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.seller-info-frame {
+    border-bottom: 1px dotted #b4a8b4;
+}
+
+.seller-info-frame a {
+    color: black;
+}
+
+.seller-info-frame a:hover {
+    color: #5284c3;
+}
+
+.order-info-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.order-info-list .goods-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.order-info-list .goods-list .goods-item {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+
+
+.order-info-list .goods-list .goods-info .goods-coverphoto {
+    width: 50px;
+    height: 50px;
+}
+
+.order-info-list .goods-list .goods-info .goods-coverphoto img {
+    width: 50px;
+    height: 50px;
+}
+
+.order-info-list .goods-list .goods-info .goods-name {
+    white-space:pre-wrap;
+    word-wrap:break-word;
+}
+
+.order-info-list .goods-list .goods-info .goods-name a {
+    color: black;
+}
+
+.order-info-list .goods-list .goods-info .goods-name a:hover {
+    color: #5284c3;
+}
+
+.order-info-list .goods-list .goods-attr .goods-attr-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.order-info-list .goods-list .goods-item {
+    margin: 10px 0;
+}
+
+.order-info-list .goods-list .order-pay {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.separator span {
+    border: 1px dashed #ece8ec;
+    width: 100%;
+}
+
+
+.special-order-info{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
+}

@@ -6697,3 +6697,9 @@ a {
 .sidebar .sidebar-item:last-child a:hover {
     color: inherit!important;
 }
+
+.row-center{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

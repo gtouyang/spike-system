@@ -511,8 +511,8 @@
             $(".place-order-frame").width(screen.width * 0.7);
             $(".order-info-frame").width(screen.width * 0.7);
             $(".order-info-list .goods-list .goods-info .goods-name").width($(".order-header .order-info").width() - 50 - 10);
-            //$(".order-info-list .goods-list .goods-info .goods-attr .goods-attr-item").width($(".order-header .order-attr"));
-
+            $('html').width(screen.availWidth);
+            $('html').css("visibility", "visible");
             /* 所有地址显示/隐藏 */
             toggleAddressList = function(self) {
                 $(self).attr("flag", $(self).attr("flag") == "true" ? "false" : "true");

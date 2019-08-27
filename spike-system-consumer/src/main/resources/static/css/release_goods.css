@@ -1,0 +1,19 @@
+html{
+    visibility: hidden;
+}
+
+.goods-release-frame{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.bootstrap-tagsinput{
+    border-color: #dbe3e8;
+    border-radius: 5px;
+    background: #ffffff;
+}
+
+.bootstrap-tagsinput .tag{
+    background: #5285c396;
+}
