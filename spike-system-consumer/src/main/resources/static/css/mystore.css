@@ -1,0 +1,25 @@
+html{
+    visibility: hidden;
+}
+
+html,
+body,
+.main{
+    width: 100%;
+    height: 100%;
+}
+
+.new-seller{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-seller-register{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}

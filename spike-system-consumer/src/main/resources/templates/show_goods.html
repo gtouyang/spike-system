@@ -40,6 +40,14 @@
                 <!-- 功能栏 -->
                 <div class="menu-extras topbar-custom">
                     <ul class="list-unstyled topbar-right-menu float-right mb-0">
+                        <!-- 未登录时样式demo -->
+                        <!-- <li class="dropdown notification-list">
+                            <a class="nav-link waves-effect" href="/login" role="button" aria-haspopup="false" aria-expanded="false">
+                                <span style="font-weight: bold;">账号登录</span>
+                            </a>
+                        </li> -->
+                        <!-- 未登录时样式demo end -->
+
                         <!-- 系统通知 -->
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -146,27 +154,27 @@
                                 </div>
 
                                 <!-- item -->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="./account.html" class="dropdown-item notify-item">
                                     <i class="fi-head"></i> <span>我的账户</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-cart-outline"></i> <span>购物车</span>
+                                <a href="./mystore.html" class="dropdown-item notify-item">
+                                    <i class="dripicons-store"></i> <span>我的店铺</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="./show_orders.html" class="dropdown-item notify-item">
                                     <i class="fi-file-subtract"></i> <span>我的订单</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fi-cog"></i> <span>设置</span>
-                                </a>
+                                </a> -->
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="javascript:void(0);" class="dropdown-item notify-item" th:href="@{/logout}">
                                     <i class="fi-power"></i> <span>注销</span>
                                 </a>
 

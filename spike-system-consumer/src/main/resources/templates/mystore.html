@@ -15,13 +15,8 @@
     <link href="../static/css/icons.css" rel="stylesheet" type="text/css" th:href="@{/css/icons.css}" />
     <link href="../static/css/style.css" rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 
-    <!-- Dropzone css -->
-    <link href="../static/plugins/dropzone/dropzone.css" rel="stylesheet" type="text/css" th:href="@{/plugins/dropzone/dropzone.css}" />
-
-    <!-- date range picker css -->
-    <link href="../static/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" th:href="@{/plugins/bootstrap-daterangepicker/daterangepicker.css}">
     <!-- style css -->
-    <link href="../static/css/release_goods.css" rel="stylesheet" th:href="@{/css/release_goods.css}">
+    <link rel="stylesheet" href="../static/css/mystore.css" th:href="@{/css/mystore.css}">
 </head>
 
 <body>
@@ -219,63 +214,212 @@
 
     <!-- main -->
     <div class="main">
-        <div class="wrapper">
-            <div class="container-fluid goods-release-frame">
-                <div class="frame-body mt-5" style="width: 40%;">
-                    <form action="#" method="post" enctype="multipart/form-data" th:action="@{/}" th:method="post">
-                        <div class="form-group">
-                            <label for="goods_name" class="font-10 font-weight-bold">商品名称<span class="text-danger">*</span></label>
-                            <input type="alphanum" data-parsley-type="alphanum" name="goods_name" parsley-trigger="change" required placeholder="" data-parsley-required-message="商品名称不能为空" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="goods_intro" class="font-10 font-weight-bold">商品描述</label>
-                            <textarea name="goods_intro" parsley-trigger="change" placeholder="" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="font-10 font-weight-bold">商品标签/属性</label>
-                            <!-- <select multiple data-role="tagsinput">
-                                <option value="Amsterdam">Amsterdam</option>
-                                <option value="Washington">Washington</option>
-                                <option value="Sydney">Sydney</option>
-                                <option value="Beijing">Beijing</option>
-                                <option value="Cairo">Cairo</option>
-                            </select> -->
-                            <input id="tags" type="text" data-role="tagsinput" onchange="listeningTags(this)" />
-                        </div>
-                        <div class="form-group">
-                            <label for="goods_price" class="font-10 font-weight-bold">商品价格（原价）<span class="text-danger">*</span></label>
-                            <input  data-parsley-type="number" name="goods_price" parsley-trigger="change" required data-parsley-number-message="非法字符，请填写正确的数字" data-parsley-required-message="价格不能为空" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="goods_special_offer" class="font-10 font-weight-bold">秒杀价<span class="text-danger">*</span></label>
-                            <input  data-parsley-type="number" name="goods_special_offer" parsley-trigger="change" required data-parsley-number-message="非法字符，请填写正确的数字" data-parsley-required-message="价格不能为空" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="goods_seckill_time" class="font-10 font-weight-bold">秒杀时间<span class="text-danger">*</span></label>
-                            <div>
-                                <input type="text" class="form-control input-daterange-timepicker" name="goods_seckill_time" placeholde="01/01/2017 1:30 PM - 01/01/2017 2:00 PM"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="goods_supply" class="font-10 font-weight-bold">商品库存量<span class="text-danger">*</span></label>
-                            <input  data-parsley-type="number" name="goods_supply" parsley-trigger="change" required data-parsley-min-message="商品库存量最少为1" data-parsley-number-message="非法字符，请填写正确的数字" data-parsley-required-message="商品库存量不能为空" class="form-control" min="1">
-                        </div>
-                        <div class="form-group">
-                            <label for="goods_pics" class="font-10 font-weight-bold">商品详细图片<span class="text-danger">*</span></label>
-                            <div class="dropzone" id="dropz">
-                                <div class="fallback">
-                                    <input name="goods_pics" type="file" multiple required data-parsley-required-message="至少选择一张图片" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group w-100 row-center">
-                            <button type="submit" class="btn btn-custom btn-sm mr-5">提交</button>
-                            <button type="reset" class="btn btn-light btn-sm" onclick="clearForm()">重新填写</button>
-                        </div>
-                        
-                    </form>
-                </div>
+        <!-- 未开通商店的界面 -->
+        <div class="new-seller" style="display: none;">
+            <h3>店铺服务开启</h3>
+            <div class="new-seller-register mt-4">
+                <form action="#" method="post" enctype="multipart/form-data" th:action="@{/}" th:method="post">
+                    <div class="form-group">
+                        <label for="store-name" class="font-10 font-weight-bold">店铺名 <span class="text-danger">*</span></label>
+                        <input type="alphanum" data-parsley-type="store-name" name="username" parsley-trigger="change" required placeholder="" data-parsley-required-message="店铺名不能为空" class="form-control" minlength="4" maxlength="18">
+                    </div>
+                    <div class="form-group">
+                        <label for="seller-name" class="font-10 font-weight-bold password-group">店主 <span class="text-danger">*</span></label>
+                        <input type="alphanum"  name="seller-name" parsley-trigger="change" required readonly class="form-control" value="zhongwei chen">
+                    </div>
+                    <div class="form-group">
+                        <label for="store_intro" class="font-10 font-weight-bold">店铺介绍</label>
+                        <textarea name="store_intro" parsley-trigger="change" placeholder="" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group text-right">
+                        <input type="submit" value="提交" class="btn btn-custom">
+                    </div>
+                </form>
             </div>
+        </div>
+
+        <!-- 已开通商品的界面 -->
+        <div class="wrapper">
+            <div class="container-fluid" style="display: flex;flex-direction: column;">
+                <h4>陈老湿的店</h4>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a href="./release_goods.html" class="btn btn-outline-custom btn-sm waves-effect waves-light mb-4"><i class="mdi mdi-plus"></i> 发布新商品</a>
+                    </div>
+                </div>
+                <!-- 商品列表 -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center card-box">
+    
+                            <div class="member-card pt-2 pb-2">
+                                <div class="thumb-lg member-thumb m-b-10 mx-auto">
+                                    <img src="assets/images/users/avatar-2.jpg" class="rounded-circle img-thumbnail" alt="profile-image">
+                                </div>
+    
+                                <div class="">
+                                    <h4 class="m-b-5">Freddie J. Plourde</h4>
+                                    <p class="text-muted">@Founder <span> | </span> <span> <a href="#" class="text-pink">websitename.com</a> </span></p>
+                                </div>
+    
+                                <ul class="social-links list-inline m-t-20">
+                                    <li class="list-inline-item">
+                                        <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
+                                    </li>
+                                </ul>
+    
+                                <button type="button" class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light">Message Now</button>
+    
+                                <div class="mt-4">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="mt-3">
+                                                <h4 class="m-b-5">2563</h4>
+                                                <p class="mb-0 text-muted">Wallets Balance</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mt-3">
+                                                <h4 class="m-b-5">6952</h4>
+                                                <p class="mb-0 text-muted">Income amounts</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mt-3">
+                                                <h4 class="m-b-5">1125</h4>
+                                                <p class="mb-0 text-muted">Total Transactions</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                    </div> <!-- end col -->
+    
+                    <div class="col-md-4">
+                        <div class="text-center card-box">
+    
+                            <div class="member-card pt-2 pb-2">
+                                <div class="thumb-lg member-thumb m-b-10 mx-auto">
+                                    <img src="assets/images/users/avatar-3.jpg" class="rounded-circle img-thumbnail" alt="profile-image">
+                                </div>
+    
+                                <div class="">
+                                    <h4 class="m-b-5">Julie L. Arsenault</h4>
+                                    <p class="text-muted">@@Programmer <span> | </span> <span> <a href="#" class="text-pink">websitename.com</a> </span></p>
+                                </div>
+    
+                                <ul class="social-links list-inline m-t-20">
+                                    <li class="list-inline-item">
+                                        <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
+                                    </li>
+                                </ul>
+    
+                                <button type="button" class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light">Message Now</button>
+    
+                                <div class="mt-4">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="mt-3">
+                                                <h4 class="m-b-5">8471</h4>
+                                                <p class="mb-0 text-muted">Wallets Balance</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mt-3">
+                                                <h4 class="m-b-5">8512</h4>
+                                                <p class="mb-0 text-muted">Income amounts</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mt-3">
+                                                <h4 class="m-b-5">4751</h4>
+                                                <p class="mb-0 text-muted">Total Transactions</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                    </div> <!-- end col -->
+    
+                    <div class="col-md-4">
+                        <div class="text-center card-box">
+    
+                            <div class="member-card pt-2 pb-2">
+                                <div class="thumb-lg member-thumb m-b-10 mx-auto">
+                                    <img src="assets/images/users/avatar-4.jpg" class="rounded-circle img-thumbnail" alt="profile-image">
+                                </div>
+    
+                                <div class="">
+                                    <h4 class="m-b-5">Christopher Gallardo</h4>
+                                    <p class="text-muted">@Webdesigner <span> | </span> <span> <a href="#" class="text-pink">websitename.com</a> </span></p>
+                                </div>
+    
+                                <ul class="social-links list-inline m-t-20">
+                                    <li class="list-inline-item">
+                                        <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
+                                    </li>
+                                </ul>
+    
+                                <button type="button" class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light">Message Now</button>
+    
+                                <div class="mt-4">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="mt-3">
+                                                <h4 class="m-b-5">1021</h4>
+                                                <p class="mb-0 text-muted">Wallets Balance</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mt-3">
+                                                <h4 class="m-b-5">4562</h4>
+                                                <p class="mb-0 text-muted">Income amounts</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mt-3">
+                                                <h4 class="m-b-5">3621</h4>
+                                                <p class="mb-0 text-muted">Total Transactions</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+
         </div>
     </div>
     <!-- end main -->
@@ -301,107 +445,30 @@
     <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
     <script src="../static/js/waves.js" th:src="@{/js/waves.js}"></script>
     <script src="../static/js/jquery.slimscroll.js" th:src="@{/js/jquery.slimscroll.js}"></script>
-    <!-- KNOB JS -->
-    <script src="../static/plugins/jquery-knob/jquery.knob.js"></script>
 
-    <!-- Counter Up  -->
-    <script src="../static/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
-    <script src="../static/plugins/counterup/jquery.counterup.min.js"></script>
+    <!-- Parsley js -->
+    <script type="text/javascript" src="../static/plugins/parsleyjs/parsley.min.js" th:src="@{/plugins/parsleyjs/parsley.min.js}"></script>
+
+    <!-- modernizr js -->
+    <script src="../static/js/modernizr.min.js" th:src="@{/js/modernizr.min.js}"></script>
+
+    <!-- lazyload js -->
+    <script src="../static/js/lazyload.js" th:src="@{/js/lazyload.js}"></script>
+
     <!-- App js -->
     <script src="../static/js/jquery.core.js" th:src="@{/js/jquery.core.js}"></script>
     <script src="../static/js/jquery.app.js" th:src="@{/js/jquery.app.js}"></script>
-    <!-- Parsley js -->
-    <script type="text/javascript" src="../static/plugins/parsleyjs/parsley.min.js" th:src="@{/plugins/parsleyjs/parsley.min.js}"></script>
     
-    <!-- Dropzone js -->
-    <script src="../static/plugins/dropzone/dropzone.js" th:src="/plugins/dropzone/dropzone.js"></script>
-    
-    <!-- date range picker js -->
-    <script src="../static/plugins/moment/moment.js" th:src="/plugins/moment/moment.js"></script>
-    <script src="../static/plugins/bootstrap-daterangepicker/daterangepicker.js" th:src="/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="../static/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js" th:src="/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
     <script>
         $(document).ready(() => {
             $('html').width(screen.availWidth);
             $('html').css("visibility", "visible");
+            /* 图片懒加载 */
+            // lazyload();
             $('form').parsley();
-
-            // 时间选择器
-            // 参考文档：https://blog.csdn.net/Webben/article/details/78319276 ; https://blog.csdn.net/baidu_38990811/article/details/79509418
-            $('.input-daterange-timepicker').daterangepicker({
-                timePicker: true,
-                timePicker24Hour: true,
-                timePickerIncrement: 5,
-                buttonClasses: ['btn', 'btn-sm'],
-                applyClass: 'btn-custom',
-                cancelClass: 'btn-light',
-                drops: "up",
-                autoUpdateInput: true,
-                locale : {
-                    format: 'YYYY/MM/DD HH:mm',
-                    applyLabel : '确定',
-                    cancelLabel : '取消',
-                    fromLabel : '起始时间',
-                    toLabel : '结束时间',
-                    customRangeLabel : '自定义',
-                    daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
-                    monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月',
-                    '七月', '八月', '九月', '十月', '十一月', '十二月' ],
-                    firstDay : 1
-                }
-            });
+            //$(".new-seller").height(screen.availHeight-$("header").height());
         })
-        // dropz图片显示框
-        // 文档可参考 https://www.cnblogs.com/zhengfengyun/p/5484842.html
-        // url 为图片的上传地址
-        Dropzone.autoDiscover = false;
-        var dropz = new Dropzone('#dropz', {
-            url: 'http://127.0.0.1:3000/test',
-            maxFilesize: 10, //MB
-            acceptedFiles: ".jpg,.gif,.png,.jpeg", //上传的类型
-            dictMaxFilesExceeded: "您最多只能上传10个文件！",
-            dictResponseError: '文件上传失败!',
-            dictInvalidFileType: "你不能上传该类型文件,文件类型只能是*.jpg,*.gif,*.png,*jpeg。",
-            dictFallbackMessage: "浏览器不受支持",
-            dictFileTooBig: "文件过大上传文件最大支持.",
-            dictDefaultMessage: "选择更多图片（可拖动图片到这里）",
-            dictRemoveFile: 'remove',
-            dictCancelUpload: 'cancel',
-            addRemoveLinks: true,
-            removedfile: function(file) {
-                var _ref;
-                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-            },
-            init: function() {
-                _this = this;
-                this.on("addedfile", function(file) {
-                    // 上传文件时触发的回调事件
-                    
-                });
-                this.on("queuecomplete", function(file) {
-                    // 当队列中的所有文件上传完成时的回调事件
-                });
-                this.on("removedfile", function(file) {
-                    // 删除文件时触发的回调事件
-                    
-                });
-                this.on("success", function(file, res) {
-                    // 文件已经成功上传触发的回调事件
-                });
-            }
-        });
-        
-        // 清空图片预览框
-        var clearForm = function(){
-            dropz.removeAllFiles();
-        }
-
-        // 监听商品标签
-        var listeningTags = function(self){
-            // 文档可参考：http://amazeui.github.io/tagsinput/docs/demo.html
-            console.log(`当前的标签有${$(self).tagsinput('items')}`)
-        }
-    </script>
+        </script>
 </body>
 
 </html>

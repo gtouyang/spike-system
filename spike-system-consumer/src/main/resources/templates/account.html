@@ -15,13 +15,14 @@
     <link href="../static/css/icons.css" rel="stylesheet" type="text/css" th:href="@{/css/icons.css}" />
     <link href="../static/css/style.css" rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 
+    <!-- Sweet Alert css -->
+    <link href="../static/plugins/sweet-alert/sweetalert2.min.css" th:href="@{/plugins/sweet-alert/sweetalert2.min.css}" rel="stylesheet" type="text/css" />
+
     <!-- icon css -->
     <link href="../static/css/iconfont.css" rel="stylesheet" type="text/css" th:href="@{/css/iconfont.css}" />
 
     <!-- style css -->
     <link rel="stylesheet" href="../static/css/account.css" th:href="@{/css/account.css}">
-    <style>
-    </style>
 </head>
 
 <body>
@@ -42,6 +43,14 @@
                 <!-- 功能栏 -->
                 <div class="menu-extras topbar-custom">
                     <ul class="list-unstyled topbar-right-menu float-right mb-0">
+                        <!-- 未登录时样式demo -->
+                        <!-- <li class="dropdown notification-list">
+                            <a class="nav-link waves-effect" href="/login" role="button" aria-haspopup="false" aria-expanded="false">
+                                <span style="font-weight: bold;">账号登录</span>
+                            </a>
+                        </li> -->
+                        <!-- 未登录时样式demo end -->
+
                         <!-- 系统通知 -->
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -140,7 +149,7 @@
                         <!-- 用户操作 -->
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
+                                <img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name" th:each="cookie: ${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('username')}" th:text="${cookie.getValue()}">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <div class="dropdown-item noti-title">
@@ -148,27 +157,27 @@
                                 </div>
 
                                 <!-- item -->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="./account.html" class="dropdown-item notify-item">
                                     <i class="fi-head"></i> <span>我的账户</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-cart-outline"></i> <span>购物车</span>
+                                <a href="./mystore.html" class="dropdown-item notify-item">
+                                    <i class="dripicons-store"></i> <span>我的店铺</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="./show_orders.html" class="dropdown-item notify-item">
                                     <i class="fi-file-subtract"></i> <span>我的订单</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fi-cog"></i> <span>设置</span>
-                                </a>
+                                </a> -->
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="javascript:void(0);" class="dropdown-item notify-item" th:href="@{/logout}">
                                     <i class="fi-power"></i> <span>注销</span>
                                 </a>
 
@@ -212,40 +221,178 @@
     <!-- main -->
     <div class="main">
         <div class="wrapper">
-            <div class="container-fluid">
-                <h4 class="font-600 mb-3">我的钱包</h4>
-                <a href="#" class="btn btn-custom waves-effect waves-light btn-sm font-10"><i class="mdi mdi-plus-circle"></i>增加钱包</a>
-                <div class="row mt-3 wallet">
-                    <div class="col-3 pointer wallet-item">
-                        <div class="card-box widget-flat bg-success text-white text-right">
-                            <i class="iconfont icon-wechat-pay-line" ></i>
-                            <h4 class="m-b-10">余额：¥<span data-plugin="counterup">25563</span></h4>
-                            <p class="text-uppercase m-b-5 font-13 font-600">微信钱包</p>
+            <div class="container-fluid mt-5">
+                <div class="tabs-vertical-env">
+                    <ul class="nav tabs-vertical">
+                        <li class="nav-item">
+                            <a href="#v-profile" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                                <i class="fi-monitor mr-2"></i> 我的资料
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#v-address" data-toggle="tab" aria-expanded="true" class="nav-link">
+                                <i class="fi-head mr-2"></i> 我的地址
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#v-wallet" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                <i class="fi-mail mr-2"></i> 我的钱包
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content w-100">
+                        <div class="tab-pane active" id="v-profile">
+                            <div>
+                                <h4 class="font-600 mb-3">个人信息</h4>
+                                <div class="profile">
+                                    <div class="profile-item">
+                                        <label class="font-10">用户名（不可修改）</label>
+                                        <input value="16wzchen" type="text" class="form-control" readonly>
+                                    </div>
+                                    <div class="profile-item">
+                                        <label class="font-10">用户昵称</label>
+                                        <input value="zhongwei chen" type="text" class="form-control" onchange="changeProfileInfo(type='nickName', this.value)">
+                                    </div>
+                                    <div class="profile-item">
+                                        <label class="font-10">电子邮件（不可修改）</label>
+                                        <input value="16wxchen@stu.edu.cn" type="email" class="form-control" readonly>
+                                    </div>
+                                    <button class="btn btn-custom btn-sm" onclick="resetPassword()">密码重置</button>
+                                </div>
+                                
+                            </div>
                         </div>
-                        <div class="wallet-item-footer">
-                            <div class="curMarker"></div>
+                        <div class="tab-pane" id="v-address">
+                            <div>
+                                <h4 class="font-600 mb-3">我的地址</h4>
+                                <a href="#" class="btn btn-custom waves-effect waves-light btn-sm font-10 mb-3" onclick="addAddress()"><i class="mdi mdi-home-variant"></i>增加新地址</a>
+                                <div class="w-100 horizontal-center">
+                                    <div>
+                                        <!-- address list -->
+                                        <div class="address-list">
+                                            <!-- address list item -->
+                                            <div class="address-item">
+                                                <div class="address-header">
+                                                    <span class="pr-2">广东<strong>汕头</strong></span>
+                                                    <span>(<strong>陈仲伟</strong> 收)</span>
+                                                </div>
+                                                <div class="separator"><span></span></div>
+                                                <div class="address-body font-11">
+                                                    <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                                    </br>
+                                                    <span class="text-muted">15919579396</span>
+                                                </div>
+                                            </div>
+                                            <!-- address list item -->
+                                            <div class="address-item">
+                                                <div class="address-header">
+                                                    <span class="pr-2">广东<strong>汕头</strong></span>
+                                                    <span>(<strong>陈仲伟</strong> 收)</span>
+                                                </div>
+                                                <div class="separator"><span></span></div>
+                                                <div class="address-body font-11">
+                                                    <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                                    </br>
+                                                    <span class="text-muted">15919579396</span>
+                                                </div>
+                                            </div>
+                                            <!-- address list item -->
+                                            <div class="address-item">
+                                                <div class="address-header">
+                                                    <span class="pr-2">广东<strong>汕头</strong></span>
+                                                    <span>(<strong>陈仲伟</strong> 收)</span>
+                                                </div>
+                                                <div class="separator"><span></span></div>
+                                                <div class="address-body font-11">
+                                                    <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                                    </br>
+                                                    <span class="text-muted">15919579396</span>
+                                                </div>
+                                            </div>
+                                            <!-- address list item -->
+                                            <div class="address-item">
+                                                <div class="address-header">
+                                                    <span class="pr-2">广东<strong>汕头</strong></span>
+                                                    <span>(<strong>陈仲伟</strong> 收)</span>
+                                                </div>
+                                                <div class="separator"><span></span></div>
+                                                <div class="address-body font-11">
+                                                    <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                                    </br>
+                                                    <span class="text-muted">15919579396</span>
+                                                </div>
+                                            </div>
+                                            <!-- address list item -->
+                                            <div class="address-item">
+                                                <div class="address-header">
+                                                    <span class="pr-2">广东<strong>汕头</strong></span>
+                                                    <span>(<strong>陈仲伟</strong> 收)</span>
+                                                </div>
+                                                <div class="separator"><span></span></div>
+                                                <div class="address-body font-11">
+                                                    <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                                    </br>
+                                                    <span class="text-muted">15919579396</span>
+                                                </div>
+                                            </div>
+                                            <!-- address list item -->
+                                            <div class="address-item">
+                                                <div class="address-header">
+                                                    <span class="pr-2">广东<strong>汕头</strong></span>
+                                                    <span>(<strong>陈仲伟</strong> 收)</span>
+                                                </div>
+                                                <div class="separator"><span></span></div>
+                                                <div class="address-body font-11">
+                                                    <span class="text-muted">广东省 汕头市 金平区 大学路243号汕头大学</span>
+                                                    </br>
+                                                    <span class="text-muted">15919579396</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="v-wallet">
+                                <div>
+                                    <h4 class="font-600 mb-3">我的钱包</h4>
+                                    <a href="#" class="btn btn-custom waves-effect waves-light btn-sm font-10" onclick="addWallet()"><i class="mdi mdi-plus-circle"></i>增加钱包</a>
+                                    <div class="row mt-3 wallet">
+                                        <div class="col-3 pointer wallet-item">
+                                            <div class="card-box widget-flat bg-success text-white text-right">
+                                                <i class="iconfont icon-wechat-pay-line" ></i>
+                                                <h4 class="m-b-10">余额：¥<span data-plugin="counterup">25563</span></h4>
+                                                <p class="text-uppercase m-b-5 font-13 font-600">微信钱包</p>
+                                            </div>
+                                            <div class="wallet-item-footer">
+                                                <div class="curMarker"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 pointer wallet-item">
+                                            <div class="card-box widget-flat bg-info text-white text-right">
+                                                <i class="iconfont icon-alipay" ></i>
+                                                <h4 class="m-b-10">余额：¥<span data-plugin="counterup">2563</span></h4>
+                                                <p class="text-uppercase m-b-5 font-13 font-600">支付宝钱包</p>
+                                            </div>
+                                            <div class="wallet-item-footer">
+                                                <div class="curMarker"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 pointer wallet-item">
+                                            <div class="card-box widget-flat bg-warning text-white text-right">
+                                                <i class="iconfont icon-zhifu-yinlian " ></i>
+                                                <h4 class="m-b-10">余额：¥<span data-plugin="counterup">2563</span></h4>
+                                                <p class="text-uppercase m-b-5 font-13 font-600">xx银行：6222 **** 222</p>
+                                            </div>
+                                            <div class="wallet-item-footer">
+                                                <div class="curMarker"></div>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
                         </div>
                     </div>
-                    <div class="col-3 pointer wallet-item">
-                        <div class="card-box widget-flat bg-info text-white text-right">
-                            <i class="iconfont icon-alipay" ></i>
-                            <h4 class="m-b-10">余额：¥<span data-plugin="counterup">2563</span></h4>
-                            <p class="text-uppercase m-b-5 font-13 font-600">支付宝钱包</p>
-                        </div>
-                        <div class="wallet-item-footer">
-                            <div class="curMarker"></div>
-                        </div>
-                    </div>
-                    <div class="col-3 pointer wallet-item">
-                        <div class="card-box widget-flat bg-warning text-white text-right">
-                            <i class="iconfont icon-zhifu-yinlian " ></i>
-                            <h4 class="m-b-10">余额：¥<span data-plugin="counterup">2563</span></h4>
-                            <p class="text-uppercase m-b-5 font-13 font-600">xx银行：6222 **** 222</p>
-                        </div>
-                        <div class="wallet-item-footer">
-                            <div class="curMarker"></div>
-                        </div>
-                    </div>    
                 </div>
             </div>
         </div>
@@ -273,6 +420,14 @@
     <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
     <script src="../static/js/waves.js" th:src="@{/js/waves.js}"></script>
     <script src="../static/js/jquery.slimscroll.js" th:src="@{/js/jquery.slimscroll.js}"></script>
+
+    <!-- Sweet Alert Js  -->
+    <script src="../static/plugins/sweet-alert/sweetalert2.min.js" th:src="@{/plugins/sweet-alert/sweetalert2.min.js}"></script>
+    <script src="../static/pages/jquery.sweet-alert.init.js" th:src="@{/pages/jquery.sweet-alert.init.js}"></script>
+
+    <!-- Parsley js -->
+    <script type="text/javascript" src="../static/plugins/parsleyjs/parsley.min.js" th:src="@{/plugins/parsleyjs/parsley.min.js}"></script>
+
     <!-- KNOB JS -->
     <script src="../static/plugins/jquery-knob/jquery.knob.js"></script>
 
@@ -295,7 +450,197 @@
                 $(".wallet-item").removeClass("active");
                 $(this).toggleClass("active");
             });
+
+            $(".address-item").click(function(e) {
+                //console.log(e)
+                $(".address-item").removeClass("active");
+                $(this).toggleClass("active");
+            });
         })
+
+        var addWallet = function(){
+            swal({
+                title: '请填写钱包相关信息',
+                html:
+                `
+                <div>
+                    <div class="form-group text-left">
+                        <label for="wallet-type" class="font-14 font-weight-bold">钱包类型</label>
+                        <input id="wallet-type" type="alphanum" data-parsley-type="alphanum" name="wallet-type" parsley-trigger="change" required placeholder="" data-parsley-required-message="钱包类型不能为空" class="form-control">
+                    </div>
+                    <div class="form-group text-left">
+                        <label for="wallet-card-num" class="font-14 font-weight-bold">卡号</label>
+                        <input id="wallet-card-num" type="alphanum" data-parsley-type="alphanum" name="wallet-card-num" parsley-trigger="change" required placeholder="" data-parsley-required-message="卡号不能为空" class="form-control">
+                    </div>
+                </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: '提交',
+                cancelButtonText: '取消',
+                showLoaderOnConfirm: true,
+                allowOutsideClick: false,
+                preConfirm: function () {
+                    return new Promise(function (resolve) { 
+                        resolve({
+                            type: $('#wallet-type').val(),
+                            cardNum: $('#wallet-card-num').val()
+                        })
+                    })
+                },
+                onOpen: function () {
+                    $('#wallet-type').focus()
+                }
+                }).then(function(input) {
+                    console.log(input)
+                    if(input.type && input.cardNum){
+                        console.log(`用户提交的钱包信息：${JSON.stringify(input)}`)
+                        // 在这里发送ajax请求
+                        // 请求结束后弹窗即可，success和error弹窗分别如下
+                        sweetAlert(
+                            '在这里填写ajax回调',       // title
+                            '提示内容',      // text
+                            'success'         // icon type
+                        )
+                    }else{
+                        sweetAlert(
+                            '请将信息填写完整！',       
+                            '',
+                            'error'
+                        )
+                    }
+                    
+                })
+        }
+        
+        var addAddress = function(){
+            swal({
+                title: '请填写地址信息',
+                html:
+                `
+                <div>
+                    <div class="form-group text-left">
+                        <label for="address-owner" class="font-14 font-weight-bold">收货人姓名</label>
+                        <input id="address-owner" type="alphanum" data-parsley-type="alphanum" name="address-owner" parsley-trigger="change" required placeholder="" class="form-control">
+                    </div>
+                    <div class="form-group text-left">
+                        <label for="address-phone" class="font-14 font-weight-bold">收货人联系方式</label>
+                        <input id="address-phone" type="alphanum" data-parsley-type="alphanum" name="address-phone" parsley-trigger="change" required placeholder="" class="form-control">
+                    </div>
+                    <div class="form-group text-left">
+                        <label for="address-detail" class="font-14 font-weight-bold">收货人地址</label>
+                        <div style="display: flex; flex-direction: row;">
+                            <input id="address-detail-province" type="alphanum" data-parsley-type="address-detail-province" name="wallet-card-num" parsley-trigger="change" required placeholder="省份" style="width: 33.33%" class="form-control">
+                            <input id="address-detail-city" type="alphanum" data-parsley-type="address-detail-city" name="wallet-card-num" parsley-trigger="change" required placeholder="市" style="width: 33.33%" class="form-control">
+                            <input id="address-detail-county" type="alphanum" data-parsley-type="address-detail-county" name="wallet-card-num" parsley-trigger="change" required placeholder="县/区" style="width: 33.33%" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: '提交',
+                cancelButtonText: '取消',
+                showLoaderOnConfirm: true,
+                allowOutsideClick: false,
+                preConfirm: function () {
+                    return new Promise(function (resolve) { 
+                        resolve({
+                            owner: $('#address-owner').val(),
+                            phone: $('#address-phone').val(),
+                            address: {province: $('#address-detail-province').val(), city: $("#address-detail-city").val(),county: $("#address-detail-county").val()}
+                        })
+                    })
+                },
+                onOpen: function () {
+                    $('#address-owner').focus()
+                }
+                }).then(function(input) {
+                    if(input.owner && input.phone && input.address.province && input.address.city && input.address.county){
+                        console.log(`用户提交的钱包信息：${JSON.stringify(input)}`)
+                        // 在这里发送ajax请求
+                        // 请求结束后弹窗即可，success和error弹窗分别如下
+                        sweetAlert(
+                            '在这里填写ajax回调',       // title
+                            '提示内容',      // text
+                            'success'         // icon type
+                        )
+                    }else{
+                        sweetAlert(
+                            '请将信息填写完整！',       
+                            '',
+                            'error'
+                        )
+                    }
+                    
+                })
+        }
+    
+        var changeProfileInfo = function(type, val){
+            console.log(val);
+        }
+
+        var resetPassword = function(){
+            swal({
+                title: '请填写钱包相关信息',
+                html:
+                `
+                <div>
+                    <div class="form-group text-left">
+                        <label for="ori-psw" class="font-14 font-weight-bold">原密码</label>
+                        <input id="ori-psw" type="password" name="ori-psw" parsley-trigger="change" required placeholder="" class="form-control">
+                    </div>
+                    <div class="form-group text-left">
+                        <label for="new-psw1" class="font-14 font-weight-bold">新密码</label>
+                        <input id="new-psw1" type="password" name="new-psw1" parsley-trigger="change" required placeholder=""class="form-control">
+                    </div>
+                    <div class="form-group text-left">
+                        <label for="new-psw2" class="font-14 font-weight-bold">确认密码</label>
+                        <input id="new-psw2" type="password" name="new-psw2" parsley-trigger="change" required placeholder=""class="form-control">
+                    </div>
+                </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: '提交',
+                cancelButtonText: '取消',
+                showLoaderOnConfirm: true,
+                allowOutsideClick: false,
+                preConfirm: function () {
+                    return new Promise(function (resolve) { 
+                        resolve({
+                            originalPassword: $('#ori-psw').val(),
+                            newPassword_1: $('#new-psw1').val(),
+                            newPassword_2: $('#new-psw2').val()
+                        })
+                    })
+                },
+                onOpen: function () {
+                    $('#ori-psw').focus()
+                }
+                }).then(function(input) {
+                    if(!input.newPassword_1 || !input.newPassword_2 || !input.originalPassword){
+                        sweetAlert(
+                            '请将信息填写完整！',       
+                            '',
+                            'error'
+                        )
+                    }else if(input.newPassword_1 != input.newPassword_2){
+                        
+                        sweetAlert(
+                            '两次输入密码不一致！',       
+                            '',
+                            'error'
+                        )
+                    }else if(input.newPassword_1 && input.newPassword_2 && input.originalPassword && (input.newPassword_1 == input.newPassword_2)){
+                        console.log(`用户提交的信息：${JSON.stringify(input)}`)
+                        // 在这里发送ajax请求
+                        // 请求结束后弹窗即可，success和error弹窗分别如下
+                        sweetAlert(
+                            '在这里填写ajax回调',       // title
+                            '提示内容',      // text
+                            'success'         // icon type
+                        )
+                    }
+                })
+        }
     </script>
 </body>
 

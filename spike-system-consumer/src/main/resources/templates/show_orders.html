@@ -43,6 +43,14 @@
                 <!-- 功能栏 -->
                 <div class="menu-extras topbar-custom">
                     <ul class="list-unstyled topbar-right-menu float-right mb-0">
+                        <!-- 未登录时样式demo -->
+                        <!-- <li class="dropdown notification-list">
+                            <a class="nav-link waves-effect" href="/login" role="button" aria-haspopup="false" aria-expanded="false">
+                                <span style="font-weight: bold;">账号登录</span>
+                            </a>
+                        </li> -->
+                        <!-- 未登录时样式demo end -->
+
                         <!-- 系统通知 -->
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -141,7 +149,7 @@
                         <!-- 用户操作 -->
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
+                                <img src="../static/images/avatar.png" th:src="@{/images/avatar.png}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name" th:each="cookie: ${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('username')}" th:text="${cookie.getValue()}">zhongwei chen<i class="mdi mdi-chevron-down"></i> </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <div class="dropdown-item noti-title">
@@ -149,27 +157,27 @@
                                 </div>
 
                                 <!-- item -->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="./account.html" class="dropdown-item notify-item">
                                     <i class="fi-head"></i> <span>我的账户</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-cart-outline"></i> <span>购物车</span>
+                                <a href="./mystore.html" class="dropdown-item notify-item">
+                                    <i class="dripicons-store"></i> <span>我的店铺</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="./show_orders.html" class="dropdown-item notify-item">
                                     <i class="fi-file-subtract"></i> <span>我的订单</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fi-cog"></i> <span>设置</span>
-                                </a>
+                                </a> -->
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="javascript:void(0);" class="dropdown-item notify-item" th:href="@{/logout}">
                                     <i class="fi-power"></i> <span>注销</span>
                                 </a>
 

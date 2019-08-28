@@ -66,3 +66,54 @@ html{
 .widget-flat{
     word-wrap:break-word;
 }
+
+.tab-content{
+    background: transparent!important;
+}
+
+.profile-item{
+    margin-bottom: .75em;
+}
+
+.address-list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.address-item {
+    border: 2px double #928692;
+    width: 22%;
+    margin: 0 4% 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.address-item:nth-child(4n) {
+    margin-right: 0;
+}
+
+.address-item:hover {
+    border: 2px dashed #5284c3;
+}
+
+.address-item .address-header,
+.address-item .address-body,
+.address-item .separator {
+    width: 90%;
+}
+
+.address-item.active {
+    border: 2px dashed #5284c3;
+}
+
+.address-item .separator {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0;
+}
