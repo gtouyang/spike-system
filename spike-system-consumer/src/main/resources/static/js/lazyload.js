@@ -112,7 +112,6 @@
                         let src = entry.target.getAttribute(self.settings.src);
                         let srcset = entry.target.getAttribute(self.settings.srcset);
                         let text = entry.target.getAttribute(self.settings.text);
-                        console.log(text)
                         if(text){
                             entry.target.innerText = text;
                         }

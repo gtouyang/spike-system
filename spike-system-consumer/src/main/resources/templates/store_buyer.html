@@ -1,3 +1,4 @@
+<!-- 该界面是商家查看自己的店铺界面 -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -15,7 +16,8 @@
     <link href="../static/css/icons.css" rel="stylesheet" type="text/css" th:href="@{/css/icons.css}" />
     <link href="../static/css/style.css" rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 
-    <script src="../static/js/modernizr.min.js" th:src="/js/modernizr.min.js"></script>
+    <!-- style css -->
+    <link rel="stylesheet" href="../static/css/store_buyer.css" th:href="@{/css/store_buyer.css}">
 </head>
 
 <body>
@@ -28,7 +30,7 @@
                 <div class="logo">
                     <a href="index.html" class="logo">
                         <span class="logo-small"><i class="mdi mdi-radar"></i></span>
-                        <span class="logo-large"><i class="mdi mdi-radar"></i> 秒杀系统</span>
+                        <span class="logo-large"><i class="mdi mdi-radar"></i> 陈老湿的店</span>
                     </a>
                 </div>
                 <!-- End Logo container-->
@@ -195,7 +197,7 @@
                     <form action="#">
                         <ul class="navigation-menu p-2">
                             <li class="has-submenu" style="width: 25%;">
-                                <input class="form-control" type="text" placeholder="搜索你想要的东西">
+                                <input class="form-control" type="text" placeholder="店内搜索">
                             </li>
                             <li>
                                 <button type="submit" class="btn btn-light waves-effect waves-primary" style="zoom: 0.95;margin-bottom: 2px;"> <i class="fa fa-search m-r-5"></i> <span>搜索</span> </button>
@@ -212,7 +214,78 @@
     <!-- end header -->
 
     <!-- main -->
-    <div class="main"></div>
+    <div class="main">
+        <div class="wrapper">
+            <div class="container-fluid mb-5" style="display: flex;flex-direction: column;">
+                <div class="row-center w-100">
+                    <div class="col-center" style="width: 80%;">
+                        <h4 class="mb-0 font-10 font-600 p-1" style="background: rgb(82, 132, 195);">本店热卖</h4>
+                        <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <!-- 下面是轮播图部分，在data-src里直接插入图片就可以 -->
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="ads-img">
+                                        <img class="d-block w-100 carousel-img lazyload" src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/goods_1.jpg" th:data-src="@{/images/goods_1.jpg}" alt="ads">
+                                    </div>
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>正在抢购中</h5>
+                                        <p class="duration">距离结束时间：<span>00</span>:<span>08</span>:<span>30</span></p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="ads-img">
+                                        <img class="d-block w-100 carousel-img lazyload" src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/goods_2.jpg" th:data-src="@{/images/goods_2.jpg}" alt="ads">
+                                    </div>
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>即将开始秒杀</h5>
+                                        <p class="duration">距离开始时间：<span>00</span>:<span>08</span>:<span>30</span></p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="ads-img">
+                                        <img class="d-block w-100 carousel-img lazyload" src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/goods_3.jpg" th:data-src="@{/images/goods_3.jpg}" alt="ads">
+                                    </div>
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>秒杀已经结束</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 mt-3" style="display: flex;flex-direction: column;align-items: center;">
+                    <h4 class="pb-2 font-600" style="width: 80%;border-bottom: 1px solid rgb(82, 132, 195);">店铺宝贝</h4>
+                    <div class="goods-list">
+                        <div class="goods-item">
+                            <div class="goods-coverphoto">
+                                <a href="#"><img class="d-block lazyload" src="../static/images/loading.gif" th:src="@{/images/loading.gif}" data-src="../static/images/iphone_1.jpg" th:data-src="@{/images/iphone_1.jpg}" alt="ads"></a>
+                            </div>
+                            <div class="goods-name">
+                                <a href="./show_goods.html" class="text-dark"><span>商品名称</span></a>
+                            </div>
+                            <div class="goods-price">
+                                <span class="text-danger font-18 font-600">￥888</span>
+                                <span class="text-muted font-14 text-del ml-2 font-600"><del>￥1088</del></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- end main -->
 
     <!-- footer -->
@@ -227,6 +300,25 @@
     </footer>
     <!-- end footer -->
 
+    <!-- 侧边操作栏 -->
+    <div class="sidebar font-14">
+        <div class="sidebar-item text-center">
+            <span><a href="#">我的足迹</a></span>
+            <span class="underline"></span>
+        </div>
+        <div class="sidebar-item text-center">
+            <span><a href="#">联系卖家</a></span>
+            <span class="underline"></span>
+        </div>
+        <div class="sidebar-item text-center">
+            <span><a href="#">举报</a></span>
+        </div>
+        <div class="sidebar-item text-center pointer">
+            <a href="#"><i class="mdi mdi-chevron-up" style="zoom: 1.5;"></i></a>
+        </div>
+    </div>
+    <!-- 侧边操作栏 end -->
+
     <!-- 阻止上传表单之后页面跳转 -->
     <iframe name="ajaxFrame" style="display: none;"></iframe>
 
@@ -237,9 +329,29 @@
     <script src="../static/js/waves.js" th:src="@{/js/waves.js}"></script>
     <script src="../static/js/jquery.slimscroll.js" th:src="@{/js/jquery.slimscroll.js}"></script>
 
+    <!-- Parsley js -->
+    <script type="text/javascript" src="../static/plugins/parsleyjs/parsley.min.js" th:src="@{/plugins/parsleyjs/parsley.min.js}"></script>
+
+    <!-- modernizr js -->
+    <script src="../static/js/modernizr.min.js" th:src="@{/js/modernizr.min.js}"></script>
+
+    <!-- lazyload js -->
+    <script src="../static/js/lazyload.js" th:src="@{/js/lazyload.js}"></script>
+
     <!-- App js -->
     <script src="../static/js/jquery.core.js" th:src="@{/js/jquery.core.js}"></script>
     <script src="../static/js/jquery.app.js" th:src="@{/js/jquery.app.js}"></script>
+    
+    <script>
+        $(document).ready(() => {
+            $('html').width(screen.availWidth);
+            $('html').css("visibility", "visible");
+            $('.goods-item .goods-coverphoto').height($('.goods-item .goods-coverphoto').width());
+            /* 图片懒加载 */
+            lazyload();
+            $('form').parsley();
+        })
+        </script>
 </body>
 
 </html>

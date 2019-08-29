@@ -23,3 +23,9 @@ body,
     flex-direction: column;
     width: 30%;
 }
+
+.goods_name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
