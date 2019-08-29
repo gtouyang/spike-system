@@ -1,6 +1,5 @@
 package com.ogic.spikesystemorderservice.controller;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ogic.spikesystemapi.common.TokenVerifyUtil;
 import com.ogic.spikesystemapi.entity.OrderEntity;
 import com.ogic.spikesystemorderservice.service.OrderService;
@@ -24,7 +23,7 @@ public class OrderController {
     TokenVerifyUtil tokenVerifyUtil;
 
     @PostMapping("/order")
-    public Optional<OrderEntity> order(@RequestParam Long productId, @RequestParam Integer amount, HttpServletRequest request){
+    public Optional<OrderEntity> order(@RequestParam Long goodId, @RequestParam Integer amount, HttpServletRequest request) {
 
         String username = Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION))
                                         .map(t -> tokenVerifyUtil.decodeToken(t))
@@ -32,7 +31,7 @@ public class OrderController {
                                         .map(jwt -> jwt.getClaim("username").asString())
                                         .orElse(null);
         if (username != null){
-            return Optional.ofNullable(orderService.order(productId, username, amount));
+            return Optional.ofNullable(orderService.order(goodId, username, amount));
         }
         return Optional.empty();
     }

@@ -33,18 +33,25 @@
                 <h4><strong>新用户注册</strong></h4>
             </div>
             <div class="login-frame">
-                <form action="#" method="post" enctype="multipart/form-data" th:action="@{/login}" th:method="post">
+                <form action="#" enctype="multipart/form-data" method="post" th:action="@{/register}" th:method="post">
                     <div class="form-group">
                         <label for="username" class="font-10 font-weight-bold">用户名</label>
-                        <input type="alphanum" data-parsley-type="alphanum" name="username" parsley-trigger="change" required placeholder="" data-parsley-required-message="用户名不能为空" class="form-control" minlength="4" maxlength="18" data-parsley-length-message="用户名长度为%s-%s位">
+                        <input class="form-control" data-parsley-length-message="用户名长度为%s-%s位"
+                               data-parsley-required-message="用户名不能为空" data-parsley-type="alphanum" maxlength="18"
+                               minlength="4" name="username" parsley-trigger="change" placeholder="" required
+                               th:name="username" type="alphanum">
                     </div>
                     <div class="form-group">
                         <label for="e-mail" class="font-10 font-weight-bold">邮箱</label>
-                        <input type="email" name="e-mail" parsley-trigger="change" required placeholder="" data-parsley-required-message="邮箱不能为空" class="form-control">
+                        <input class="form-control" data-parsley-required-message="邮箱不能为空" name="e-mail"
+                               parsley-trigger="change" placeholder="" required th:name="email" type="email">
                     </div>
                     <div class="form-group">
                         <label for="password" class="font-10 font-weight-bold">密码</label>
-                        <input type="password" id="password" data-parsley-type="alphanum"  name="password" parsley-trigger="change" required placeholder="" data-parsley-required-message="用户密码不能为空"  data-parsley-length-message="密码长度为%s-%s位" class="form-control" minlength="6" maxlength="18">
+                        <input class="form-control" data-parsley-length-message="密码长度为%s-%s位"
+                               data-parsley-required-message="用户密码不能为空" data-parsley-type="alphanum" id="password"
+                               maxlength="18" minlength="6" name="password" parsley-trigger="change" placeholder=""
+                               required th:name="password" type="password">
                     </div>
                     <div class="form-group">
                         <label for="passWord2" class="font-10 font-weight-bold">确认用户密码</label>
@@ -54,7 +61,9 @@
                         <label for="verificationCode" class="font-10 font-weight-bold">验证码</label>
                         <div class="verification-code">
                             <div>
-                                <input type="alphanum" data-parsley-type="alphanum" name="verificationCode" parsley-trigger="change" required placeholder="" data-parsley-required-message="验证码不能为空" class="form-control">
+                                <input class="form-control" data-parsley-required-message="验证码不能为空"
+                                       data-parsley-type="alphanum" name="verificationCode" parsley-trigger="change"
+                                       placeholder="" required th:name="verificationCode" type="alphanum">
                             </div>
                             <div class="verificationCode">
                                 <img alt="验证码" id="captcha_img" onclick="refresh()" th:src="@{/kaptcha}" title="点击更换验证码"/>

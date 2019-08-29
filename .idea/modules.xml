@@ -7,9 +7,9 @@
       <module fileurl="file://$PROJECT_DIR$/spike-system-authentication-service/spike-system-authentication-service.iml" filepath="$PROJECT_DIR$/spike-system-authentication-service/spike-system-authentication-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spike-system-consumer/spike-system-consumer.iml" filepath="$PROJECT_DIR$/spike-system-consumer/spike-system-consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/spike-system-eureka-server/spike-system-eureka-server.iml" filepath="$PROJECT_DIR$/spike-system-eureka-server/spike-system-eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spike-system-good-service/spike-system-good-service.iml" filepath="$PROJECT_DIR$/spike-system-good-service/spike-system-good-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spike-system-order-service/spike-system-order-service.iml" filepath="$PROJECT_DIR$/spike-system-order-service/spike-system-order-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spike-system-pay-service/spike-system-pay-service.iml" filepath="$PROJECT_DIR$/spike-system-pay-service/spike-system-pay-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/spike-system-product-service/spike-system-product-service.iml" filepath="$PROJECT_DIR$/spike-system-product-service/spike-system-product-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spike-system-shop-service/spike-system-shop-service.iml" filepath="$PROJECT_DIR$/spike-system-shop-service/spike-system-shop-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spike-system-sql-service/spike-system-sql-service.iml" filepath="$PROJECT_DIR$/spike-system-sql-service/spike-system-sql-service.iml" />
     </modules>

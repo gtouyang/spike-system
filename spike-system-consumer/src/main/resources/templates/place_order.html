@@ -368,12 +368,16 @@
                                                 <div class="goods-coverphoto"><img src="../static/images/iphone_1.jpg" th:src="@{/images/iphone_1.jpg}" alt=""></div>
                                                 <div class="goods-otherinfo">
                                                     <!-- 商品名称 -->
-                                                    <div class="goods-name font-10"><a href="#" th:text="${product.getName()}">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
+                                                    <div class="goods-name font-10"><a href="#"
+                                                                                       th:text="${good.getName()}">【限时抢购】【下单立减200】
+                                                        iPhone XS Max 256G 【白色】</a></div>
                                                 </div>
                                             </div>
                                             <!-- 商品属性 尺寸、颜色等等 -->
                                             <div class="goods-attr">
-                                                <div class="goods-attr-item"><span class="font-10" th:text="${product.getInfo()}">颜色： 白色</span></div>
+                                                <div class="goods-attr-item"><span class="font-10"
+                                                                                   th:text="${good.getInfo()}">颜色： 白色</span>
+                                                </div>
                                                 <div class="goods-attr-item"><span class="font-10" th:remove="all">内存： 256G</span></div>
                                             </div>
                                             <!-- 当前选购的商品的单价 -->

@@ -6,9 +6,9 @@
     <file url="file://$PROJECT_DIR$/spike-system-authentication-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spike-system-consumer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spike-system-eureka-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spike-system-good-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spike-system-order-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spike-system-pay-service" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/spike-system-product-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spike-system-shop-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spike-system-sql-service" charset="UTF-8" />
   </component>

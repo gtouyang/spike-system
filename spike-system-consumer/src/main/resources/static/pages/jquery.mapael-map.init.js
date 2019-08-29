@@ -36,21 +36,21 @@ $(function(){
                     attrs: {
                         fill: "#188ae2"
                     },
-                    label: "Product One",
+                    label: "Good One",
                     sliceValue: "Value 1"
                 }, {
                     size: 24,
                     attrs: {
                         fill: "#3ac9d6"
                     },
-                    label: "Product Two",
+                    label: "Good Two",
                     sliceValue: "Value 2"
                 }, {
                     size: 24,
                     attrs: {
                         fill: "#f5707a"
                     },
-                    label: "Product Three",
+                    label: "Good Three",
                     sliceValue: "Value 3"
                 }]
             }

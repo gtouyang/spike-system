@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * @author ogic
  */
@@ -12,7 +14,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Data
 @Accessors(chain = true)
-public class ShopEntity {
+public class ShopEntity implements Serializable {
 
     /**
      * 店铺ID

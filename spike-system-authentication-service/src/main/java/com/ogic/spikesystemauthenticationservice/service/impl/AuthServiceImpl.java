@@ -4,12 +4,14 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ogic.spikesystemapi.entity.UserEntity;
 import com.ogic.spikesystemapi.service.SqlExposeService;
 import com.ogic.spikesystemauthenticationservice.component.TokenCreateUtil;
+import com.ogic.spikesystemauthenticationservice.mapper.UserMapper;
 import com.ogic.spikesystemauthenticationservice.service.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Optional;
 
 /**
@@ -20,8 +22,8 @@ public class AuthServiceImpl implements AuthService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    SqlExposeService sqlExposeService;
+    @Resource
+    UserMapper userMapper;
 
     @Autowired
     TokenCreateUtil tokenCreateUtil;
@@ -32,27 +34,26 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Optional<String> register(UserEntity userEntity) {
 
-        Optional<Integer> res = sqlExposeService.insertUser(userEntity);
-        if (res.isPresent() && res.get() > 0){
-            return Optional.of("create user success");
+        Integer res = userMapper.insertUser(userEntity);
+        if (res != null && res.equals(1)) {
+            return Optional.of("register success");
         }
         return Optional.of("fail");
     }
 
     @Override
     public Optional<String> login(String username, String password) {
-        Optional<UserEntity> userOptional = sqlExposeService.getUser(username);
-        if (userOptional.isPresent()) {
-            UserEntity userEntity = userOptional.get();
-            if (userEntity.getPassword().equals(password)) {
-                return Optional.ofNullable(tokenCreateUtil.createToken(userEntity, tokenLife));
+        UserEntity user = userMapper.getUseByUsername(username);
+        if (user != null) {
+            if (user.getPassword().equals(password)) {
+                return Optional.ofNullable(tokenCreateUtil.createToken(user, tokenLife));
             }
         }
         return Optional.of("login fail");
     }
 
     @Override
-    public Optional findByToken(String token) {
+    public Optional<String> findByToken(String token) {
         DecodedJWT jwt = tokenCreateUtil.decodeToken(token);
         if (jwt != null) {
 
@@ -60,7 +61,8 @@ public class AuthServiceImpl implements AuthService {
             return Optional
                     .ofNullable(username)
                     .map(String::valueOf)
-                    .flatMap(sqlExposeService::getUser);
+                    .map(userMapper::getUseByUsername)
+                    .map(UserEntity::toString);
         }
         return  Optional.empty();
     }

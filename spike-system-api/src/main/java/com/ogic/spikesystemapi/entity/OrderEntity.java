@@ -79,7 +79,7 @@ public class OrderEntity implements Serializable {
     /**
      * 商品ID
      */
-    private Long productId;
+    private Long goodId;
 
     /**
      * 数量
