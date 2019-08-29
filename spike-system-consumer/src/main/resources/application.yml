@@ -9,6 +9,8 @@ eureka:
     service-url:
       defaultZone: http://eureka1:8761/eureka/, http://eureka2:8762/eureka/, http://eureka3:8763/eureka/
     register-with-eureka: false
+    eureka-server-read-timeout-seconds: 2
+
 
 spring:
   thymeleaf:
@@ -21,3 +23,6 @@ spring:
 token:
   secret: mySecret
 
+feign:
+  httpclient:
+    connection-timeout: 20000

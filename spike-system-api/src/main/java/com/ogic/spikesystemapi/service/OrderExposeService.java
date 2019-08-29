@@ -17,11 +17,11 @@ public interface OrderExposeService {
 
     /**
      * 下单
-     * @param productId 商品ID
+     * @param goodId 商品ID
      * @param amount 数量
      * @param token 令牌
      * @return  订单对象
      */
     @PostMapping(value = "/order")
-    Optional<OrderEntity> order(@RequestParam Long productId, @RequestParam Integer amount, @RequestHeader(HttpHeaders.AUTHORIZATION) String token);
+    Optional<OrderEntity> order(@RequestParam Long goodId, @RequestParam Integer amount, @RequestHeader(HttpHeaders.AUTHORIZATION) String token);
 }

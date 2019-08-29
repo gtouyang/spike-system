@@ -21,18 +21,18 @@ public class ShopSqlController {
         return Optional.ofNullable(shopMapper.getShopById(id));
     }
 
-    @GetMapping(value = "/sql/select/shop")
+    @GetMapping(value = "/sql/select/shops")
     public Optional<List<ShopEntity>> getShopByOwner(@RequestParam String owner) {
         return Optional.ofNullable(shopMapper.getShopsByOwner(owner));
     }
 
     @PostMapping(value = "/sql/insert/shop")
-    public Optional<Integer> insertShop(@RequestParam ShopEntity shop) {
+    public Optional<Integer> insertShop(@RequestBody ShopEntity shop) {
         return Optional.ofNullable(shopMapper.insertShop(shop));
     }
 
     @PutMapping(value = "/sql/update/shop")
-    public Optional<Integer> updateShopMoney(@RequestParam ShopEntity shop) {
+    public Optional<Integer> updateShopMoney(@RequestBody ShopEntity shop) {
         return Optional.ofNullable(shopMapper.updateShopMoney(shop));
     }
 }

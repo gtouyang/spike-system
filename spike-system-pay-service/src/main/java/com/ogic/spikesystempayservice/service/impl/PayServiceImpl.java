@@ -2,7 +2,7 @@ package com.ogic.spikesystempayservice.service.impl;
 
 import com.ogic.spikesystemapi.entity.OrderEntity;
 import com.ogic.spikesystemapi.entity.WalletEntity;
-import com.ogic.spikesystemapi.service.SqlExposeService;
+import com.ogic.spikesystempayservice.mapper.WalletMapper;
 import com.ogic.spikesystempayservice.service.PayService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -30,8 +31,8 @@ public class PayServiceImpl implements PayService {
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired
-    SqlExposeService sqlExposeService;
+    @Resource
+    WalletMapper walletMapper;
 
     @Autowired
     RabbitTemplate rabbitTemplate;
@@ -51,16 +52,16 @@ public class PayServiceImpl implements PayService {
      */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Boolean reduceMoney(Long walletId,String payPassword, OrderEntity order){
-        Optional<WalletEntity> wallet = sqlExposeService.getWalletById(walletId);
-        if (wallet.isPresent()) {
-            if (wallet.get().getMoney() < order.getPayMoney() || !wallet.get().getPayPassword().equals(payPassword)) {
+        WalletEntity wallet = walletMapper.getWalletById(walletId);
+        if (wallet != null) {
+            if (wallet.getMoney() < order.getPayMoney() || !wallet.getPayPassword().equals(payPassword)) {
                 return false;
             }
-            Optional result = sqlExposeService.updateWalletMoney(walletId,
-                    wallet.get().getMoney() - order.getPayMoney(),
-                    wallet.get().getVersion());
-            if (result.isPresent()){
-                return result.get().equals(1);
+            Integer result = walletMapper.updateWalletMoney(walletId,
+                    wallet.getMoney() - order.getPayMoney(),
+                    wallet.getVersion());
+            if (result != null) {
+                return result.equals(1);
             }
         }
         return false;
@@ -69,13 +70,13 @@ public class PayServiceImpl implements PayService {
     @Async
     public void rollbackMoney(Long walletId, OrderEntity order) {
         while (true) {
-            Optional<WalletEntity> wallet = sqlExposeService.getWalletById(walletId);
-            Optional result;
-            if (wallet.isPresent()) {
-                result = sqlExposeService.updateWalletMoney(walletId,
-                        wallet.get().getMoney() + order.getPayMoney(),
-                        wallet.get().getVersion());
-                if (result.isPresent() && result.get().equals(1)){
+            WalletEntity wallet = walletMapper.getWalletById(walletId);
+            Integer result;
+            if (wallet != null) {
+                result = walletMapper.updateWalletMoney(walletId,
+                        wallet.getMoney() + order.getPayMoney(),
+                        wallet.getVersion());
+                if (result != null && result.equals(1)) {
                     break;
                 }
             }else {
@@ -104,12 +105,12 @@ public class PayServiceImpl implements PayService {
 
     @Override
     public Optional<List<WalletEntity>> getUserAllWallets(String username) {
-        Optional<List<WalletEntity>> walletEntityList = sqlExposeService.getWalletByUsername(username);
-        if (!walletEntityList.isPresent() || walletEntityList.get().size() < 1){
+        List<WalletEntity> walletEntityList = walletMapper.getWalletByUsername(username);
+        if (walletEntityList == null || walletEntityList.size() < 1) {
             return Optional.empty();
         }
-        walletEntityList.get().sort(Comparator.comparing(WalletEntity::getMoney));
-        return walletEntityList;
+        walletEntityList.sort(Comparator.comparing(WalletEntity::getMoney));
+        return Optional.of(walletEntityList);
     }
 
     @Override
@@ -119,18 +120,18 @@ public class PayServiceImpl implements PayService {
             return Optional.empty();
         }
 
-        Optional<List<WalletEntity>> walletEntityList = sqlExposeService.getWalletByUsername(username);
-        if (!walletEntityList.isPresent() || walletEntityList.get().size() < 1){
+        List<WalletEntity> walletEntityList = walletMapper.getWalletByUsername(username);
+        if (walletEntityList == null || walletEntityList.size() < 1) {
             return Optional.empty();
         }
 
-        for (WalletEntity wallet : walletEntityList.get()){
+        for (WalletEntity wallet : walletEntityList) {
             if (wallet.getMoney() < order.getPayMoney()){
-                walletEntityList.get().remove(wallet);
+                walletEntityList.remove(wallet);
             }
         }
-        walletEntityList.get().sort(Comparator.comparing(WalletEntity::getMoney));
-        return walletEntityList;
+        walletEntityList.sort(Comparator.comparing(WalletEntity::getMoney));
+        return Optional.of(walletEntityList);
     }
 
     @Override
@@ -157,6 +158,6 @@ public class PayServiceImpl implements PayService {
 
     @Override
     public Optional<Integer> addWallet(WalletEntity wallet) {
-        return sqlExposeService.insertWallet(wallet);
+        return Optional.ofNullable(walletMapper.insertWallet(wallet));
     }
 }

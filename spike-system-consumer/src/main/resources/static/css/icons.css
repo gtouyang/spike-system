@@ -2681,7 +2681,7 @@ File: Icons
   content: "";
 }
 
-.fa-product-hunt:before {
+.fa-good-hunt:before {
   content: "";
 }
 
@@ -9189,7 +9189,7 @@ File: Icons
   content: "\F45B";
 }
 
-.mdi-reproduction:before {
+.mdi-regoodion:before {
   content: "\F45C";
 }
 
@@ -11296,7 +11296,7 @@ File: Icons
 
 .mdi-rotate-45 {
   /*
-        // Not included in production
+        // Not included in goodion
         &.mdi-flip-h:before {
             -webkit-transform: scaleX(-1) rotate(45deg);
             transform: scaleX(-1) rotate(45deg);
@@ -11321,7 +11321,7 @@ File: Icons
 
 .mdi-rotate-90 {
   /*
-        // Not included in production
+        // Not included in goodion
         &.mdi-flip-h:before {
             -webkit-transform: scaleX(-1) rotate(90deg);
             transform: scaleX(-1) rotate(90deg);
@@ -11346,7 +11346,7 @@ File: Icons
 
 .mdi-rotate-135 {
   /*
-        // Not included in production
+        // Not included in goodion
         &.mdi-flip-h:before {
             -webkit-transform: scaleX(-1) rotate(135deg);
             transform: scaleX(-1) rotate(135deg);
@@ -11371,7 +11371,7 @@ File: Icons
 
 .mdi-rotate-180 {
   /*
-        // Not included in production
+        // Not included in goodion
         &.mdi-flip-h:before {
             -webkit-transform: scaleX(-1) rotate(180deg);
             transform: scaleX(-1) rotate(180deg);
@@ -11396,7 +11396,7 @@ File: Icons
 
 .mdi-rotate-225 {
   /*
-        // Not included in production
+        // Not included in goodion
         &.mdi-flip-h:before {
             -webkit-transform: scaleX(-1) rotate(225deg);
             transform: scaleX(-1) rotate(225deg);
@@ -11421,7 +11421,7 @@ File: Icons
 
 .mdi-rotate-270 {
   /*
-        // Not included in production
+        // Not included in goodion
         &.mdi-flip-h:before {
             -webkit-transform: scaleX(-1) rotate(270deg);
             transform: scaleX(-1) rotate(270deg);
@@ -11446,7 +11446,7 @@ File: Icons
 
 .mdi-rotate-315 {
   /*
-        // Not included in production
+        // Not included in goodion
         &.mdi-flip-h:before {
             -webkit-transform: scaleX(-1) rotate(315deg);
             transform: scaleX(-1) rotate(315deg);

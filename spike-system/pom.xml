@@ -118,7 +118,7 @@
         <module>../spike-system-eureka-server</module>
         <module>../spike-system-order-service</module>
         <module>../spike-system-pay-service</module>
-        <module>../spike-system-product-service</module>
+        <module>../spike-system-good-service</module>
         <module>../spike-system-sql-service</module>
     </modules>
 

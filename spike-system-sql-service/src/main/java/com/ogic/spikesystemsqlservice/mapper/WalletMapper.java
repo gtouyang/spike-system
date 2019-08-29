@@ -51,8 +51,9 @@ public interface WalletMapper {
      */
     @Master
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("insert into wallet(username, money)" +
+    @Insert("insert into wallet(username, money, pay_password)" +
             "values(#{username}," +
-            "#{money})")
+            "#{money}," +
+            "#{payPassword})")
     Integer insertWallet(WalletEntity wallet);
 }

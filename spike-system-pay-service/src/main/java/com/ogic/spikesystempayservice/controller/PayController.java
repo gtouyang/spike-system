@@ -35,7 +35,7 @@ public class PayController {
      * @param orderId  订单ID
      * @return 钱包列表
      */
-    @GetMapping("/wallets/{username}")
+    @GetMapping("/wallets/payable/{username}")
     public Optional<List<WalletEntity>> getUserAllWallets(@PathVariable String username, @RequestParam String orderId) {
         return payService.getUserAllWallets(username, orderId);
     }
@@ -54,7 +54,7 @@ public class PayController {
     }
 
     @PostMapping("/wallet")
-    public Optional<Integer> addWallet(@RequestParam WalletEntity wallet) {
+    public Optional<Integer> addWallet(@RequestBody WalletEntity wallet) {
         return payService.addWallet(wallet);
     }
 }

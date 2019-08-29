@@ -27,7 +27,7 @@ public class UserSqlController {
     }
 
     @PostMapping("/sql/insert/user")
-    public Optional<Integer> insertUser(@RequestParam UserEntity user){
+    public Optional<Integer> insertUser(@RequestBody UserEntity user) {
         return Optional.ofNullable(userMapper.insertUser(user));
     }
 

@@ -42,7 +42,7 @@ public class WalletSqlController {
 
     @Master
     @PostMapping(value = "/sql/insert/wallet")
-    public Optional<Integer> insertWallet(@RequestParam WalletEntity wallet){
+    public Optional<Integer> insertWallet(@RequestBody WalletEntity wallet) {
         return Optional.ofNullable(walletMapper.insertWallet(wallet));
     }
 }

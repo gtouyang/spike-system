@@ -1,7 +1,7 @@
 package com.ogic.spikesystemsqlservice;
 
 import com.ogic.spikesystemsqlservice.annotation.Slave;
-import com.ogic.spikesystemsqlservice.mapper.ProductMapper;
+import com.ogic.spikesystemsqlservice.mapper.GoodMapper;
 import com.ogic.spikesystemsqlservice.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 public class SpikeSystemSqlServiceApplicationTests {
 
     @Resource
-    ProductMapper productMapper;
+    GoodMapper goodMapper;
 
     @Resource
     UserMapper userMapper;

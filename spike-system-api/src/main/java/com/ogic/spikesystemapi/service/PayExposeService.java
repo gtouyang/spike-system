@@ -29,7 +29,7 @@ public interface PayExposeService {
      * @param orderId  订单ID
      * @return 钱包列表
      */
-    @GetMapping("/wallets/{username}")
+    @GetMapping("/wallets/payable/{username}")
     Optional<List<WalletEntity>> getUserAllWallets(@PathVariable String username, @RequestParam String orderId);
 
     /**
@@ -45,10 +45,9 @@ public interface PayExposeService {
 
     /**
      * 添加钱包
-     *
      * @param wallet
      * @return
      */
     @PostMapping("/wallet")
-    Optional<Integer> addWallet(@RequestParam WalletEntity wallet);
+    Optional<Integer> addWallet(@RequestBody WalletEntity wallet);
 }

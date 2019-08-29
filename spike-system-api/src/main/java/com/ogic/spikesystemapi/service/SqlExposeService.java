@@ -1,6 +1,6 @@
 package com.ogic.spikesystemapi.service;
 
-import com.ogic.spikesystemapi.entity.ProductEntity;
+import com.ogic.spikesystemapi.entity.GoodEntity;
 import com.ogic.spikesystemapi.entity.ShopEntity;
 import com.ogic.spikesystemapi.entity.UserEntity;
 import com.ogic.spikesystemapi.entity.WalletEntity;
@@ -20,8 +20,8 @@ public interface SqlExposeService {
      * @param id
      * @return
      */
-    @GetMapping(value = "/sql/select/product/{id}")
-    Optional<ProductEntity> getProductById(@PathVariable Long id);
+    @GetMapping(value = "/sql/select/good/{id}")
+    Optional<GoodEntity> getGoodById(@PathVariable Long id);
 
     /**
      * 根据在数据库的位置查询商品
@@ -29,16 +29,16 @@ public interface SqlExposeService {
      * @param rows
      * @return
      */
-    @GetMapping(value = "/sql/select/products")
-    Optional<List<ProductEntity>> getProducts(@RequestParam Long offest, @RequestParam Integer rows);
+    @GetMapping(value = "/sql/select/goods")
+    Optional<List<GoodEntity>> getGoods(@RequestParam Long offest, @RequestParam Integer rows);
 
     /**
      * 插入新商品
-     * @param product
+     * @param good
      * @return
      */
-    @PostMapping(value = "/sql/insert/product")
-    Optional<Integer> insertProduct(@RequestParam ProductEntity product);
+    @PostMapping(value = "/sql/insert/good")
+    Optional<Integer> insertGood(@RequestBody GoodEntity good);
 
     /**
      * 获取新用户
@@ -54,7 +54,7 @@ public interface SqlExposeService {
      * @return 插入结果
      */
     @PostMapping("/sql/insert/user")
-    Optional<Integer> insertUser(@RequestParam UserEntity user);
+    Optional<Integer> insertUser(@RequestBody UserEntity user);
 
     /**
      * 根据ID查询钱包
@@ -88,7 +88,7 @@ public interface SqlExposeService {
      * @return
      */
     @PostMapping(value = "/sql/insert/wallet")
-    Optional<Integer> insertWallet(@RequestParam WalletEntity wallet);
+    Optional<Integer> insertWallet(@RequestBody WalletEntity wallet);
 
     /**
      * 根据商铺ID获取商铺
@@ -103,7 +103,7 @@ public interface SqlExposeService {
      * @param owner
      * @return
      */
-    @GetMapping(value = "/sql/select/shop")
+    @GetMapping(value = "/sql/select/shops")
     Optional<List<ShopEntity>> getShopByOwner(@RequestParam String owner);
 
     /**
@@ -112,7 +112,7 @@ public interface SqlExposeService {
      * @return
      */
     @PostMapping(value = "/sql/insert/shop")
-    Optional<Integer> insertShop(@RequestParam ShopEntity shop);
+    Optional<Integer> insertShop(@RequestBody ShopEntity shop);
 
     /**
      * 更新商铺余额
@@ -120,5 +120,5 @@ public interface SqlExposeService {
      * @return
      */
     @PutMapping(value = "/sql/update/shop")
-    Optional<Integer> updateShopMoney(@RequestParam ShopEntity shop);
+    Optional<Integer> updateShopMoney(@RequestBody ShopEntity shop);
 }
