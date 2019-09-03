@@ -1,26 +1,23 @@
 package com.ogic.spikesystemorderservice;
 
-import com.ogic.spikesystemapi.entity.OrderEntity;
-import com.ogic.spikesystemorderservice.service.OrderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpikeSystemOrderServiceApplicationTests {
 
-    @Autowired
-    RedisTemplate redisTemplate;
-
-    @Autowired
-    OrderService orderService;
 
     @Test
     public void contextLoads() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        System.out.println(dateFormat.format(new Date()));
     }
 
 }

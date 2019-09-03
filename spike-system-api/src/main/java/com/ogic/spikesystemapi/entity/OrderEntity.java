@@ -102,4 +102,6 @@ public class OrderEntity implements Serializable {
      * 支付用户名
      */
     private String payUsername;
+
+    private String info;
 }

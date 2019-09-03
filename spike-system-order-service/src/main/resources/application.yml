@@ -23,3 +23,28 @@ info:
 
 token:
   secret: mySecret
+
+
+kafka:
+  producer:
+    bootstrapServers: localhost:9092
+    retries: 3
+
+    #16K
+    batchSize: 16384
+
+    lingerMs: 1
+
+    #32M
+    bufferMemory: 33554432
+
+  consumer:
+    bootstrapServers: localhost:9092
+    groupId: order-service
+    enableAutoCommit: false
+    autoCommitIntervalMs: 1000
+    sessionTimeoutMs: 30000
+    maxPollRecords: 100
+
+    #earliest,latest
+    autoOffsetReset: earliest
