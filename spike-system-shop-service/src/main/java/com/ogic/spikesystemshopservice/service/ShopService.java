@@ -16,7 +16,7 @@ public interface ShopService {
      * @param id
      * @return
      */
-    Optional<ShopEntity> getShopById(Long id);
+    Optional<ShopEntity> getShopById(long id);
 
     /**
      * 根据卖家名获取商铺
@@ -41,7 +41,7 @@ public interface ShopService {
      * @param money
      * @return
      */
-    Optional<ShopEntity> receiveMoney(Long id, Double money);
+    Optional<ShopEntity> receiveMoney(long id, double money);
 
     /**
      * 扣钱
@@ -50,5 +50,5 @@ public interface ShopService {
      * @param money
      * @return
      */
-    Optional<ShopEntity> deductMoney(Long id, Double money);
+    Optional<ShopEntity> deductMoney(long id, double money);
 }

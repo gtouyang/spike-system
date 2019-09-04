@@ -18,7 +18,7 @@ public interface ShopMapper {
      * @return
      */
     @Select("select * from shop where id = #{id} limit 1")
-    ShopEntity getShopById(Long id);
+    ShopEntity getShopById(long id);
 
     /**
      * 根据卖家用户名获得商铺列表

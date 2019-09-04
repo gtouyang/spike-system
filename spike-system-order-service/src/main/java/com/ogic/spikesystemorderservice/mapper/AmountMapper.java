@@ -10,11 +10,20 @@ import org.apache.ibatis.annotations.Update;
 public interface AmountMapper {
 
     /**
-     * 更新库存
+     * 减少库存
      * @param goodId
      * @param reduce
      * @return
      */
     @Update("update amount set amount = amount - #{reduce} where id = #{goodId} and amount >= reduce")
     Integer reduceAmount(Long goodId, Integer reduce);
+
+    /**
+     * 减少库存
+     * @param goodId
+     * @param add
+     * @return
+     */
+    @Update("update amount set amount = amount + #{add} where id = #{goodId}")
+    Integer addAmount(Long goodId, Integer add);
 }

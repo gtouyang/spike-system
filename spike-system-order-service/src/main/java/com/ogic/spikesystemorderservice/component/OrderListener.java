@@ -14,9 +14,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.security.SecureRandom;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -49,23 +46,32 @@ public class OrderListener {
     public void listenTopicOrder(Object data){
         OrderEntity order = (OrderEntity) data;
         if (order!=null) {
-            if (order.getGoodId() != null && order.getOrderUsername() != null && order.getAmount() != null) {
-                tryCreateOrder(order);
-                logger.info("finish order : [" + order.toString() + "]");
-                redisTemplate.boundListOps(order.getOrderUsername() + "-OrderResult").rightPush(order);
+            if (order.getOrderUsername() != null) {
+                if (calculateMoney(order) && tryReduceAmount(order)){
+                    logger.info("ready order : [" + order.getId() + "]");
+                    kafkaTemplate.send("readyOrder", order);
+                }else {
+                    logger.info("fail order : [" + order.getId() + "]-->" + order.getInfo());
+                    kafkaTemplate.send("canceledOrder", order);
+                }
+                redisTemplate.boundValueOps(Long.toString(order.getId())).setIfAbsent(order, 15, TimeUnit.MINUTES);
             } else {
-                logger.error("bad order: [" + order.toString() + "]");
-                redisTemplate.boundListOps("badOrder").rightPush(order);
+                logger.info("bad order: [" + order.getId() + "]");
             }
         }
     }
 
-    private void tryCreateOrder(OrderEntity order) {
+    /**
+     * 检查并减少库存
+     * @param order
+     * @return
+     */
+    private boolean tryReduceAmount(OrderEntity order) {
         order.setOrderTime(new Date());
         if (guavaCache.contain(order.getGoodId())){
             order.setOrderStatus(OrderEntity.OrderStatusEnum.CANCELED)
                     .setInfo("库存不足");
-            return;
+            return false;
         }
 
         if (decrementAmountInRedis(order.getGoodId(), order.getAmount()) < 0){
@@ -74,7 +80,7 @@ public class OrderListener {
             logger.debug("set good[" + order.getGoodId() + "] disabled");
             order.setOrderStatus(OrderEntity.OrderStatusEnum.CANCELED)
                     .setInfo("库存不足");
-            return;
+            return false;
         }
 
         if (amountMapper.reduceAmount(order.getGoodId(), order.getAmount()) != 1){
@@ -82,11 +88,11 @@ public class OrderListener {
             logger.debug("set good[" + order.getGoodId() + "] disabled");
             order.setOrderStatus(OrderEntity.OrderStatusEnum.CANCELED)
                     .setInfo("库存不足");
-            return;
+            return false;
         }
-        createOrder(order);
-        logger.debug("good[" + order.getGoodId() + "] is enough");
-        kafkaTemplate.send("readyOrder", order);
+        logger.debug("order[ " + order.getId() + "]-->good[" + order.getGoodId() + "] is enough");
+        order.setOrderStatus(OrderEntity.OrderStatusEnum.READY);
+        return true;
     }
 
     private Integer decrementAmountInRedis(Long goodId, Integer amount){
@@ -102,12 +108,23 @@ public class OrderListener {
 
     @Async
     public void incrementAmountInRedis(Long goodId, Integer amount){
-        logger.debug("rollback amount of good[" + goodId + "]");
+        logger.debug("rollback amount of good[" + goodId + "] in redis");
         redisTemplate.boundHashOps("amount").increment(goodId, amount);
     }
 
+    @Async
+    public void incrementAmountInDatabase(Long goodId, Integer amount){
+        logger.debug("rollback amount of good[" + goodId + "] in Database");
+        amountMapper.addAmount(goodId, amount);
+    }
 
-    private void createOrder(OrderEntity order){
+
+    /**
+     * 计算订单商品价格
+     * @param order
+     * @return
+     */
+    private boolean calculateMoney(OrderEntity order){
         Date current = order.getOrderTime();
         Optional<GoodEntity> goodOptional = goodExposeService.getGoodById(order.getGoodId());
         if (goodOptional.isPresent() && goodOptional.get().getOriginPrice() != null){
@@ -123,22 +140,9 @@ public class OrderListener {
         }else {
             order.setOrderStatus(OrderEntity.OrderStatusEnum.CANCELED);
             order.setInfo("获取商品价格出错");
+            return false;
         }
-
-        DateFormat dateFormat = new SimpleDateFormat();
-        do {
-            order.setId(dateFormat.format(current) + randomNumbers(7));
-            logger.debug("try add order[" + order.getId() + "]");
-        } while (!redisTemplate.boundValueOps(order.getId()).setIfAbsent(order, 15, TimeUnit.MINUTES));
-        logger.info("add order[" + order.getId() + "] success");
-    }
-
-    private String randomNumbers(int size) {
-        StringBuilder builder = new StringBuilder();
-        SecureRandom random = new SecureRandom();
-        for (int i = 0; i < size; i++) {
-            builder.append(random.nextInt(9));
-        }
-        return builder.toString();
+        logger.info("calculate order[" + order.getId() + "] money success");
+        return true;
     }
 }

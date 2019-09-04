@@ -21,7 +21,7 @@ public interface AuthExposeService {
      * @return  token
      */
     @PostMapping("/login")
-    Optional<String> login(@RequestParam("username") final String username, @RequestBody final String password);
+    Optional<String> login(@RequestParam("username") final String username, @RequestParam final String password);
 
     /**
      * 注册服务

@@ -19,8 +19,8 @@ public interface ShopExposeService {
      * @param id
      * @return
      */
-    @GetMapping("shop/{id}")
-    Optional<ShopEntity> getShopById(@PathVariable Long id);
+    @GetMapping("/shop")
+    Optional<ShopEntity> getShopById(@RequestParam long id);
 
     /**
      * 通过卖家用户名获得商铺列表
@@ -29,7 +29,7 @@ public interface ShopExposeService {
      * @return
      */
     @GetMapping("/shops/{owner}")
-    Optional<List<ShopEntity>> getShopByOwner(@PathVariable String owner);
+    Optional<List<ShopEntity>> getShopByOwner(@RequestParam String owner);
 
     /**
      * 创建商铺
@@ -48,7 +48,7 @@ public interface ShopExposeService {
      * @return
      */
     @PutMapping("/shop/receive")
-    Optional<ShopEntity> receiveMoney(@RequestParam Long shopId, @RequestParam Double money);
+    Optional<ShopEntity> receiveMoney(@RequestParam long shopId, @RequestParam double money);
 
     /**
      * 商铺扣钱
@@ -58,5 +58,5 @@ public interface ShopExposeService {
      * @return
      */
     @PutMapping("/shop/deduct")
-    Optional<ShopEntity> deductMoney(@RequestParam Long shopId, @RequestParam Double money);
+    Optional<ShopEntity> deductMoney(@RequestParam long shopId, @RequestParam double money);
 }

@@ -16,13 +16,13 @@ public class ShopController {
     @Autowired
     ShopService shopService;
 
-    @GetMapping("shop/{id}")
-    public Optional<ShopEntity> getShopById(@PathVariable Long id) {
+    @GetMapping("/shop")
+    public Optional<ShopEntity> getShopById(@RequestParam long id) {
         return shopService.getShopById(id);
     }
 
-    @GetMapping("/shops/{owner}")
-    public Optional<List<ShopEntity>> getShopByOwner(@PathVariable String owner) {
+    @GetMapping("/shops")
+    public Optional<List<ShopEntity>> getShopByOwner(@RequestParam String owner) {
         return shopService.getShopByOwner(owner);
     }
 
@@ -32,12 +32,12 @@ public class ShopController {
     }
 
     @PutMapping("/shop/receive")
-    public Optional<ShopEntity> receiveMoney(@RequestParam Long shopId, @RequestParam Double money) {
+    public Optional<ShopEntity> receiveMoney(@RequestParam long shopId, @RequestParam double money) {
         return shopService.receiveMoney(shopId, money);
     }
 
     @PutMapping("/shop/deduct")
-    public Optional<ShopEntity> deductMoney(@RequestParam Long shopId, @RequestParam Double money) {
+    public Optional<ShopEntity> deductMoney(@RequestParam long shopId, @RequestParam double money) {
         return shopService.deductMoney(shopId, money);
     }
 }

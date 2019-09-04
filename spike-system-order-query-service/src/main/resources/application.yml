@@ -1,0 +1,36 @@
+spring:
+  # redis config
+  redis:
+    jedis:
+      pool:
+        max-wait: 5000
+        max-idle: 50
+        min-idle: 5
+    cluster:
+      nodes:
+        - 127.0.0.1:7000
+        - 127.0.0.1:7001
+        - 127.0.0.1:7002
+        - 127.0.0.1:7003
+        - 127.0.0.1:7004
+        - 127.0.0.1:7005
+    timeout: 500
+
+  application:
+    name: spike-system-order-query-service
+server:
+  port: 7090
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:8761/eureka/, http://eureka2:8762/eureka/, http://eureka3:8763/eureka/
+  instance:
+    instance-id: order-query-service
+info:
+  app.name: ogic-spike-system-order-query-service
+  company.name: ogic.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+token:
+  secret: mySecret

@@ -8,12 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="spike-system-order-service" />
-        <module name="spike-system-good-service" />
+        <module name="spike-system-order-query-service" />
         <module name="spike-system-pay-service" />
-        <module name="spike-system-authentication-service" />
+        <module name="spike-system-good-service" />
+        <module name="spike-system-consumer" />
         <module name="spike-system-sql-service" />
         <module name="spike-system-api" />
-        <module name="spike-system-consumer" />
+        <module name="spike-system-authentication-service" />
         <module name="spike-system-shop-service" />
         <module name="spike-system-eureka-server" />
       </profile>
@@ -25,6 +26,7 @@
       <module name="spike-system-consumer" target="1.8" />
       <module name="spike-system-eureka-server" target="1.8" />
       <module name="spike-system-good-service" target="1.8" />
+      <module name="spike-system-order-query-service" target="1.8" />
       <module name="spike-system-order-service" target="1.8" />
       <module name="spike-system-pay-service" target="1.8" />
       <module name="spike-system-shop-service" target="1.8" />
@@ -39,6 +41,7 @@
       <module name="spike-system-consumer" options="-parameters" />
       <module name="spike-system-eureka-server" options="-parameters" />
       <module name="spike-system-good-service" options="-parameters" />
+      <module name="spike-system-order-query-service" options="-parameters" />
       <module name="spike-system-order-service" options="-parameters" />
       <module name="spike-system-pay-service" options="-parameters" />
       <module name="spike-system-shop-service" options="-parameters" />

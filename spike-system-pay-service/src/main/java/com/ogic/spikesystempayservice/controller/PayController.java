@@ -23,8 +23,8 @@ public class PayController {
      * @param username 用户名
      * @return 钱包列表
      */
-    @GetMapping("/wallets/{username}")
-    public Optional<List<WalletEntity>> getUserAllWallets(@PathVariable String username) {
+    @GetMapping("/wallets")
+    public Optional<List<WalletEntity>> getUserAllWallets(@RequestParam String username) {
         return payService.getUserAllWallets(username);
     }
 
@@ -35,8 +35,8 @@ public class PayController {
      * @param orderId  订单ID
      * @return 钱包列表
      */
-    @GetMapping("/wallets/payable/{username}")
-    public Optional<List<WalletEntity>> getUserAllWallets(@PathVariable String username, @RequestParam String orderId) {
+    @GetMapping("/wallets/payable")
+    public Optional<List<WalletEntity>> getUserAllWallets(@RequestParam String username, @RequestParam long orderId) {
         return payService.getUserAllWallets(username, orderId);
     }
 
@@ -49,7 +49,7 @@ public class PayController {
      * @return 支付成功与否
      */
     @PutMapping("/pay")
-    public Optional<Boolean> payOrderByWallet(@RequestParam Long walletId, @RequestBody String payPassword, @RequestParam String orderId) {
+    public Optional<Boolean> payOrderByWallet(@RequestParam Long walletId, @RequestParam String payPassword, @RequestParam long orderId) {
         return payService.payOrderByWallet(walletId, payPassword, orderId);
     }
 

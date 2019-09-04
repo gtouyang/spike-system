@@ -19,7 +19,7 @@ public class WalletEntity implements Serializable {
     /**
      * 钱包ID
      */
-    private Long id;
+    private long id;
 
     /**
      * 用户名
@@ -29,7 +29,7 @@ public class WalletEntity implements Serializable {
     /**
      * 余额
      */
-    private Double money;
+    private double money;
 
     /**
      * 支付密码
@@ -39,5 +39,5 @@ public class WalletEntity implements Serializable {
     /**
      * 版本,用于乐观锁
      */
-    private Integer version;
+    private int version;
 }

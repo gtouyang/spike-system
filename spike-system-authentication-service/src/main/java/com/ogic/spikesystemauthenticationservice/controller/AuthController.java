@@ -2,12 +2,9 @@ package com.ogic.spikesystemauthenticationservice.controller;
 
 import com.ogic.spikesystemapi.entity.UserEntity;
 import com.ogic.spikesystemauthenticationservice.service.AuthService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 /**
@@ -20,7 +17,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public Optional<String> login(@RequestParam("username") final String username, @RequestBody final String password) {
+    public Optional<String> login(@RequestParam("username") final String username, @RequestParam final String password) {
         return authService.login(username,password);
     }
 

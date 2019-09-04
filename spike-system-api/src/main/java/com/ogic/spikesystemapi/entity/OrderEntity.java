@@ -8,6 +8,8 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -18,7 +20,6 @@ import java.util.Date;
  * @date 2019-07-16
  */
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 @Accessors(chain = true)
 public class OrderEntity implements Serializable {
@@ -57,7 +58,7 @@ public class OrderEntity implements Serializable {
     /**
      * 订单ID
      */
-    private String id;
+    private long id;
 
     /**
      * 下单时间
@@ -79,12 +80,12 @@ public class OrderEntity implements Serializable {
     /**
      * 商品ID
      */
-    private Long goodId;
+    private long goodId;
 
     /**
      * 数量
      */
-    private Integer amount;
+    private int amount;
 
     /**
      * 支付金额
@@ -104,4 +105,17 @@ public class OrderEntity implements Serializable {
     private String payUsername;
 
     private String info;
+
+    public OrderEntity(){
+        id = Long.parseLong(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()) + randomNumbers(8));
+    }
+
+    private String randomNumbers(int size) {
+        StringBuilder builder = new StringBuilder();
+        SecureRandom random = new SecureRandom();
+        for (int i = 0; i < size; i++) {
+            builder.append(random.nextInt(9));
+        }
+        return builder.toString();
+    }
 }

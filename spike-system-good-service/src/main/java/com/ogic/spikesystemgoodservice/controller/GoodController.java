@@ -17,8 +17,8 @@ public class GoodController {
     @Autowired
     GoodService goodService;
 
-    @GetMapping("/good/{id}")
-    public Optional<GoodEntity> getGoodById(@PathVariable("id") long id) {
+    @GetMapping("/good")
+    public Optional<GoodEntity> getGoodById(@RequestParam long id) {
         return goodService.getGoodById(id);
     }
 

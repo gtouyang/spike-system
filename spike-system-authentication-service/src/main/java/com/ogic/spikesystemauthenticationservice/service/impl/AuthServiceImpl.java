@@ -2,7 +2,6 @@ package com.ogic.spikesystemauthenticationservice.service.impl;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ogic.spikesystemapi.entity.UserEntity;
-import com.ogic.spikesystemapi.service.SqlExposeService;
 import com.ogic.spikesystemauthenticationservice.component.TokenCreateUtil;
 import com.ogic.spikesystemauthenticationservice.mapper.UserMapper;
 import com.ogic.spikesystemauthenticationservice.service.AuthService;

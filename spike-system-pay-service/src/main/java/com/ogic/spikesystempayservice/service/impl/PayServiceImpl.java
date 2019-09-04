@@ -51,7 +51,7 @@ public class PayServiceImpl implements PayService {
      * @return  完成情况
      */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public Boolean reduceMoney(Long walletId,String payPassword, OrderEntity order){
+    public Boolean reduceMoney(long walletId,String payPassword, OrderEntity order){
         WalletEntity wallet = walletMapper.getWalletById(walletId);
         if (wallet != null) {
             if (wallet.getMoney() < order.getPayMoney() || !wallet.getPayPassword().equals(payPassword)) {
@@ -68,7 +68,7 @@ public class PayServiceImpl implements PayService {
     }
 
     @Async
-    public void rollbackMoney(Long walletId, OrderEntity order) {
+    public void rollbackMoney(long walletId, OrderEntity order) {
         while (true) {
             WalletEntity wallet = walletMapper.getWalletById(walletId);
             Integer result;
@@ -85,7 +85,7 @@ public class PayServiceImpl implements PayService {
         }
     }
 
-    private String lockOrder(String orderId){
+    private String lockOrder(long orderId){
 
         if (redisTemplate.boundValueOps(LOCK_HEADER + orderId).get() != null) {
             return null;
@@ -114,8 +114,8 @@ public class PayServiceImpl implements PayService {
     }
 
     @Override
-    public Optional<List<WalletEntity>> getUserAllWallets(String username, String orderId) {
-        OrderEntity order = (OrderEntity) redisTemplate.boundValueOps(orderId).get();
+    public Optional<List<WalletEntity>> getUserAllWallets(String username, long orderId) {
+        OrderEntity order = (OrderEntity) redisTemplate.boundValueOps(Long.toString(orderId)).get();
         if (order == null) {
             return Optional.empty();
         }
@@ -135,19 +135,19 @@ public class PayServiceImpl implements PayService {
     }
 
     @Override
-    public Optional<Boolean> payOrderByWallet(Long walletId, String payPassword, String orderId) {
+    public Optional<Boolean> payOrderByWallet(long walletId, String payPassword, long orderId) {
         String lockCode = lockOrder(orderId);
         if (lockCode == null){
             return Optional.of(Boolean.FALSE);
         }
-        OrderEntity order = (OrderEntity) redisTemplate.boundValueOps(orderId).get();
+        OrderEntity order = (OrderEntity) redisTemplate.boundValueOps(Long.toString(orderId)).get();
         if (reduceMoney(walletId, payPassword, order)) {
             if (redisTemplate.boundValueOps(LOCK_HEADER + orderId).get() == lockCode) {
                 assert order != null;
                 order.setOrderStatus(OrderEntity.OrderStatusEnum.FINISHED);
                 rabbitTemplate.convertAndSend("order", "finishedOrder", order);
                 redisTemplate.delete(LOCK_HEADER + orderId);
-                redisTemplate.delete(orderId);
+                redisTemplate.delete(Long.toString(orderId));
                 return Optional.of(Boolean.TRUE);
             }else {
                 rollbackMoney(walletId, order);

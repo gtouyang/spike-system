@@ -25,7 +25,7 @@ public class GoodEntity implements Serializable {
     /**
      * 商品ID
      */
-    private Long id;
+    private long id;
 
     /**
      * 商品名
@@ -35,12 +35,12 @@ public class GoodEntity implements Serializable {
     /**
      * 商品库存
      */
-    private Integer amount;
+    private int amount;
 
     /**
      * 商品原价
      */
-    private Double originPrice;
+    private double originPrice;
 
     /**
      * 商品秒杀价
@@ -78,7 +78,7 @@ public class GoodEntity implements Serializable {
     /**
      * 商铺
      */
-    public Long shopId;
+    public long shopId;
 
     /**
      * 商品图片链接

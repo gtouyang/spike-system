@@ -18,8 +18,8 @@ public interface GoodExposeService {
      * @param id 商品ID
      * @return 商品对象
      */
-    @GetMapping("/good/{id}")
-    Optional<GoodEntity> getGoodById(@PathVariable("id") long id);
+    @GetMapping("/good")
+    Optional<GoodEntity> getGoodById(@RequestParam long id);
 
     /**
      * 添加商品

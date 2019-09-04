@@ -19,7 +19,7 @@ public class ShopEntity implements Serializable {
     /**
      * 店铺ID
      */
-    public Long id;
+    public long id;
 
     /**
      * 卖家用户名
@@ -34,5 +34,5 @@ public class ShopEntity implements Serializable {
     /**
      * 店铺余额
      */
-    public Double money;
+    public double money;
 }

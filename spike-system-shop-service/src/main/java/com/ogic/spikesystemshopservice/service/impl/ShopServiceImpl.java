@@ -19,7 +19,7 @@ public class ShopServiceImpl implements ShopService {
     ShopMapper shopMapper;
 
     @Override
-    public Optional<ShopEntity> getShopById(Long id) {
+    public Optional<ShopEntity> getShopById(long id) {
         return Optional.ofNullable(shopMapper.getShopById(id));
     }
 
@@ -51,7 +51,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Optional<ShopEntity> receiveMoney(Long id, Double money) {
+    public Optional<ShopEntity> receiveMoney(long id, double money) {
         Optional<ShopEntity> shop = getShopById(id);
         if (shop.isPresent()) {
             shop.get().setMoney(shop.get().getMoney() + money);
@@ -64,7 +64,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Optional<ShopEntity> deductMoney(Long id, Double money) {
+    public Optional<ShopEntity> deductMoney(long id, double money) {
         Optional<ShopEntity> shop = getShopById(id);
         if (shop.isPresent() && shop.get().getMoney() >= money) {
             shop.get().setMoney(shop.get().getMoney() - money);

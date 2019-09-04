@@ -19,8 +19,8 @@ public interface PayExposeService {
      * @param username 用户名
      * @return 钱包列表
      */
-    @GetMapping("/wallets/{username}")
-    Optional<List<WalletEntity>> getUserAllWallets(@PathVariable String username);
+    @GetMapping("/wallets")
+    Optional<List<WalletEntity>> getUserAllWallets(@RequestParam String username);
 
     /**
      * 获得可以支付的钱包列表
@@ -29,8 +29,8 @@ public interface PayExposeService {
      * @param orderId  订单ID
      * @return 钱包列表
      */
-    @GetMapping("/wallets/payable/{username}")
-    Optional<List<WalletEntity>> getUserAllWallets(@PathVariable String username, @RequestParam String orderId);
+    @GetMapping("/wallets/payable")
+    Optional<List<WalletEntity>> getUserAllWallets(@RequestParam String username, @RequestParam long orderId);
 
     /**
      * 使用钱包给订单支付
@@ -41,7 +41,7 @@ public interface PayExposeService {
      * @return 支付成功与否
      */
     @PutMapping("/pay")
-    Optional<Boolean> payOrderByWallet(@RequestParam Long wallerId, @RequestBody String payPassword, @RequestParam String orderId);
+    Optional<Boolean> payOrderByWallet(@RequestParam long wallerId, @RequestParam String payPassword, @RequestParam String orderId);
 
     /**
      * 添加钱包
