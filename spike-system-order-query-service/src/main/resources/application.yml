@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: spike-system-order-query-service
   # redis config
   redis:
     jedis:
@@ -15,11 +17,8 @@ spring:
         - 127.0.0.1:7004
         - 127.0.0.1:7005
     timeout: 500
-
-  application:
-    name: spike-system-order-query-service
 server:
-  port: 7090
+  port: 7100
 eureka:
   client:
     service-url:

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: spike-system-order-service
 
   # redis config
   redis:
@@ -17,8 +19,6 @@ spring:
         - 127.0.0.1:7005
     timeout: 500
 
-  application:
-    name: spike-system-order-service
 server:
   port: 7090
 eureka:

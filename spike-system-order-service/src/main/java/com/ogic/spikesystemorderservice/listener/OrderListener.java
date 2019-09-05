@@ -1,8 +1,9 @@
-package com.ogic.spikesystemorderservice.component;
+package com.ogic.spikesystemorderservice.listener;
 
 import com.ogic.spikesystemapi.entity.GoodEntity;
 import com.ogic.spikesystemapi.entity.OrderEntity;
 import com.ogic.spikesystemapi.service.GoodExposeService;
+import com.ogic.spikesystemorderservice.component.GuavaCache;
 import com.ogic.spikesystemorderservice.mapper.AmountMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Date;

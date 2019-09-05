@@ -81,6 +81,7 @@ create table `order`
     `order_username` varchar(100)       not null comment '下单用户用户名',
     `order_status`   tinyint            not null default 0 comment '订单状态 -1取消 0准备 1成功',
     `good_id`        bigint             unsigned not null comment '秒杀商品ID',
+    `amount`         int                unsigned not null comment '秒杀商品数量',
     `pay_money`      decimal(10, 2)     default null comment '支付金额',
     `pay_time`       timestamp          not null default current_timestamp comment '支付时间',
     `pay_wallet_id`  bigint             unsigned default null comment '支付用钱包ID',

@@ -22,15 +22,11 @@ public class GuavaCache {
                 .build();
     }
 
-    void add(Long goodId){
+    public void add(Long goodId){
         disableGood.put(goodId, System.currentTimeMillis());
     }
 
-    boolean contain(Long goodId){
+    public boolean contain(Long goodId){
         return disableGood.getIfPresent(goodId) != null;
-    }
-
-    void remove(Long goodId){
-        disableGood.invalidate(goodId);
     }
 }

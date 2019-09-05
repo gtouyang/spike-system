@@ -1,4 +1,4 @@
-package com.ogic.spikesystempayservice.component;
+package com.ogic.spikesystempayservice.listener;
 
 import com.ogic.spikesystemapi.entity.GoodEntity;
 import com.ogic.spikesystemapi.entity.OrderEntity;

@@ -1,6 +1,7 @@
 spring:
   application:
-    name: spike-system-pay-service
+    name: spike-system-sync-service
+
   # redis config
   redis:
     jedis:
@@ -19,34 +20,26 @@ spring:
     timeout: 500
 
 server:
-  port: 8100
+  port: 18000
 eureka:
   client:
     service-url:
       defaultZone: http://eureka1:8761/eureka/, http://eureka2:8762/eureka/, http://eureka3:8763/eureka/
   instance:
-    instance-id: pay-service
+    instance-id: sync-service
 info:
-  app.name: ogic-spike-system-pay-service
+  app.name: ogic-spike-system-sync-service
   company.name: ogic.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
+
+token:
+  secret: mySecret
+
 kafka:
-  producer:
-    bootstrapServers: localhost:9092
-    retries: 3
-
-    #16K
-    batchSize: 16384
-
-    lingerMs: 1
-
-    #32M
-    bufferMemory: 33554432
-
   consumer:
     bootstrapServers: localhost:9092
-    groupId: order-service
+    groupId: sync-service
     enableAutoCommit: false
     autoCommitIntervalMs: 1000
     sessionTimeoutMs: 30000

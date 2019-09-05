@@ -3,7 +3,6 @@ package com.ogic.spikesystemgoodservice.service;
 import com.ogic.spikesystemapi.entity.GoodEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author ogic
@@ -16,7 +15,7 @@ public interface GoodService {
      * @param goodEntity
      * @return
      */
-    Optional<Integer> addGood(GoodEntity goodEntity);
+    int addGood(GoodEntity goodEntity);
 
     /**
      * 根据商品ID获取商品
@@ -24,7 +23,7 @@ public interface GoodService {
      * @param id
      * @return
      */
-    Optional<GoodEntity> getGoodById(Long id);
+    GoodEntity getGoodById(long id);
 
     /**
      * 根据位移和数量获取商品列表
@@ -33,5 +32,5 @@ public interface GoodService {
      * @param rows
      * @return
      */
-    Optional<List<GoodEntity>> getGoods(Long offset, Integer rows);
+    List<GoodEntity> getGoods(long offset, int rows);
 }

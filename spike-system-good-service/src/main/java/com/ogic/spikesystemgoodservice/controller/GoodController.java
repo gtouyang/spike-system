@@ -19,11 +19,11 @@ public class GoodController {
 
     @GetMapping("/good")
     public Optional<GoodEntity> getGoodById(@RequestParam long id) {
-        return goodService.getGoodById(id);
+        return Optional.ofNullable(goodService.getGoodById(id));
     }
 
     @PostMapping("/good")
     public Optional<Integer> addGood(@RequestBody GoodEntity good) {
-        return goodService.addGood(good);
+        return Optional.of(goodService.addGood(good));
     }
 }

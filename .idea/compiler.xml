@@ -9,12 +9,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="spike-system-order-service" />
         <module name="spike-system-order-query-service" />
+        <module name="spike-system-authentication-service" />
         <module name="spike-system-pay-service" />
         <module name="spike-system-good-service" />
-        <module name="spike-system-consumer" />
+        <module name="spike-system-sync-service" />
         <module name="spike-system-sql-service" />
         <module name="spike-system-api" />
-        <module name="spike-system-authentication-service" />
+        <module name="spike-system-consumer" />
         <module name="spike-system-shop-service" />
         <module name="spike-system-eureka-server" />
       </profile>
@@ -31,6 +32,7 @@
       <module name="spike-system-pay-service" target="1.8" />
       <module name="spike-system-shop-service" target="1.8" />
       <module name="spike-system-sql-service" target="1.8" />
+      <module name="spike-system-sync-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -46,6 +48,7 @@
       <module name="spike-system-pay-service" options="-parameters" />
       <module name="spike-system-shop-service" options="-parameters" />
       <module name="spike-system-sql-service" options="-parameters" />
+      <module name="spike-system-sync-service" options="-parameters" />
     </option>
   </component>
 </project>

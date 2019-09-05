@@ -50,7 +50,7 @@ public interface GoodMapper {
             "#{imageUrl}, " +
             "#{info}," +
             "#{shopId})")
-    Integer insertGood(GoodEntity good);
+    int insertGood(GoodEntity good);
 
     /**
      * 更新库存
@@ -61,5 +61,5 @@ public interface GoodMapper {
      * @return
      */
     @Update("update amount set amount = #{amount}, version = version + 1 where id = #{id} and version = #{version}")
-    Integer updateGoodAmount(Long id, Integer amount, Integer version);
+    int updateGoodAmount(long id, int amount, int version);
 }

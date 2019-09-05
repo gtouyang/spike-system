@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 商品相关服务,对商品进行的所有操作都通过这个service来提供服务
@@ -36,11 +35,9 @@ public class GoodServiceImpl implements GoodService {
      * @param goodEntity 商品对象
      */
     @Override
-    public Optional<Integer> addGood(GoodEntity goodEntity) {
-        //这一条命令可有可无
-        goodEntity.setId(null).setCreateTime(null);
+    public int addGood(GoodEntity goodEntity) {
 
-        return Optional.ofNullable(goodMapper.insertGood(goodEntity));
+        return goodMapper.insertGood(goodEntity);
     }
 
     /**
@@ -50,23 +47,23 @@ public class GoodServiceImpl implements GoodService {
      * @return 商品对象
      */
     @Override
-    public Optional<GoodEntity> getGoodById(Long id) {
+    public GoodEntity getGoodById(long id) {
 
         GoodEntity cache = (GoodEntity) redisTemplate.boundHashOps("goodMap").get(id);
         if (cache == null) {
-            Optional<GoodEntity> goodOptional = Optional.ofNullable(goodMapper.getGoodById(id));
-            if (goodOptional.isPresent()) {
-                redisTemplate.boundHashOps("goodMap").put(id, goodOptional.get());
+            GoodEntity good = goodMapper.getGoodById(id);
+            if (good != null) {
+                redisTemplate.boundHashOps("goodMap").put(id, good);
                 redisTemplate.boundZSetOps("goodZSet").add(id, 1);
 
                 if (redisTemplate.boundValueOps(GOOD_AMOUNT_HEADER + id).get() == null) {
-                    redisTemplate.boundValueOps(GOOD_AMOUNT_HEADER + id).set(goodOptional.get().getAmount());
+                    redisTemplate.boundValueOps(GOOD_AMOUNT_HEADER + id).set(good.getAmount());
                 }
             }
-            return goodOptional;
+            return good;
         } else {
             redisTemplate.boundZSetOps("goodZSet").incrementScore(id, 1);
-            return Optional.of(cache);
+            return cache;
         }
     }
 
@@ -79,9 +76,11 @@ public class GoodServiceImpl implements GoodService {
      * @return 商品列表
      */
     @Override
-    public Optional<List<GoodEntity>> getGoods(Long offset, Integer rows) {
-        Optional<List<GoodEntity>> goods = Optional.ofNullable(goodMapper.getGoods(offset, rows));
-        goods.ifPresent(this::updateRedis);
+    public List<GoodEntity> getGoods(long offset, int rows) {
+        List<GoodEntity> goods = goodMapper.getGoods(offset, rows);
+        if (goods != null){
+            updateRedis(goods);
+        }
         return goods;
     }
 
