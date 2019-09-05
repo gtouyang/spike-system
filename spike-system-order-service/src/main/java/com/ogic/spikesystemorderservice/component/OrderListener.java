@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author ogic
  */
-@Component
 public class OrderListener {
 
     @Resource
@@ -127,7 +126,7 @@ public class OrderListener {
     private boolean calculateMoney(OrderEntity order){
         Date current = order.getOrderTime();
         Optional<GoodEntity> goodOptional = goodExposeService.getGoodById(order.getGoodId());
-        if (goodOptional.isPresent() && goodOptional.get().getOriginPrice() != null){
+        if (goodOptional.isPresent()){
             if (goodOptional.get().getSpikeStartTime() != null
                     && goodOptional.get().getSpikeStartTime().before(current)
                     && goodOptional.get().getSpikeEndTime() != null

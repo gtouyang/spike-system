@@ -25,7 +25,7 @@ public class PayController {
      */
     @GetMapping("/wallets")
     public Optional<List<WalletEntity>> getUserAllWallets(@RequestParam String username) {
-        return payService.getUserAllWallets(username);
+        return Optional.ofNullable(payService.getUserAllWallets(username));
     }
 
     /**
@@ -37,24 +37,17 @@ public class PayController {
      */
     @GetMapping("/wallets/payable")
     public Optional<List<WalletEntity>> getUserAllWallets(@RequestParam String username, @RequestParam long orderId) {
-        return payService.getUserAllWallets(username, orderId);
+        return Optional.ofNullable(payService.getUserAllWallets(username, orderId));
     }
+
 
     /**
-     * 使用钱包给订单支付
-     *
-     * @param orderId     订单ID
-     * @param walletId    钱包
-     * @param payPassword 支付密码
-     * @return 支付成功与否
+     * 新建钱包
+     * @param wallet
+     * @return
      */
-    @PutMapping("/pay")
-    public Optional<Boolean> payOrderByWallet(@RequestParam Long walletId, @RequestParam String payPassword, @RequestParam long orderId) {
-        return payService.payOrderByWallet(walletId, payPassword, orderId);
-    }
-
     @PostMapping("/wallet")
     public Optional<Integer> addWallet(@RequestBody WalletEntity wallet) {
-        return payService.addWallet(wallet);
+        return Optional.ofNullable(payService.addWallet(wallet));
     }
 }

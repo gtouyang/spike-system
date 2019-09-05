@@ -1,9 +1,4 @@
 spring:
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
   application:
     name: spike-system-pay-service
 server:
@@ -19,3 +14,26 @@ info:
   company.name: ogic.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
+kafka:
+  producer:
+    bootstrapServers: localhost:9092
+    retries: 3
+
+    #16K
+    batchSize: 16384
+
+    lingerMs: 1
+
+    #32M
+    bufferMemory: 33554432
+
+  consumer:
+    bootstrapServers: localhost:9092
+    groupId: order-service
+    enableAutoCommit: false
+    autoCommitIntervalMs: 1000
+    sessionTimeoutMs: 30000
+    maxPollRecords: 100
+
+    #earliest,latest
+    autoOffsetReset: earliest

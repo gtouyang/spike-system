@@ -100,10 +100,13 @@ public class OrderEntity implements Serializable {
     private Date payTime;
 
     /**
-     * 支付用户名
+     * 支付用钱包
      */
-    private String payUsername;
+    private Long payWalletId;
 
+    /**
+     * 备注
+     */
     private String info;
 
     public OrderEntity(){

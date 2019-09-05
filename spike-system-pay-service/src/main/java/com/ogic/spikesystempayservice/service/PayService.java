@@ -16,7 +16,7 @@ public interface PayService {
      * @param username 用户名
      * @return 钱包列表
      */
-    Optional<List<WalletEntity>> getUserAllWallets(String username);
+    List<WalletEntity> getUserAllWallets(String username);
 
     /**
      * 获得可以支付的钱包列表
@@ -25,17 +25,8 @@ public interface PayService {
      * @param orderId  订单ID
      * @return 钱包列表
      */
-    Optional<List<WalletEntity>> getUserAllWallets(String username, long orderId);
+    List<WalletEntity> getUserAllWallets(String username, long orderId);
 
-    /**
-     * 使用钱包给订单支付
-     *
-     * @param orderId     订单ID
-     * @param walletId    钱包
-     * @param payPassword 支付密码
-     * @return 支付成功与否
-     */
-    Optional<Boolean> payOrderByWallet(long walletId, String payPassword, long orderId);
 
     /**
      * 添加钱包
@@ -43,5 +34,5 @@ public interface PayService {
      * @param wallet
      * @return
      */
-    Optional<Integer> addWallet(WalletEntity wallet);
+    Integer addWallet(WalletEntity wallet);
 }
