@@ -1,6 +1,31 @@
 spring:
   application:
     name: spike-system-order-query-service
+
+  #MySQL config
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/spike_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ogic
+    password: pass
+
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    filters: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
   # redis config
   redis:
     jedis:
@@ -33,3 +58,8 @@ info:
 
 token:
   secret: mySecret
+
+#mybatis config
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true  #启动驼峰命名法

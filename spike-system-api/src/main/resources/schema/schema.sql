@@ -1,6 +1,3 @@
-/*
- *  mysql-v: 8.0.16
- */
 
 -- 创建用户表
 create table `user`
@@ -40,13 +37,14 @@ create table `shop`
     primary key (`id`),
     foreign key (owner) references user(`username`)
 )charset = utf8mb4
-engine = InnoDB comment '商铺表';
+ engine = InnoDB comment '商铺表';
 
 -- 创建商品表
 create table `good`
 (
     `id`               bigint                   unsigned not null auto_increment comment '商品ID',
     `name`             varchar(100)             default null comment '商品标题',
+    `amount`           int                      default 0 comment '商品数量',
     `origin_price`     decimal(10, 2)           not null comment '商品原价格',
     `spike_price`      decimal(10, 2)           default null comment '商品秒杀价格',
     `spike_start_time` timestamp                default null default '1970-02-01 00:00:01' comment '秒杀开始时间',
@@ -64,17 +62,8 @@ create table `good`
 ) charset = utf8mb4
   engine = InnoDB comment '商品表';
 
--- 库存表
-create table `amount`
-(
-    `id`     bigint         unsigned not null comment '商品ID',
-    `amount` int            default 0 comment '剩余库存数量',
-    foreign key (`id`) references good (`id`)
-) charset = utf8mb4
-  engine = InnoDB comment '库存表';
-
 -- 创建订单表
-create table `order`
+create table `indent`
 (
     `id`             bigint             unsigned not null comment '订单号',
     `order_time`     timestamp          not null comment '下单时间',
@@ -83,7 +72,7 @@ create table `order`
     `good_id`        bigint             unsigned not null comment '秒杀商品ID',
     `amount`         int                unsigned not null comment '秒杀商品数量',
     `pay_money`      decimal(10, 2)     default null comment '支付金额',
-    `pay_time`       timestamp          not null default current_timestamp comment '支付时间',
+    `pay_time`       timestamp          default null comment '支付时间',
     `pay_wallet_id`  bigint             unsigned default null comment '支付用钱包ID',
     `create_time`    timestamp          not null default current_timestamp comment '创建时间',
     `update_time`    timestamp          not null default current_timestamp on update current_timestamp comment '最近修改时间',

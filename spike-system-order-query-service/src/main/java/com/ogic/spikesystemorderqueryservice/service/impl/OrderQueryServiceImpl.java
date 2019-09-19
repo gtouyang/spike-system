@@ -33,7 +33,8 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         List<OrderEntity> orders = getAllOrders(username);
         if (orders != null && orders.size() > 0) {
             for (int i = 0; i < orders.size(); i++) {
-                if (!orders.get(i).getOrderStatus().equals(OrderEntity.OrderStatusEnum.READY)) {
+                /* 如果订单不是准备中状态则移除 */
+                if (orders.get(i).getOrderStatus() != OrderEntity.OrderStatusEnum.READY.getStatus()) {
                     orders.remove(i);
                     i--;
                 }else {
@@ -51,7 +52,7 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         List<OrderEntity> orders = getAllOrders(username);
         if (orders != null && orders.size() > 0) {
             for (int i = 0; i < orders.size(); i++) {
-                if (!orders.get(i).getOrderStatus().equals(OrderEntity.OrderStatusEnum.FINISHED)) {
+                if (orders.get(i).getOrderStatus() != OrderEntity.OrderStatusEnum.FINISHED.getStatus()) {
                     orders.remove(i);
                     i--;
                 }

@@ -17,7 +17,7 @@ public interface OrderMapper {
      * @param username
      * @return
      */
-    @Select("select * from order where order_username = #{username}")
+    @Select("select * from indent where order_username = #{username}")
     List<OrderEntity> getOrders(String username);
 
     /**
@@ -25,6 +25,6 @@ public interface OrderMapper {
      * @param orderId
      * @return
      */
-    @Select(("select * from order where id = #{orderId}"))
+    @Select(("select * from indent where id = #{orderId}"))
     OrderEntity getOrder(long orderId);
 }

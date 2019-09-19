@@ -40,4 +40,12 @@ public interface OrderQueryExposeService {
      */
     @GetMapping("/allOrders")
     Optional<List<OrderEntity>> getAllOrders(@RequestParam String username);
+
+    /**
+     * 根据ID获取订单
+     * @param id
+     * @return
+     */
+    @GetMapping("/order")
+    Optional<OrderEntity> getOrder(@RequestParam long id);
 }

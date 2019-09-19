@@ -3,12 +3,14 @@ package com.ogic.spikesystemsyncservice.listener;
 import com.ogic.spikesystemapi.entity.OrderEntity;
 import com.ogic.spikesystemsyncservice.mapper.OrderMapper;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
 /**
  * @author ogic
  */
+@Component
 public class SyncListener {
 
     @Resource

@@ -40,7 +40,7 @@ public class ShopServiceImpl implements ShopService {
                 List<ShopEntity> shopList = shopListOptional;
                 if (shopList.size() >= 1) {
                     for (ShopEntity entity : shopList) {
-                        if (entity.getShopName().equals(shop.getShopName())) {
+                        if (entity != null && entity.getShopName() != null && entity.getShopName().equals(shop.getShopName())) {
                             return Optional.of(entity);
                         }
                     }

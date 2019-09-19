@@ -9,12 +9,14 @@ spring:
       INDENT_OUTPUT: true
   application:
     name: spike-system-auth-service
+
+  #MySQL config
   datasource:
-    username: root
-    password: pass
-    url: jdbc:mysql://127.0.0.1:8066/spike_db
-    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/spike_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ogic
+    password: pass
 
     initialSize: 5
     minIdle: 5

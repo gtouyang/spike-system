@@ -1,12 +1,14 @@
 spring:
   application:
     name: spike-system-good-service
+
+  #MySQL config
   datasource:
-    username: root
-    password: pass
-    url: jdbc:mysql://127.0.0.1:8066/spike_db
-    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/spike_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ogic
+    password: pass
 
     initialSize: 5
     minIdle: 5
@@ -37,3 +39,8 @@ info:
   company.name: ogic.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
+
+#mybatis config
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true  #启动驼峰命名法

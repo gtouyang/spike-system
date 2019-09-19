@@ -20,8 +20,8 @@ public interface GoodMapper {
      * @param id
      * @return
      */
-    @Select("select * from good where id = #{id} join amount")
-    GoodEntity getGoodById(Long id);
+    @Select("select * from good where id = #{id}")
+    GoodEntity getGoodById(long id);
 
     /**
      * 获取商品列表
@@ -31,7 +31,7 @@ public interface GoodMapper {
      * @return
      */
     @Select("select * from good order by id desc limit #{offset}, #{rows}")
-    List<GoodEntity> getGoods(Long offset, Integer rows);
+    List<GoodEntity> getGoods(long offset, int rows);
 
     /**
      * 插入新商品

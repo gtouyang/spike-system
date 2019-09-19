@@ -13,5 +13,6 @@
     <file url="file://$PROJECT_DIR$/spike-system-shop-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spike-system-sql-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spike-system-sync-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spike-system-test" charset="UTF-8" />
   </component>
 </project>

@@ -15,15 +15,6 @@ public interface AmountMapper {
      * @param reduce
      * @return
      */
-    @Update("update amount set amount = amount - #{reduce} where id = #{goodId} and amount >= reduce")
-    Integer reduceAmount(Long goodId, Integer reduce);
-
-    /**
-     * 减少库存
-     * @param goodId
-     * @param add
-     * @return
-     */
-    @Update("update amount set amount = amount + #{add} where id = #{goodId}")
-    Integer addAmount(Long goodId, Integer add);
+    @Update("update good set amount = amount - #{reduce} where id = #{goodId} and amount >= #{reduce}")
+    Integer reduceAmount(long goodId, int reduce);
 }

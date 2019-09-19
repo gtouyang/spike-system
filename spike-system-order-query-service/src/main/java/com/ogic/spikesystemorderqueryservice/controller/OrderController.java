@@ -49,6 +49,11 @@ public class OrderController {
         return Optional.ofNullable(orderQueryService.getAllOrders(username));
     }
 
+    /**
+     * 根据ID获取订单
+     * @param id
+     * @return
+     */
     @GetMapping("/order")
     public Optional<OrderEntity> getOrder(@RequestParam long id){
         return Optional.ofNullable(orderQueryService.getOrder(id));

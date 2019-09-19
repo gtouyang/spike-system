@@ -32,25 +32,25 @@ public class OrderEntity implements Serializable {
         /**
          * 待支付
          */
-        READY(Short.valueOf("0")),
+        READY((short) 0),
 
         /**
          * 已完成
          */
-        FINISHED(Short.valueOf("1")),
+        FINISHED((short) 1),
 
         /**
          * 已取消
          */
-        CANCELED(Short.valueOf("-1"));
+        CANCELED((short) -1);
 
-        private Short status;
+        private short status;
 
-        OrderStatusEnum(Short status) {
+        OrderStatusEnum(short status) {
             this.status = status;
         }
 
-        public Short getStatus() {
+        public short getStatus() {
             return status;
         }
     }
@@ -75,7 +75,7 @@ public class OrderEntity implements Serializable {
     /**
      * 订单状态
      */
-    private OrderStatusEnum orderStatus;
+    private short orderStatus;
 
     /**
      * 商品ID
@@ -110,7 +110,8 @@ public class OrderEntity implements Serializable {
     private String info;
 
     public OrderEntity(){
-        id = Long.parseLong(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()) + randomNumbers(8));
+        orderTime = new Date();
+        id = Long.parseLong(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(orderTime) + randomNumbers(2));
     }
 
     private String randomNumbers(int size) {

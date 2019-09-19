@@ -39,7 +39,7 @@ public interface WalletMapper {
      * @param version 版本
      * @return 更新成功与否
      */
-    @Update("update table wallet set money = #{money}, version = version+1 where id = #{id} and version = #{version}")
+    @Update("update wallet set money = #{money}, version = version+1 where id = #{id} and version = #{version}")
     Integer updateWalletMoney(Long id, Double money, Integer version);
 
     /**
