@@ -84,6 +84,14 @@ public class GoodServiceImpl implements GoodService {
         return goods;
     }
 
+    @Override
+    public List<GoodEntity> getGoodsByShopId(long shopId) {
+        if (shopId > 0){
+            return goodMapper.getGoodsByShopId(shopId);
+        }
+        return null;
+    }
+
     /**
      * 将列表中的商品添加到redis中并在热度加一
      *

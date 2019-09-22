@@ -33,4 +33,12 @@ public interface GoodService {
      * @return
      */
     List<GoodEntity> getGoods(long offset, int rows);
+
+    /**
+     * 根据shopId获取商品列表
+     *
+     * @param shopId
+     * @return
+     */
+    List<GoodEntity> getGoodsByShopId(long shopId);
 }

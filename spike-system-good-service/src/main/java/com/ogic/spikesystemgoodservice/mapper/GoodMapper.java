@@ -53,13 +53,12 @@ public interface GoodMapper {
     int insertGood(GoodEntity good);
 
     /**
-     * 更新库存
+     * 根据商铺ID获取商品列表
      *
-     * @param id
-     * @param amount
-     * @param version
+     * @param shopId
      * @return
      */
-    @Update("update amount set amount = #{amount}, version = version + 1 where id = #{id} and version = #{version}")
-    int updateGoodAmount(long id, int amount, int version);
+    @Select("select * from good where shop_id = ${shopId}")
+    List<GoodEntity> getGoodsByShopId(long shopId);
+
 }
