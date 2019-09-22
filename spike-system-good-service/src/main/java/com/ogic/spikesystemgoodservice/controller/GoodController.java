@@ -19,7 +19,8 @@ public class GoodController {
 
     @GetMapping("/good")
     public Optional<GoodEntity> getGoodById(@RequestParam long id) {
-        return Optional.ofNullable(goodService.getGoodById(id));
+        Optional<GoodEntity> temp = Optional.ofNullable(goodService.getGoodById(id));
+        return temp;
     }
 
     @PostMapping("/good")

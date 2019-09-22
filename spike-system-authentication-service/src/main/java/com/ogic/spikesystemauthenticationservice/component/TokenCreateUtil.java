@@ -8,14 +8,14 @@ import com.ogic.spikesystemapi.common.TokenVerifyUtil;
 import com.ogic.spikesystemapi.entity.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 /**
  * @author ogic
  */
+@Component
 public class TokenCreateUtil {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -24,8 +24,7 @@ public class TokenCreateUtil {
 
     private TokenVerifyUtil tokenVerifyUtil;
 
-    @Value("token.secret")
-    private String secret;
+    private String secret = "mySecret";
 
     public TokenCreateUtil(){
         algorithm = Algorithm.HMAC512(secret);

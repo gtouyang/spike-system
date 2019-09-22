@@ -381,8 +381,8 @@
                                                 <div class="goods-attr-item"><span class="font-10" th:remove="all">内存： 256G</span></div>
                                             </div>
                                             <!-- 当前选购的商品的单价 -->
-                                            <div class="goods-price">
-                                                <span class="font-10" th:text="${order.getPayMoney()/order.getAmount()}">¥ 9999.00</span>
+                                            <div class="goods-price" th:if="${order.getPayMoney()!= null}">
+                                                <span class="font-10" th:text="${order.getPayMoney()}">¥ 9999.00</span>
                                             </div>
                                             <!-- 当前选购该商品的数量 -->
                                             <div class="goods-amount">
@@ -478,7 +478,10 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-custom btn-large" onclick="confirmOrder()" th:if="${order.getOrderStatus() == 0}">支付</button>
-                                <button class="btn btn-custom btn-large" th:if="${order.getOrderStatus() == 10}">刷新</button>
+                                <form th:action="@{/refreshOrder}" th:if="${order.getOrderStatus() == 10}" th:method="get">
+                                    <input type="hidden" th:value="${order.getId()}" th:name="orderId">
+                                    <button class="btn btn-custom btn-large" th:type="submit">刷新</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -639,21 +642,7 @@
 
         })
 
-        refreshOrder = function () {
-            $.ajax({
-                url:'/refreshOrder',
-                type:'GET',
-                data: {
-                  orderId: '[[${order.getId()}]]'
-                },
-                success:function (data) {
-                    if (data != null) {
-                        $(".order-pay").html(data);
-                        $(".order-footer").html(data);
-                    }
-                }
-            })
-        }
+
     </script>
 </body>
 

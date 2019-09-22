@@ -237,14 +237,14 @@
                         </div>
                         <div class="order-info-list w-100">
                             <div class="order-info-list-item w-100">
-                                <div class="order-item w-100">
+                                <div class="order-item w-100" th:each="map:${mapList}">
                                     <div class="seller-info-frame horizontal-center w-100 text-left mt-3" style="justify-content: space-between;">
                                         <!-- 店铺信息 若店铺/卖家只有一个 可以直接删除另外一个 -->
                                         <div>
-                                            <span class="font-10 font-600 pr-3">2019-07-20</span>
-                                            <span class="font-10 font-600 pr-5">订单号：200000000</span>
-                                            <span class="shop-info font-10 font-600"><i class="mdi mdi-shopping pr-1"></i>店铺：<a href="#" th:text="${shop.getShopName()}"> 沈氏集团</a></span>
-                                            <span class="seller-info pl-4 font-10 font-600"><i class="mdi mdi-account-multiple pr-1"></i>卖家：<a href="#" th:text="${shop.getOwner()}"> 沈氏集团-凌紫幻</a></span>
+                                            <span class="font-10 font-600 pr-3" th:text="${map.get('orderTime')}">2019-07-20</span>
+                                            <span class="font-10 font-600 pr-5" th:text="${map.get('orderId')}">订单号：200000000</span>
+                                            <span class="shop-info font-10 font-600"><i class="mdi mdi-shopping pr-1"></i>店铺：<a href="#" th:text="${map.get('shopName')}"> 沈氏集团</a></span>
+                                            <span class="seller-info pl-4 font-10 font-600"><i class="mdi mdi-account-multiple pr-1"></i>卖家：<a href="#" th:text="${map.get('seller')}"> 沈氏集团-凌紫幻</a></span>
                                         </div>
                                         <div>
                                             <a href="#" onclick="orderDetele(this)"><span class="iconfont icon-shanchu1"></span> </a>
@@ -260,68 +260,42 @@
                                                     <div class="goods-coverphoto"><img src="../static/images/iphone_1.jpg" th:src="@{/images/iphone_1.jpg}" alt=""></div>
                                                     <div class="goods-otherinfo pl-2">
                                                         <!-- 商品名称 -->
-                                                        <div class="goods-name font-10"><a href="#" th:text="${product.getName()}">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
+                                                        <div class="goods-name font-10"><a href="#" th:text="${map.get('goodName')}">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
                                                     </div>
                                                 </div>
                                                 <!-- 商品属性 尺寸、颜色等等 -->
                                                 <div class="goods-attr">
-                                                    <div class="goods-attr-item"><span class="font-10" th:text="${product.getInfo()}">颜色： 白色</span></div>
+                                                    <div class="goods-attr-item"><span class="font-10" th:text="${map.get('goodInfo')}">颜色： 白色</span></div>
                                                     <div class="goods-attr-item"><span class="font-10" th:remove="all">内存： 256G</span></div>
                                                 </div>
                                                 <!-- 当前选购的商品的单价 -->
                                                 <div class="goods-price">
-                                                    <span class="font-10" th:text="${order.getPayMoney()/order.getAmount()}">¥ 9999.00</span>
+                                                    <span class="font-10" th:text="${map.get('price')}">¥ 9999.00</span>
                                                 </div>
                                                 <!-- 当前选购该商品的数量 -->
                                                 <div class="goods-amount">
-                                                    <span class="font-10" th:text="'x ' + ${order.getAmount()}">
+                                                    <span class="font-10" th:text="'x ' + ${map.get('amount')}">
                                                                     × 1
                                                                 </span>
                                                 </div>
                                             </div>
-                                            <div class="goods-item" style="width: 100%;">
-                                                <!-- 商品名称 以及 封面 -->
-                                                <div class="goods-info">
-                                                    <div class="goods-coverphoto"><img src="../static/images/iphone_1.jpg" th:src="@{/images/iphone_1.jpg}" alt=""></div>
-                                                    <div class="goods-otherinfo pl-2">
-                                                        <!-- 商品名称 -->
-                                                        <div class="goods-name font-10"><a href="#" th:text="${product.getName()}">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
-                                                    </div>
-                                                </div>
-                                                <!-- 商品属性 尺寸、颜色等等 -->
-                                                <div class="goods-attr">
-                                                    <div class="goods-attr-item"><span class="font-10" th:text="${product.getInfo()}">颜色： 白色</span></div>
-                                                    <div class="goods-attr-item"><span class="font-10" th:remove="all">内存： 256G</span></div>
-                                                </div>
-                                                <!-- 当前选购的商品的单价 -->
-                                                <div class="goods-price">
-                                                    <span class="font-10" th:text="${order.getPayMoney()/order.getAmount()}">¥ 9999.00</span>
-                                                </div>
-                                                <!-- 当前选购该商品的数量 -->
-                                                <div class="goods-amount">
-                                                    <span class="font-10" th:text="'x ' + ${order.getAmount()}">
-                                                                    × 1
-                                                                </span>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="order-item-price">
-                                            <span class="font-10" th:text="${order.getPayMoney()}">¥ 9999.00</span>
+                                            <span class="font-10" th:text="${map.get('price')}">¥ 9999.00</span>
                                         </div>
                                         <div class="order-item-status">
-                                            <span class="font-10" th:text="${order.getPayMoney()}">订单完成</span>
+                                            <span class="font-10">订单完成</span>
                                             <a href="#" class="font-10" onclick="showOrder('订单号/订单id')">查看订单</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="order-item w-100">
+                                <div class="order-item w-100" th:remove="all">
                                     <div class="seller-info-frame horizontal-center w-100 text-left mt-3" style="justify-content: space-between;">
                                         <!-- 店铺信息 若店铺/卖家只有一个 可以直接删除另外一个 -->
                                         <div>
                                             <span class="font-10 font-600 pr-3">2019-07-20</span>
                                             <span class="font-10 font-600 pr-5">订单号：200000000</span>
-                                            <span class="shop-info font-10 font-600"><i class="mdi mdi-shopping pr-1"></i>店铺：<a href="#" th:text="${shop.getShopName()}"> 沈氏集团</a></span>
-                                            <span class="seller-info pl-4 font-10 font-600"><i class="mdi mdi-account-multiple pr-1"></i>卖家：<a href="#" th:text="${shop.getOwner()}"> 沈氏集团-凌紫幻</a></span>
+                                            <span class="shop-info font-10 font-600"><i class="mdi mdi-shopping pr-1"></i>店铺：<a href="#"> 沈氏集团</a></span>
+                                            <span class="seller-info pl-4 font-10 font-600"><i class="mdi mdi-account-multiple pr-1"></i>卖家：<a href="#"> 沈氏集团-凌紫幻</a></span>
                                         </div>
                                         <div>
                                             <a href="#" onclick="orderDetele(this)"><span class="iconfont icon-shanchu1"></span> </a>
@@ -336,21 +310,21 @@
                                                     <div class="goods-coverphoto"><img src="../static/images/iphone_1.jpg" th:src="@{/images/iphone_1.jpg}" alt=""></div>
                                                     <div class="goods-otherinfo pl-2">
                                                         <!-- 商品名称 -->
-                                                        <div class="goods-name font-10"><a href="#" th:text="${product.getName()}">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
+                                                        <div class="goods-name font-10"><a href="#">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
                                                     </div>
                                                 </div>
                                                 <!-- 商品属性 尺寸、颜色等等 -->
                                                 <div class="goods-attr">
-                                                    <div class="goods-attr-item"><span class="font-10" th:text="${product.getInfo()}">颜色： 白色</span></div>
+                                                    <div class="goods-attr-item"><span class="font-10">颜色： 白色</span></div>
                                                     <div class="goods-attr-item"><span class="font-10" th:remove="all">内存： 256G</span></div>
                                                 </div>
                                                 <!-- 当前选购的商品的单价 -->
                                                 <div class="goods-price">
-                                                    <span class="font-10" th:text="${order.getPayMoney()/order.getAmount()}">¥ 9999.00</span>
+                                                    <span class="font-10">¥ 9999.00</span>
                                                 </div>
                                                 <!-- 当前选购该商品的数量 -->
                                                 <div class="goods-amount">
-                                                    <span class="font-10" th:text="'x ' + ${order.getAmount()}">
+                                                    <span class="font-10" >
                                                                     × 1
                                                                 </span>
                                                 </div>
@@ -361,31 +335,31 @@
                                                     <div class="goods-coverphoto"><img src="../static/images/iphone_1.jpg" th:src="@{/images/iphone_1.jpg}" alt=""></div>
                                                     <div class="goods-otherinfo pl-2">
                                                         <!-- 商品名称 -->
-                                                        <div class="goods-name font-10"><a href="#" th:text="${product.getName()}">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
+                                                        <div class="goods-name font-10"><a href="#">【限时抢购】【下单立减200】 iPhone XS Max 256G 【白色】</a></div>
                                                     </div>
                                                 </div>
                                                 <!-- 商品属性 尺寸、颜色等等 -->
                                                 <div class="goods-attr">
-                                                    <div class="goods-attr-item"><span class="font-10" th:text="${product.getInfo()}">颜色： 白色</span></div>
+                                                    <div class="goods-attr-item"><span class="font-10">颜色： 白色</span></div>
                                                     <div class="goods-attr-item"><span class="font-10" th:remove="all">内存： 256G</span></div>
                                                 </div>
                                                 <!-- 当前选购的商品的单价 -->
                                                 <div class="goods-price">
-                                                    <span class="font-10" th:text="${order.getPayMoney()/order.getAmount()}">¥ 9999.00</span>
+                                                    <span class="font-10">¥ 9999.00</span>
                                                 </div>
                                                 <!-- 当前选购该商品的数量 -->
                                                 <div class="goods-amount">
-                                                    <span class="font-10" th:text="'x ' + ${order.getAmount()}">
+                                                    <span class="font-10">
                                                                     × 1
                                                                 </span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="order-item-price">
-                                            <span class="font-10" th:text="${order.getPayMoney()}">¥ 9999.00</span>
+                                            <span class="font-10">¥ 9999.00</span>
                                         </div>
                                         <div class="order-item-status">
-                                            <span class="font-10" th:text="${order.getPayMoney()}">订单完成</span>
+                                            <span class="font-10">订单完成</span>
                                             <a href="#" class="font-10" onclick="showOrder('订单号/订单id')">查看订单</a>
                                         </div>
                                     </div>

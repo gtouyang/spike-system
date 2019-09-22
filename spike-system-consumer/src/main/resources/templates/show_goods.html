@@ -261,7 +261,7 @@
                                     <form th:action="@{/order}" th:method="post">
                                         <input th:name="goodId" th:value="${good.getId()}" type="hidden">
                                         <input type="hidden" th:value="1" th:name="amount">
-                                        <button th:type="submit" class="btn btn-outline-primary waves-effect waves-light btn-sm" onclick="place_order()"><i class="mdi mdi-cash-usd"></i> 立即购买</button>
+                                        <button th:type="submit" class="btn btn-outline-primary waves-effect waves-light btn-sm" onclick="place_order()" th:onclick=""><i class="mdi mdi-cash-usd"></i> 立即购买</button>
                                         <button class="btn btn-outline-secondary waves-effect waves-light btn-sm" onclick="favorites()"><i class="mdi mdi-star-outline"></i> 加入收藏夹</button>
                                         <button class="btn btn-outline-dark waves-effect waves-light btn-sm"><i class="mdi mdi-cart-outline"></i> 添加到购物车</button>
                                     </form>

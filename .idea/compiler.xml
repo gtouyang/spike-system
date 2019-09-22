@@ -7,7 +7,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spike-system-sql-service" />
         <module name="spike-system-order-service" />
         <module name="spike-system-order-query-service" />
         <module name="spike-system-test" />

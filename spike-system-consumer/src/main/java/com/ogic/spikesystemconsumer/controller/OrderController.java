@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 /**
  * @author ogic
  */
@@ -59,7 +60,7 @@ public class OrderController {
         DecodedJWT jwt = null;
         if (tokenOptional.isPresent()){
             jwt = tokenVerifyUtil.decodeToken(tokenOptional.get());
-            jwt = tokenVerifyUtil.verifyToken(jwt);
+            //jwt = tokenVerifyUtil.verifyToken(jwt);
         }
         if (goodOptional.isPresent()
                 && goodOptional.get().getAmount() >= amount
@@ -91,28 +92,48 @@ public class OrderController {
         }
         if (tokenOptional.isPresent()) {
             DecodedJWT jwt = tokenVerifyUtil.decodeToken(tokenOptional.get());
-            jwt = tokenVerifyUtil.verifyToken(jwt);
+//            jwt = tokenVerifyUtil.verifyToken(jwt);
             if (jwt != null){
                 Optional<List<OrderEntity>> orderListOptional
                         = orderQueryExposeService.getAllOrders(
                                 jwt.getClaim(USERNAME_KEY).asString());
                 if (orderListOptional.isPresent()){
                     List<OrderEntity> orderList = orderListOptional.get();
-                    model.addAttribute("orders", orderList);
+                    List<Map<String, String>> mapList = new ArrayList<>(orderList.size());
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                    for(OrderEntity order : orderList){
+                        Map<String, String> map = new HashMap<>(8);
+                        map.put("orderId", Long.toString(order.getId()));
+                        map.put("orderTime", dateFormat.format(order.getOrderTime()));
+                        Optional<GoodEntity> goodOptional = goodExposeService.getGoodById(order.getGoodId());
+                        Optional<ShopEntity> shopOptional = shopExposeService.getShopById(goodOptional.get().getShopId());
+                        map.put("shopName", shopOptional.get().getShopName());
+                        map.put("seller", shopOptional.get().getOwner());
+                        map.put("goodName", goodOptional.get().getName());
+                        map.put("goodInfo", goodOptional.get().getInfo());
+                        map.put("price", order.getPayMoney().toString());
+                        map.put("amount", Integer.toString(order.getAmount()));
+                        mapList.add(map);
+                    }
+                    model.addAttribute("mapList", mapList);
                 }
             }
         }
         return "show_orders";
     }
 
-    @ResponseBody
     @GetMapping("/refreshOrder")
-    public OrderEntity refreshOrder(@RequestBody String orderId){
+    public String refreshOrder(@RequestParam String orderId, Model model){
         long id = Long.parseLong(orderId);
         if (id != 0){
             Optional<OrderEntity> orderOptional = orderQueryExposeService.getOrder(id);
             if (orderOptional.isPresent()){
-                return orderOptional.get();
+                model.addAttribute("order", orderOptional.get());
+                Optional<GoodEntity> goodOptional = goodExposeService.getGoodById(orderOptional.get().getGoodId());
+                goodOptional.ifPresent(goodEntity -> model.addAttribute("good", goodEntity));
+                Optional<ShopEntity> shopOptional = shopExposeService.getShopById(goodOptional.get().getShopId());
+                shopOptional.ifPresent(shopEntity -> model.addAttribute("shop", shopEntity));
+                return "place_order";
             }
         }
         return null;

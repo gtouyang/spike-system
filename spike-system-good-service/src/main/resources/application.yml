@@ -26,6 +26,23 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
+  # redis config
+  redis:
+    jedis:
+      pool:
+        max-wait: 5000
+        max-idle: 50
+        min-idle: 5
+    cluster:
+      nodes:
+        - 127.0.0.1:7000
+        - 127.0.0.1:7001
+        - 127.0.0.1:7002
+        - 127.0.0.1:7003
+        - 127.0.0.1:7004
+        - 127.0.0.1:7005
+    timeout: 500
+
 server:
   port: 7080
 eureka:
