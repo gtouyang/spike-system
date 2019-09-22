@@ -5,6 +5,7 @@ import com.ogic.spikesystemapi.common.TokenVerifyUtil;
 import com.ogic.spikesystemapi.entity.OrderEntity;
 import com.ogic.spikesystemapi.entity.GoodEntity;
 import com.ogic.spikesystemapi.service.GoodExposeService;
+import com.ogic.spikesystemapi.service.OrderQueryExposeService;
 import com.ogic.spikesystemapi.service.ShopExposeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Optional;
 /**
  * @author ogic
@@ -29,6 +31,9 @@ public class OrderController {
 
     @Autowired
     ShopExposeService shopExposeService;
+
+    @Autowired
+    OrderQueryExposeService orderQueryExposeService;
 
     @Autowired
     TokenVerifyUtil tokenVerifyUtil;
@@ -82,7 +87,13 @@ public class OrderController {
             DecodedJWT jwt = tokenVerifyUtil.decodeToken(tokenOptional.get());
             jwt = tokenVerifyUtil.verifyToken(jwt);
             if (jwt != null){
-
+                Optional<List<OrderEntity>> orderListOptional
+                        = orderQueryExposeService.getAllOrders(
+                                jwt.getClaim(USERNAME_KEY).asString());
+                if (orderListOptional.isPresent()){
+                    List<OrderEntity> orderList = orderListOptional.get();
+                    model.addAttribute("orders", orderList);
+                }
             }
         }
         return "show_orders";

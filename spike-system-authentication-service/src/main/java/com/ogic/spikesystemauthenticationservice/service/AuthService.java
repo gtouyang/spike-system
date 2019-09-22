@@ -3,8 +3,6 @@ package com.ogic.spikesystemauthenticationservice.service;
 
 import com.ogic.spikesystemapi.entity.UserEntity;
 
-import java.util.Optional;
-
 /**
  * @author ogic
  */
@@ -15,7 +13,7 @@ public interface AuthService {
      * @param userEntity    用户对象
      * @return  注册消息
      */
-    Optional<String> register(UserEntity userEntity);
+    String register(UserEntity userEntity);
 
     /**
      * 登录
@@ -23,12 +21,12 @@ public interface AuthService {
      * @param password  密码
      * @return  token
      */
-    Optional<String> login(String username, String password);
+    String login(String username, String password);
 
     /**
-     * 通过Token获得用户名
-     * @param token 身份令牌
-     * @return  用户名
+     * 获得用户信息
+     * @param token
+     * @return
      */
-    Optional<String> findByToken(String token);
+    UserEntity accInfo(String token);
 }

@@ -248,15 +248,15 @@
                                 <div class="profile">
                                     <div class="profile-item">
                                         <label class="font-10">用户名（不可修改）</label>
-                                        <input value="16wzchen" type="text" class="form-control" readonly>
+                                        <input value="16wzchen" type="text" th:value="${user.getUsername()}" class="form-control" readonly>
                                     </div>
                                     <div class="profile-item">
                                         <label class="font-10">用户昵称</label>
-                                        <input value="zhongwei chen" type="text" class="form-control" onchange="changeProfileInfo(type='nickName', this.value)">
+                                        <input value="zhongwei chen" type="text" th:value="${user.getUsername()}" class="form-control" onchange="changeProfileInfo(type='nickName', this.value)">
                                     </div>
                                     <div class="profile-item">
                                         <label class="font-10">电子邮件（不可修改）</label>
-                                        <input value="16wxchen@stu.edu.cn" type="email" class="form-control" readonly>
+                                        <input value="16wxchen@stu.edu.cn" th:value="${user.getEmail()}" type="email" class="form-control" readonly>
                                     </div>
                                     <button class="btn btn-custom btn-sm" onclick="resetPassword()">密码重置</button>
                                 </div>

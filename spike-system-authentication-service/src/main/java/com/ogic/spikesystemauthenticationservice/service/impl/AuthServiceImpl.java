@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Optional;
 
 /**
  * @author ogic
@@ -31,39 +30,40 @@ public class AuthServiceImpl implements AuthService {
     private Long tokenLife = 24L * 60 * 60 * 1000;
 
     @Override
-    public Optional<String> register(UserEntity userEntity) {
+    public String register(UserEntity userEntity) {
 
         Integer res = userMapper.insertUser(userEntity);
         if (res != null && res.equals(1)) {
-            return Optional.of("register success");
+            return "register success";
         }
-        return Optional.of("fail");
+        return "fail";
     }
 
     @Override
-    public Optional<String> login(String username, String password) {
-        UserEntity user = userMapper.getUseByUsername(username);
+    public String login(String username, String password) {
+        UserEntity user = userMapper.getUserByUsername(username);
         if (user != null) {
             if (user.getPassword().equals(password)) {
-                return Optional.ofNullable(tokenCreateUtil.createToken(user, tokenLife));
+                return tokenCreateUtil.createToken(user, tokenLife);
             }
         }
-        return Optional.of("login fail");
+        return "login fail";
     }
 
     @Override
-    public Optional<String> findByToken(String token) {
+    public UserEntity accInfo(String token) {
         DecodedJWT jwt = tokenCreateUtil.decodeToken(token);
-        if (jwt != null) {
-
-            String username = jwt.getClaim("username").asString();
-            return Optional
-                    .ofNullable(username)
-                    .map(String::valueOf)
-                    .map(userMapper::getUseByUsername)
-                    .map(UserEntity::toString);
+        if (jwt != null){
+            jwt = tokenCreateUtil.verifyToken(jwt);
+            if (jwt != null){
+                UserEntity user = userMapper.getUserByUsername(jwt.getClaim("username").asString());
+                user.setPassword("");
+                return user;
+            }
         }
-        return  Optional.empty();
+        return null;
     }
+
+
 }
 

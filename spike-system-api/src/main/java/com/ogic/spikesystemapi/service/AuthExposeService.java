@@ -2,6 +2,7 @@ package com.ogic.spikesystemapi.service;
 
 import com.ogic.spikesystemapi.entity.UserEntity;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,4 +31,12 @@ public interface AuthExposeService {
      */
     @PostMapping("/register")
     Optional<String> register(@RequestBody final UserEntity userEntity);
+
+    /**
+     * 获取用户信息
+     * @param token
+     * @return
+     */
+    @GetMapping("/accInfo")
+    Optional<UserEntity> accInfo(@RequestParam final String token);
 }

@@ -40,7 +40,7 @@ public class GoodController {
             Date current = new Date();
             display.setName(good.getName());
             display.setInfo(good.getInfo());
-            display.setPrice(good.getOriginPrice().toString());
+            display.setPrice(Double.toString(good.getOriginPrice()));
             display.setTimeInfo("目前还没有活动");
             if (good.getSpikeStartTime() != null && current.before(good.getSpikeStartTime())) {
                 display.setTimeInfo("秒杀开始： " + good.getSpikeStartTime());

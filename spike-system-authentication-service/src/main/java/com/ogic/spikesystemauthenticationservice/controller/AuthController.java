@@ -16,14 +16,35 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @return
+     */
     @PostMapping("/login")
     public Optional<String> login(@RequestParam("username") final String username, @RequestParam final String password) {
-        return authService.login(username,password);
+        return Optional.ofNullable(authService.login(username,password));
     }
 
+    /**
+     * 注册
+     * @param userEntity
+     * @return
+     */
     @PostMapping("/register")
     public Optional<String> register(@RequestBody final UserEntity userEntity){
-        return authService.register(userEntity);
+        return Optional.ofNullable(authService.register(userEntity));
+    }
+
+    /**
+     * 获取用户信息
+     * @param token
+     * @return
+     */
+    @GetMapping("/accInfo")
+    public Optional<UserEntity> accInfo(@RequestParam final String token){
+        return Optional.ofNullable(authService.accInfo(token));
     }
 }
 
