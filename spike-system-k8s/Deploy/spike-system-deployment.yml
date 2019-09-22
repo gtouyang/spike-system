@@ -1,0 +1,18 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: spike-system-deployment
+spec:
+  replicas: 6
+  template:
+    metadata:
+      labels:
+        app: spike-system-consumer
+    spec:
+      containers:
+      - image: spike-system-consumer:1.0.0
+        name: spike-system
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+
