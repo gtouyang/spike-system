@@ -1,0 +1,37 @@
+# linux内核版本
+[root@master220 ~]# uname -r
+5.2.10-1.el7.elrepo.x86_64
+
+# centos系统版本
+[root@master220 ~]# lsb_release -a
+LSB Version:    :core-4.1-amd64:core-4.1-noarch:cxx-4.1-amd64:cxx-4.1-noarch:desktop-4.1-amd64:desktop-4.1-noarch:printing-4.1-amd64:printing-4.1-noarch
+Distributor ID: CentOS
+Description:    CentOS Linux release 7.7.1908 (Core)
+Release:        7.7.1908
+Codename:       Core
+
+# docker版本
+[root@master220 ~]# docker -v
+Docker version 18.09.0, build 4d60db4
+
+# haproxy版本
+[root@master220 ~]# haproxy -v
+HA-Proxy version 1.5.18 2016/05/10
+Copyright 2000-2016 Willy Tarreau <willy@haproxy.org>
+
+# keepalived版本
+[root@master220 ~]# keepalived -v
+Keepalived v1.3.5 (03/19,2017), git commit v1.3.5-6-g6fa32f2
+
+Copyright(C) 2001-2017 Alexandre Cassen, <acassen@gmail.com>
+
+Build options:  PIPE2 LIBNL3 RTA_ENCAP RTA_EXPIRES RTA_PREF FRA_OIFNAME FRA_SUPPRESS_PREFIXLEN FRA_TUN_ID RTAX_CC_ALGO RTAX_QUICKACK LIBIPTC LIBIPSET_DYNAMIC LVS LIBIPVS_NETLINK VRRP VRRP_AUTH VRRP_VMAC SOCK_NONBLOCK SOCK_CLOEXEC FIB_ROUTING INET6_ADDR_GEN_MODE SNMP_V3_FOR_V2 SNMP SNMP_KEEPALIVED SNMP_CHECKER SNMP_RFC SNMP_RFCV2 SNMP_RFCV3 SO_MARK
+
+# ipvs版本
+[root@master220 ~]# ipvsadm -v
+ipvsadm v1.27 2008/5/15 (compiled with popt and IPVS v1.2.1)
+
+# k8s版本
+[root@master220 ~]# kubectl version 
+Client Version: version.Info{Major:"1", Minor:"15", GitVersion:"v1.15.3", GitCommit:"2d3c76f9091b6bec110a5e63777c332469e0cba2", GitTreeState:"clean", BuildDate:"2019-08-19T11:13:54Z", GoVersion:"go1.12.9", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"15", GitVersion:"v1.15.3", GitCommit:"2d3c76f9091b6bec110a5e63777c332469e0cba2", GitTreeState:"clean", BuildDate:"2019-08-19T11:05:50Z", GoVersion:"go1.12.9", Compiler:"gc", Platform:"linux/amd64"}
