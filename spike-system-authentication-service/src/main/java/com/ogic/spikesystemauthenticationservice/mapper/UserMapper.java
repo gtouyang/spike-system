@@ -21,7 +21,7 @@ public interface UserMapper {
      * @return 用户对象
      */
     @Select("select * from user where username like #{username}")
-    UserEntity getUseByUsername(String username);
+    UserEntity getUserByUsername(String username);
 
     /**
      * 插入User

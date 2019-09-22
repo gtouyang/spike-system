@@ -7,14 +7,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="spike-system-sql-service" />
         <module name="spike-system-order-service" />
         <module name="spike-system-order-query-service" />
         <module name="spike-system-test" />
         <module name="spike-system-pay-service" />
         <module name="spike-system-good-service" />
-        <module name="spike-system-consumer" />
-        <module name="spike-system-api" />
         <module name="spike-system-authentication-service" />
+        <module name="spike-system-api" />
+        <module name="spike-system-consumer" />
         <module name="spike-system-shop-service" />
         <module name="spike-system-eureka-server" />
       </profile>

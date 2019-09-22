@@ -222,14 +222,14 @@
         <div class="wrapper">
             <div class="container-fluid goods-release-frame">
                 <div class="frame-body mt-5" style="width: 40%;">
-                    <form action="#" method="post" enctype="multipart/form-data" th:action="@{/}" th:method="post">
+                    <form action="#" method="post" enctype="multipart/form-data" th:action="@{/add-good}" th:method="post">
                         <div class="form-group">
                             <label for="goods_name" class="font-10 font-weight-bold">商品名称<span class="text-danger">*</span></label>
-                            <input type="alphanum" data-parsley-type="alphanum" name="goods_name" parsley-trigger="change" required placeholder="" data-parsley-required-message="商品名称不能为空" class="form-control">
+                            <input type="alphanum" data-parsley-type="alphanum" name="goods_name" th:name="goodName" parsley-trigger="change" required placeholder="" data-parsley-required-message="商品名称不能为空" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="goods_intro" class="font-10 font-weight-bold">商品描述</label>
-                            <textarea name="goods_intro" parsley-trigger="change" placeholder="" class="form-control"></textarea>
+                            <textarea name="goods_intro" parsley-trigger="change" placeholder="" th:name="goodInfo" class="form-control"></textarea>
                         </div>
                         <div class="form-group">
                             <label class="font-10 font-weight-bold">商品标签/属性</label>
@@ -244,21 +244,21 @@
                         </div>
                         <div class="form-group">
                             <label for="goods_price" class="font-10 font-weight-bold">商品价格（原价）<span class="text-danger">*</span></label>
-                            <input  data-parsley-type="number" name="goods_price" parsley-trigger="change" required data-parsley-number-message="非法字符，请填写正确的数字" data-parsley-required-message="价格不能为空" class="form-control">
+                            <input  data-parsley-type="number" name="goods_price" parsley-trigger="change" th:name="originPrice" required data-parsley-number-message="非法字符，请填写正确的数字" data-parsley-required-message="价格不能为空" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="goods_special_offer" class="font-10 font-weight-bold">秒杀价<span class="text-danger">*</span></label>
-                            <input  data-parsley-type="number" name="goods_special_offer" parsley-trigger="change" required data-parsley-number-message="非法字符，请填写正确的数字" data-parsley-required-message="价格不能为空" class="form-control">
+                            <input  data-parsley-type="number" name="goods_special_offer" parsley-trigger="change" th:name="spikePrice" required data-parsley-number-message="非法字符，请填写正确的数字" data-parsley-required-message="价格不能为空" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="goods_seckill_time" class="font-10 font-weight-bold">秒杀时间<span class="text-danger">*</span></label>
                             <div>
-                                <input type="text" class="form-control input-daterange-timepicker" name="goods_seckill_time" placeholde="01/01/2017 1:30 PM - 01/01/2017 2:00 PM"/>
+                                <input type="text" class="form-control input-daterange-timepicker" name="goods_seckill_time" th:name="spikeTime" placeholde="01/01/2017 1:30 PM - 01/01/2017 2:00 PM"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="goods_supply" class="font-10 font-weight-bold">商品库存量<span class="text-danger">*</span></label>
-                            <input  data-parsley-type="number" name="goods_supply" parsley-trigger="change" required data-parsley-min-message="商品库存量最少为1" data-parsley-number-message="非法字符，请填写正确的数字" data-parsley-required-message="商品库存量不能为空" class="form-control" min="1">
+                            <input  data-parsley-type="number" name="goods_supply" parsley-trigger="change" th:name="goodAmount" required data-parsley-min-message="商品库存量最少为1" data-parsley-number-message="非法字符，请填写正确的数字" data-parsley-required-message="商品库存量不能为空" class="form-control" min="1">
                         </div>
                         <div class="form-group">
                             <label for="goods_pics" class="font-10 font-weight-bold">商品详细图片<span class="text-danger">*</span></label>

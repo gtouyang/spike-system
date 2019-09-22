@@ -3,7 +3,6 @@ package com.ogic.spikesystemapi.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -42,7 +41,12 @@ public class OrderEntity implements Serializable {
         /**
          * 已取消
          */
-        CANCELED((short) -1);
+        CANCELED((short) -1),
+
+        /**
+         * 正在下单
+         */
+        ORDERING((short) 10);
 
         private short status;
 
@@ -112,6 +116,7 @@ public class OrderEntity implements Serializable {
     public OrderEntity(){
         orderTime = new Date();
         id = Long.parseLong(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(orderTime) + randomNumbers(2));
+        orderStatus = OrderStatusEnum.ORDERING.getStatus();
     }
 
     private String randomNumbers(int size) {

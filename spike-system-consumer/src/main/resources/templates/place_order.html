@@ -399,15 +399,18 @@
                                                 <a href="#" onclick="goodsDelete(this)"><i class="fi fi-cross"></i> </a>
                                             </div>
                                         </div>
-                                        <div class="order-pay">
-                                            <div class="freight font-10">
+                                        <div class="order-pay"  th:switch="${order.getOrderStatus()}">
+                                            <div class="freight font-10" th:case="${0}">
                                                 运送方式：包邮
                                             </div>
-                                            <div class="order-subtotal">
+                                            <div class="order-subtotal"  th:case="${0}">
                                                 <div class="font-10">店铺合计(含运费): ¥<span class="font-18 text-danger"
                                                                                        th:text="${order.getPayMoney()}"> 19998</span>
                                                 </div>
                                             </div>
+                                            <div class="font-10" th:case="${10}">正在为你抢购</div>
+                                            <div class="font-10" th:case="${-1}">下单失败</div>
+                                            <div class="font-10" th:case="#{1}">已支付</div>
                                         </div>
                                     </div>
                                 </div>
@@ -474,7 +477,8 @@
                                         <div><strong>收货人： </strong> <span>陈仲伟 </span> <span>15919579396</span> </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-custom btn-large" onclick="confirmOrder()">确定下单</button>
+                                <button class="btn btn-custom btn-large" onclick="confirmOrder()" th:if="${order.getOrderStatus() == 0}">支付</button>
+                                <button class="btn btn-custom btn-large" th:if="${order.getOrderStatus() == 10}">刷新</button>
                             </div>
                         </div>
                     </div>
@@ -634,6 +638,22 @@
             });
 
         })
+
+        refreshOrder = function () {
+            $.ajax({
+                url:'/refreshOrder',
+                type:'GET',
+                data: {
+                  orderId: '[[${order.getId()}]]'
+                },
+                success:function (data) {
+                    if (data != null) {
+                        $(".order-pay").html(data);
+                        $(".order-footer").html(data);
+                    }
+                }
+            })
+        }
     </script>
 </body>
 

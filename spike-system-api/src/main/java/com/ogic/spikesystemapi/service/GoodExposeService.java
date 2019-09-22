@@ -4,6 +4,7 @@ import com.ogic.spikesystemapi.entity.GoodEntity;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -29,4 +30,23 @@ public interface GoodExposeService {
      */
     @PostMapping("/good")
     Optional<Integer> addGood(@RequestBody GoodEntity good);
+
+    /**
+     * 根据位移和数量获取商品列表
+     *
+     * @param offset
+     * @param rows
+     * @return
+     */
+    @GetMapping("/goods")
+    Optional<List<GoodEntity>> getGoods(@RequestParam long offset, @RequestParam int rows);
+
+    /**
+     * 根据shopId获取商品列表
+     *
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/shop-goods")
+    Optional<List<GoodEntity>> getGoodsByShopId(@RequestParam long shopId);
 }

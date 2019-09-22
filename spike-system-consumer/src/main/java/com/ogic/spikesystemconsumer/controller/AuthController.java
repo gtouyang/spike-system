@@ -5,6 +5,7 @@ import com.ogic.spikesystemapi.entity.UserEntity;
 import com.ogic.spikesystemapi.service.AuthExposeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -105,6 +106,24 @@ public class AuthController {
             return login(username, password, response);
         }
         return new RedirectView("/login");
+    }
+
+    @GetMapping("/accInfo")
+    public String getAccountInfo(HttpServletRequest request, Model model){
+        Cookie[] cookies = request.getCookies();
+        String token = null;
+        for (Cookie cookie : cookies) {
+            if (TOKEN_KEY.equals(cookie.getName())) {
+                token = cookie.getValue();
+                break;
+            }
+        }
+        if (token != null){
+            Optional<UserEntity> userOptional = authExposeService.accInfo(token);
+            userOptional.ifPresent(userEntity -> model.addAttribute("user", userEntity));
+            return "account";
+        }
+        return "redirect:login";
     }
 
 }
